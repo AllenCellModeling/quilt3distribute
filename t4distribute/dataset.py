@@ -165,7 +165,7 @@ class Dataset(object):
         return pkg
 
     def __str__(self):
-        return f"<Dataset [name: {self.name}, shape: {self.data.shape}]>"
+        return f"<Dataset [package: {self.package_owner}/{self.name}, shape: {self.data.shape}]>"
 
     def __repr__(self):
         return str(self)
