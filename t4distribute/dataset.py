@@ -28,6 +28,7 @@ class Dataset(object):
         self,
         dataset: Union[str, Path, pd.DataFrame],
         name: str,
+        package_owner: str,
         readme_path: Union[str, Path]
     ):
         """
@@ -35,6 +36,7 @@ class Dataset(object):
 
         :param dataset: Filepath or preloaded pandas dataframe.
         :param name: A name for the dataset. May only contain alphabetic and underscore characters.
+        :param package_owner: The name of the dataset owner. To be attached to the dataset name.
         :param readme_path: A path to a markdown README file.
         """
         # Read the dataset
@@ -54,11 +56,13 @@ class Dataset(object):
         # Store basic
         self._data = dataset
         self.name = name
+        self.package_owner = package_owner
         self.readme_path = readme_path
 
         # Lazy loaded
         self._readme = None
         self._index_columns = []
+        self._path_columns = []
 
     @property
     def data(self) -> pd.DataFrame:
@@ -83,6 +87,9 @@ class Dataset(object):
 
     def index_on_columns(self, columns: List[str]):
         self._index_columns = columns
+
+    def set_path_columns(self, columns: List[str]):
+        self._path_columns = columns
 
     def distribute(
         self,
@@ -121,7 +128,10 @@ class Dataset(object):
             v_ds = validate(self.data)
 
             # Set package contents
-            fp_cols = v_ds.schema.df.index[v_ds.schema.df["dtype"] == "pathlib.Path"].tolist()
+            if len(self._path_columns) > 0:
+                fp_cols = self._path_columns
+            else:
+                fp_cols = v_ds.schema.df.index[v_ds.schema.df["dtype"] == "pathlib.Path"].tolist()
             for col in fp_cols:
                 # Update values to the logical key as they are set
                 for i, val in enumerate(v_ds.data[col].values):
@@ -144,13 +154,13 @@ class Dataset(object):
             v_ds.data.to_csv(meta_path)
             pkg.set("metadata.csv", meta_path)
 
-        # Optionally build
-        if build_location:
-            pkg = pkg.build(name, registry=build_location, message=message)
+            # Optionally build
+            if build_location:
+                pkg = pkg.build(f"{self.package_owner}/{name}", registry=build_location, message=message)
 
-        # Optionally push
-        if push_location:
-            pkg = pkg.push(name, registry=push_location, message=message)
+            # Optionally push
+            if push_location:
+                pkg = pkg.push(f"{self.package_owner}/{name}", registry=push_location, message=message)
 
         return pkg
 

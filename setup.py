@@ -77,7 +77,7 @@ setup(
     description="A small wrapper around T4 to make dataset distribution even easier.",
     entry_points={
         'console_scripts': [
-            # 'my_example=t4distribute.bin.my_example:main'
+            't4_distribute_dataset=t4distribute.bin.t4_distribute_dataset:main'
         ],
     },
     install_requires=requirements,
