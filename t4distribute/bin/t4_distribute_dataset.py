@@ -36,17 +36,15 @@ class Args(argparse.Namespace):
                                                  'out with the package. Lastly, will parse the provided README for '
                                                  'any referenced files and will package those them up as well so that '
                                                  'the README will be properly rendered on the quiltdata catalog.'))
-        p.add_argument('dataset_path', action='store', dest='dataset', type=Path,
+        p.add_argument('dataset_path', action='store', type=Path,
                        help='Filepath to a csv dataset to distribute.')
-        p.add_argument('name', action='store', dest='name',
+        p.add_argument('dataset_name', action='store',
                        help='A name for the dataset. May only include alphabetic and underscore characters.')
-        p.add_argument('package_owner', action='store', dest='owner',
+        p.add_argument('package_owner', action='store',
                        help='The name of the dataset owner. This will be attached to the name. Example: "aics"')
-        p.add_argument('readme_path', action='store', dest='readme_path', type=Path,
+        p.add_argument('readme_path', action='store', type=Path,
                        help='Filepath to a markdown readme for the dataset.')
-        p.add_argument('build_location', action='store', dest='build_location', type=Path,
-                       help='A filepath for where the package manifest should be stored locally.')
-        p.add_argument('-p', '--push-location', action='store', dest='push_location', default=None,
+        p.add_argument('push_uri', action='store',
                        help='The S3 bucket URI you want to push to. Talk to your Quilt admin for details and support.')
         p.add_argument('-m', '--message', action='store', dest='message', default=None,
                        help='A message to attach to the built/ released dataset version.')
@@ -75,7 +73,12 @@ def main():
         args = Args()
 
         # Create dataset
-        ds = Dataset(dataset=args.dataset, name=args.name, package_owner=args.owner, eadme_path=args.readme_path)
+        ds = Dataset(
+            dataset=args.dataset_path,
+            name=args.dataset_name,
+            package_owner=args.package_owner,
+            readme_path=args.readme_path
+        )
 
         # Handle optional provided
         if args.usage_doc_or_link:
@@ -88,8 +91,11 @@ def main():
             ds.set_path_columns(args.path_columns)
 
         # Distribute
-        pkg = ds.distribute(build_location=args.build_location, push_location=args.push_location, message=args.message)
-        log.info(f"Completed distribution. Package [name: '{args.owner}/{args.name}', version: {pkg.top_hash}]")
+        pkg = ds.distribute(push_uri=args.push_uri, message=args.message)
+        log.info(
+            f"Completed distribution. "
+            f"Package [name: '{args.package_owner}/{args.dataset_name}', version: {pkg.top_hash}]"
+        )
 
     except Exception as e:
         log.error("=============================================")

@@ -93,8 +93,7 @@ class Dataset(object):
 
     def distribute(
         self,
-        build_location: Optional[str] = None,
-        push_location: Optional[str] = None,
+        push_uri: Optional[str] = None,
         message: Optional[str] = None
     ) -> t4.Package:
         # Confirm name matches approved pattern
@@ -154,13 +153,9 @@ class Dataset(object):
             v_ds.data.to_csv(meta_path)
             pkg.set("metadata.csv", meta_path)
 
-            # Optionally build
-            if build_location:
-                pkg = pkg.build(f"{self.package_owner}/{name}", registry=build_location, message=message)
-
             # Optionally push
-            if push_location:
-                pkg = pkg.push(f"{self.package_owner}/{name}", registry=push_location, message=message)
+            if push_uri:
+                pkg = pkg.push(f"{self.package_owner}/{name}", registry=push_uri, message=message)
 
         return pkg
 
