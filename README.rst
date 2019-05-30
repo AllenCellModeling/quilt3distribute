@@ -2,7 +2,7 @@
 T4Distribute
 ============
 
-.. image:: https://img.shields.io/travis/AllenCellModeling/t4distribute.svg
+.. image:: https://travis-ci.com/AllenCellModeling/t4distribute.svg?branch=master
         :target: https://travis-ci.com/AllenCellModeling/t4distribute
         :alt: Build Status
 
