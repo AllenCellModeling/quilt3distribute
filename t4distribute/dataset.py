@@ -48,10 +48,8 @@ class Dataset(object):
             # Read
             dataset = pd.read_csv(dataset)
 
-        # Check readme
-        readme_path = Path(readme_path).expanduser().resolve(strict=True)
-        if readme_path.is_dir():
-            raise IsADirectoryError(readme_path)
+        # Init readme
+        readme = README(readme_path)
 
         # Confirm name matches allowed pattern
         name = self.return_or_raise_approved_name(name)
@@ -60,10 +58,10 @@ class Dataset(object):
         self._data = dataset
         self.name = name
         self.package_owner = package_owner
-        self.readme_path = readme_path
+        self._readme = readme
+        self.readme_path = readme.fp
 
         # Lazy loaded
-        self._readme = None
         self._index_columns = []
         self._path_columns = []
 
@@ -71,16 +69,9 @@ class Dataset(object):
     def data(self) -> pd.DataFrame:
         return self._data
 
-    def generate_readme(self):
-        self._readme = README(self.readme_path)
-        return self._readme
-
     @property
     def readme(self):
-        if self._readme:
-            return self._readme
-
-        return self.generate_readme()
+        return self._readme
 
     def add_usage_doc(self, doc_or_link: Union[str, Path]):
         self.readme.append_readme_standards(usage_doc_or_link=doc_or_link)

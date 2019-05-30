@@ -42,6 +42,12 @@ class FeatureDefinition(object):
                 f"FeatureDefinitions must be initialized with either no, a list, or a tuple of validation functions."
             )
 
+        # Ensure all items provided in validation functions are callable
+        if not all(callable(f) for f in validation_functions):
+            raise TypeError(
+                f"Items provided as validation functions must be callable. Received: {validation_functions}"
+            )
+
         # Store configuration
         self.dtype = dtype
         self.validation_functions = validation_functions
@@ -166,15 +172,18 @@ class Validator(object):
 
             # Attempt type casting
             if self.definition.cast_values:
+                # Uncomment to fix windows paths
+                # Still debating the best way to do this
+                # Ideally we would want to detect which path sep was provided and what is the current os path sep
                 # Fix windows paths
                 # DEAR GOD WHY WINDOWS WHY
-                if self.definition.dtype == Path:
-                    val = val.replace("\\", "/")
+                # if self.definition.dtype == Path:
+                #     val = val.replace("\\", "/")
 
                 try:
                     val = self.definition.dtype(val)
                     self.values[i] = val
-                except ValueError:
+                except (ValueError, TypeError):
                     raise ValueError(
                         f"Could not cast value {val_descriptor} to received type {self.definition.dtype}."
                     )
