@@ -63,7 +63,7 @@ class README(object):
                 fp = match[match.index("]") + 2: -1].split(" ")[0]
 
                 # Check if it is a file
-                fp = Path(fp)
+                fp = Path(fp).resolve()
                 if fp.is_file() or fp.is_dir():
                     files.add(fp)
                 else:

@@ -39,7 +39,8 @@ class Args(argparse.Namespace):
         p.add_argument('dataset_path', action='store', type=Path,
                        help='Filepath to a csv dataset to distribute.')
         p.add_argument('dataset_name', action='store',
-                       help='A name for the dataset. May only include alphabetic and underscore characters.')
+                       help=('A name for the dataset. May only include lowercase alphanumeric, '
+                             'underscore, and hyphen characters.'))
         p.add_argument('package_owner', action='store',
                        help='The name of the dataset owner. This will be attached to the name. Example: "aics"')
         p.add_argument('readme_path', action='store', type=Path,

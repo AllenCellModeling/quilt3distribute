@@ -7,11 +7,16 @@ T4Distribute
         :alt: Build Status
 
 .. image:: https://codecov.io/gh/AllenCellModeling/t4distribute/branch/master/graph/badge.svg
-        :target: https://codecov.io/gh/AllenCellModeling/t4distribute/branch/master/graph/badge.svg
+        :target: https://codecov.io/gh/AllenCellModeling/t4distribute
         :alt: Codecov Status
 
 
-A small wrapper around T4 to make dataset distribution even easier.
+A small wrapper around Quilt 3/ T4 to make dataset distribution even easier.
+
+Quick Start
+-----------
+
+
 
 
 * Free software: Allen Institute Software License
@@ -21,8 +26,9 @@ Features
 --------
 
 * Automatically adds license details and bare minimum T4 usage instructions to your dataset README.
-* Attempts to determine which files to upload based off csv contents.
-* Attempts to validate and run basic cleaning operations on your features and/ or metadata csv.
+* Attempts to determine which files to upload based off csv contents. (Explicit override available)
+* Validates and runs basic cleaning operations on your features and/ or metadata csv.
+* Attempts to parse README for any referenced files and packages them up as well.
 
 
 Credits

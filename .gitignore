@@ -103,3 +103,7 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# Project specific generated files
+fake_images/
+fake_metadata_files/

@@ -12,7 +12,7 @@ from markdown2 import markdown
 import pandas as pd
 import t4
 
-from .readme import README, ReplacedPath
+from .documentation import README, ReplacedPath
 from .validation import validate
 
 ###############################################################################
@@ -53,6 +53,9 @@ class Dataset(object):
         if readme_path.is_dir():
             raise IsADirectoryError(readme_path)
 
+        # Confirm name matches allowed pattern
+        name = self.return_or_raise_approved_name(name)
+
         # Store basic
         self._data = dataset
         self.name = name
@@ -86,10 +89,29 @@ class Dataset(object):
         self.readme.append_readme_standards(license_doc_or_link=doc_or_link)
 
     def index_on_columns(self, columns: List[str]):
+        # Check columns
+        if not any(col in self.data.columns for col in columns):
+            raise ValueError(f"One or more columns provided were not found in the dataset. Received: {columns}")
+
         self._index_columns = columns
 
     def set_path_columns(self, columns: List[str]):
+        # Check columns
+        if not any(col in self.data.columns for col in columns):
+            raise ValueError(f"One or more columns provided were not found in the dataset. Received: {columns}")
+
         self._path_columns = columns
+
+    @staticmethod
+    def return_or_raise_approved_name(name: str):
+        name = name.lower().replace(" ", "_").replace("-", "_")
+        if not re.match(r"^[a-z0-9_\-]*$", name):
+            raise ValueError(
+                f"Dataset names may only include lowercase alphanumeric, underscore, and hyphen characters. "
+                f"Received: {name}"
+            )
+
+        return name
 
     def distribute(
         self,
@@ -97,9 +119,8 @@ class Dataset(object):
         message: Optional[str] = None
     ) -> t4.Package:
         # Confirm name matches approved pattern
-        name = self.name.lower().replace(" ", "_").replace("-", "_")
-        if not re.match(r"^[a-z_]*$", name):
-            raise ValueError(f"Dataset names may only include alphabetic and underscore characters. Received: {name}")
+        # We previously checked during init, but the name could have been changed
+        name = self.return_or_raise_approved_name(self.name)
 
         # Create empty package
         pkg = t4.Package()
@@ -134,28 +155,29 @@ class Dataset(object):
             for col in fp_cols:
                 # Update values to the logical key as they are set
                 for i, val in enumerate(v_ds.data[col].values):
-                    key = str(uuid4()).replace("-", "")
-                    unique_name = f"{key}_{val.name}"
-                    lk = f"{col}/{unique_name}"
                     pk = Path(val).expanduser().resolve()
                     if pk.is_file():
+                        key = str(uuid4()).replace("-", "")
+                        unique_name = f"{key}_{val.name}"
+                        lk = f"{col}/{unique_name}"
                         v_ds.data[col].values[i] = lk
 
                         # Attach metadata to object
                         meta = {index_col: str(v_ds.data[index_col].values[i]) for index_col in self._index_columns}
                         pkg.set(lk, pk, meta)
                     else:
+                        lk = f"{col}/{val.name}"
                         v_ds.data[col].values[i] = lk
                         pkg.set_dir(lk, pk)
 
             # Store validated dataset in the temp dir with paths replaced
             meta_path = Path(tmpdir, "metadata.csv")
-            v_ds.data.to_csv(meta_path)
+            v_ds.data.to_csv(meta_path, index=False)
             pkg.set("metadata.csv", meta_path)
 
             # Optionally push
             if push_uri:
-                pkg = pkg.push(f"{self.package_owner}/{name}", registry=push_uri, message=message)
+                pkg = pkg.push(f"{self.package_owner}/{name}", dest=push_uri, message=message)
 
         return pkg
 

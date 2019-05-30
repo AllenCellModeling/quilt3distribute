@@ -14,9 +14,11 @@ with open('HISTORY.rst') as history_file:
 test_requirements = [
     'codecov',
     'flake8',
+    'numpy==1.16.3',
     'pytest',
     'pytest-cov',
     'pytest-raises',
+    'tifffile==0.15.1',
 ]
 
 setup_requirements = ['pytest-runner', ]
