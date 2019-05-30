@@ -1,23 +1,16 @@
-============
-T4Distribute
-============
+# T4Distribute
 
-.. image:: https://travis-ci.com/AllenCellModeling/t4distribute.svg?branch=master
-        :target: https://travis-ci.com/AllenCellModeling/t4distribute
-        :alt: Build Status
-
-.. image:: https://codecov.io/gh/AllenCellModeling/t4distribute/branch/master/graph/badge.svg
-        :target: https://codecov.io/gh/AllenCellModeling/t4distribute
-        :alt: Codecov Status
+[![build status](https://travis-ci.com/AllenCellModeling/t4distribute.svg?branch=master)](https://travis-ci.com/AllenCellModeling/t4distribute)
+[![codecov](https://codecov.io/gh/AllenCellModeling/t4distribute/branch/master/graph/badge.svg)](https://codecov.io/gh/AllenCellModeling/t4distribute)
 
 
-.. image:: http://www.allencell.org/uploads/8/1/9/9/81996008/published/automatingaccess-button-3_2.png?1549322257
-        :alt: Dataset packaging and distribution
+![dataset packaging and distribution](http://www.allencell.org/uploads/8/1/9/9/81996008/published/automatingaccess-button-3_2.png?1549322257)
 
 A small wrapper around Quilt 3/ T4 to make dataset distribution even easier while enforcing some basic standards.
 
-Features
---------
+---
+
+### Features
 
 * Attempts to determine which files to upload based off csv contents. (Explicit override available)
 * Simple interface for attaching metadata to each file based off the manifest contents.
@@ -25,21 +18,15 @@ Features
 * Optionally add license details and usage instructions to your dataset README.
 * Attempts to parse README for any referenced files and packages them up as well. (Please use full paths)
 
-Quick Start
------------
-Construct a csv (or pandas dataframe) dataset manifest (Example_):
+### Quick Start
+Construct a csv (or pandas dataframe) dataset manifest ([Example](t4distribute/tests/data/example.csv)):
 
-+-------------+-------------+-------------+-------------+
-| CellId      | Structure   | 2dReadPath  | 3dReadPath  |
-+=============+=============+=============+=============+
-| 1           | lysosome    | /allen/...  | /allen/...  |
-+-------------+-------------+-------------+-------------+
-| 2           | laminb2     | /allen/...  | /allen/...  |
-+-------------+-------------+-------------+-------------+
-| 3           | golgi       | /allen/...  | /allen/...  |
-+-------------+-------------+-------------+-------------+
-| 4           | myosin      | /allen/...  | /allen/...  |
-+-------------+-------------+-------------+-------------+
+| CellId | Structure | 2dReadPath | 3dReadPath |
+|--------|-----------|------------|------------|
+| 1      | lysosome  | 2d/1.png   | 3d/1.tiff  |
+| 2      | laminb1   | 2d/2.png   | 3d/2.tiff  |
+| 3      | golgi     | 2d/3.png   | 3d/3.tiff  |
+| 4      | myosin    | 2d/4.png   | 3d/4.tiff  |
 
 Using the bin script offers easy dataset distribution, simply provide (in order):
 
@@ -49,11 +36,9 @@ Using the bin script offers easy dataset distribution, simply provide (in order)
 4. The filepath to a markdown readme for the dataset
 5. The S3 bucket URI you want to push the dataset to.
 
-If you don't know the details for #3 or #5, talk to your Quilt account admin for help.
+If you don't know the details for items 3 or 5, talk to your Quilt account admin for help.
 
-```bash
-t4_distribute_dataset my_dataset.csv test_dataset jacksonb readme.md s3://quilt-jacksonb
-```
+`t4_distribute_dataset my_dataset.csv test_dataset jacksonb readme.md s3://quilt-jacksonb`
 
 Use `t4_distribute_dataset -h` to bring up more details about each parameter and all the options available.
 
@@ -80,25 +65,15 @@ ds.index_on_columns(["Structure"])
 pkg = ds.distribute(push_uri="s3://quilt-jacksonb", message="Initial dataset example")
 ```
 
-
-.. _Example: t4distribute/tests/data/example.csv
-
-To simply get data
-
-Installation
-------------
+### Installation
 
 * pypi releases: `pip install t4distribute`
 * master branch: `pip install git+https://github.com/AllenCellModeling/t4distribute.git`
 
 
+### Credits
 
-Free software: Allen Institute Software License
+This package was created with Cookiecutter. [Original repository](https://github.com/audreyr/cookiecutter)
 
 
-Credits
--------
-
-This package was created with Cookiecutter_.
-
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
+***Free software: Allen Institute Software License***
