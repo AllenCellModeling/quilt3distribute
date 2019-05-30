@@ -10,15 +10,14 @@ A small wrapper around Quilt 3/ T4 to make dataset distribution even easier whil
 
 ---
 
-### Features
-
-* Attempts to determine which files to upload based off csv contents. (Explicit override available)
+## Features
+* Automatically determines which files to upload based off csv headers. (Explicit override available)
 * Simple interface for attaching metadata to each file based off the manifest contents.
 * Validates and runs basic cleaning operations on your features and metadata csv.
 * Optionally add license details and usage instructions to your dataset README.
-* Attempts to parse README for any referenced files and packages them up as well. (Please use full paths)
+* Parses README for any referenced files and packages them up as well. (Please use full paths)
 
-### Quick Start
+## Quick Start
 Construct a csv (or pandas dataframe) dataset manifest ([Example](t4distribute/tests/data/example.csv)):
 
 | CellId | Structure | 2dReadPath | 3dReadPath |
@@ -65,10 +64,10 @@ ds.index_on_columns(["Structure"])
 pkg = ds.distribute(push_uri="s3://quilt-jacksonb", message="Initial dataset example")
 ```
 
-### Installation
+## Installation
+Pypi installation not available at this time, please install using git.
 
-* pypi releases: `pip install t4distribute`
-* master branch: `pip install git+https://github.com/AllenCellModeling/t4distribute.git`
+`pip install git+https://github.com/AllenCellModeling/t4distribute.git`
 
 
 ### Credits
