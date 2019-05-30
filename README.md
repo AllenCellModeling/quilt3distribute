@@ -18,6 +18,8 @@ A small wrapper around Quilt 3/ T4 to make dataset distribution even easier whil
 * Parses README for any referenced files and packages them up as well. (Please use full paths)
 
 ## Quick Start
+***Bin Script:***
+
 Construct a csv (or pandas dataframe) dataset manifest ([Example](t4distribute/tests/data/example.csv)):
 
 | CellId | Structure | 2dReadPath | 3dReadPath |
@@ -35,13 +37,16 @@ Using the bin script offers easy dataset distribution, simply provide (in order)
 4. The filepath to a markdown readme for the dataset
 5. The S3 bucket URI you want to push the dataset to.
 
-If you don't know the details for items 3 or 5, talk to your Quilt account admin for help.
+Layout:<br>
+`t4_distribute_dataset {dataset_path} {dataset_name} {dataset_owner} {readme_path} {s3_uri}`
 
-`t4_distribute_dataset my_dataset.csv test_dataset jacksonb readme.md s3://quilt-jacksonb`
+Filled:<br>
+`t4_distribute_dataset single_cell_examples.csv single_cell_examples jacksonb single_cell_examples.md s3://quilt-jacksonb`
 
-Use `t4_distribute_dataset -h` to bring up more details about each parameter and all the options available.
+Use `t4_distribute_dataset -h` to bring up more details about each parameter and all the options available. If you don't know the details for items 3 or 5, talk to your Quilt account admin for help.
 
-If you want more iterative control over how the dataset is created import the package in python:
+
+***Python:***
 ```python
 from t4distribute import Dataset
 
@@ -65,7 +70,7 @@ pkg = ds.distribute(push_uri="s3://quilt-jacksonb", message="Initial dataset exa
 ```
 
 ## Installation
-Pypi installation not available at this time, please install using git.
+PyPI installation not available at this time, please install using git.
 
 `pip install git+https://github.com/AllenCellModeling/t4distribute.git`
 
