@@ -104,6 +104,9 @@ ENV/
 # mypy
 .mypy_cache/
 
+# Project specific standalone files
+workbench.ipynb
+
 # Project specific generated files
 fake_images/
 fake_metadata_files/

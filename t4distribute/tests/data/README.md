@@ -6,4 +6,4 @@ hello world
 
 *This will link correctly because when tox runs, it runs at the top level directory instead of in the data dir*
 *Probably a bug....*
-[Authors](AUTHORS.rst)
+[Contributing](CONTRIBUTING.rst)
