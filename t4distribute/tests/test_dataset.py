@@ -122,6 +122,16 @@ def test_dataset_set_path_columns(dataset, columns):
     dataset.set_path_columns(columns)
 
 
+@pytest.mark.parametrize("columns", [
+    ({"3dReadPath": "3dImages"}),
+    ({"3dReadPath": "3dImages", "2dReadPath": "2dImages"}),
+    pytest.param({"DNE": "DNELabeled"}, marks=pytest.mark.raises(exception=ValueError)),
+    pytest.param({"DNE1": "DNELabeled1", "DNE2": "DNELabeled2"}, marks=pytest.mark.raises(exception=ValueError))
+])
+def test_dataset_set_column_names_map(dataset, columns):
+    dataset.set_column_names_map(columns)
+
+
 def test_dataset_distribute(dataset):
     with mock.patch("t4.Package.push") as mocked_package_push:
         mocked_package_push.return_value = "NiceTryGuy"
