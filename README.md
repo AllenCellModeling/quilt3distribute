@@ -43,7 +43,8 @@ Layout:<br>
 Filled:<br>
 `t4_distribute_dataset single_cell_examples.csv single_cell_examples jacksonb single_cell_examples.md s3://quilt-jacksonb`
 
-Use `t4_distribute_dataset -h` to bring up more details about each parameter and all the options available. If you don't know the details for items 3 or 5, talk to your Quilt account admin for help.
+Use `t4_distribute_dataset -h` to bring up more details about each parameter and all the options available.
+If you don't know the details for items 3 or 5, talk to your Quilt account admin for help.
 
 
 ***Python:***
@@ -68,6 +69,16 @@ ds.index_on_columns(["Structure"])
 # Distribute
 pkg = ds.distribute(push_uri="s3://quilt-jacksonb", message="Initial dataset example")
 ```
+
+***index_on_columns:***
+
+A note on the bin script parameter and the Python API `index_on_columns`:<br>
+Using the small example dataframe above as an example, if we provided `["Structure"]` as the list of columns to index
+on in Python (using the bin script this would be `-i "Structure"`). `{"Structure": "lysosome"}` gets added as metadata
+for both `2d/1.png` and `3d/1.tiff` files; `{"Structure": "laminb1"}` gets added as metadata for both `2d/2.png` and
+`3d/2.tiff` files; etc.
+
+In short: the columns provided will be used for metadata attachment for every file found.
 
 ## Installation
 PyPI installation not available at this time, please install using git.

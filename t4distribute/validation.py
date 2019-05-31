@@ -30,6 +30,19 @@ class FeatureDefinition(object):
         description: Optional[str] = None,
         units: Optional[str] = None
     ):
+        """
+        Initialize a new feature definition. A feature definition can be as simple as providing a data type (dtype) or
+        can be incredibly specific by including validation and cleaning operations or providing metadata. If dtype of
+        pathlib.Path is provided, cast_values is automatically set to True.
+
+        :param dtype: The data type for the feature.
+        :param validation_functions: A list or tuple of callable functions to validate each instance of the feature.
+        :param cast_values: In the case that an instance of the feature is found that doesn't match the dtype provided,
+            should that instance be attempted to cast to the provided dtype.
+        :param display_name: Metadata attachment for a display name to be given to the feature.
+        :param description: Metadata attachment for a description for the feature.
+        :param units: Metadata attachment for unit details for the feature.
+        """
         # Handle non tuple values
         if validation_functions is None:
             validation_functions = tuple()
@@ -69,6 +82,11 @@ class FeatureDefinition(object):
 
 
 def _generate_schema_template(df: pd.DataFrame) -> Dict[str, FeatureDefinition]:
+    """
+    Helper function to generate a schema template (a dictionary of column name to FeatureDefinitions). This function
+    makes strong assumptions about which columns headers indicate that a value is a filepath or not. It also, attempts
+    to determine if value casting should be turned on based off the number of unique types present in a column.
+    """
     # Create feature definition for each column
     feature_definitions = {}
     for col in df.columns:
@@ -113,6 +131,16 @@ class ValidatedFeature(object):
         units: Optional[str] = None,
         validation_functions: Optional[Tuple[Callable]] = None
     ):
+        """
+        A feature that has it's core validation attributes locked but metadata freely mutable.
+
+        :param name: The name for the feature in the dataset (usually this is the column).
+        :param dtype: A single data type for the feature.
+        :param display_name: A display name for the feature.
+        :param description: A description for the feature.
+        :param units: Units for the feature.
+        :param validation_functions: The tuple of validation functions ran against the feature values.
+        """
         # Store configuration
         self._name = name
         self._dtype = dtype
@@ -158,12 +186,25 @@ class Validator(object):
         values: np.ndarray,
         definition: FeatureDefinition
     ):
+        """
+        A container to manage feature values and feature definition that can actually process (validate) the feature.
+
+        :param name: The name of the feature (usually this is the column name).
+        :param values: The np.ndarray of feature values.
+        :param definition: The feature definition to validate against.
+        """
         # Store configuration
         self.name = name
         self.values = values
         self.definition = definition
 
     def process(self, progress_bar: Optional[tqdm] = None) -> ValidatedFeature:
+        """
+        Use the feature definition stored on this object to attempt to validate the feature.
+
+        :param progress_bar: An optional tqdm progress bar to update as the values are processed.
+        :return: A ValidatedFeature object representing that this feature has been checked.
+        """
         # Begin checking
         for i in range(len(self.values)):
             # Short ref to value
@@ -227,11 +268,21 @@ class ValidationReturn(NamedTuple):
 
 
 def _validate_helper(validator: Validator, progress_bar: Optional[tqdm] = None) -> ValidatedFeature:
+    """
+    A concurrency helper function to manage validator io.
+    """
     return ValidationReturn(validator.name, validator.process(progress_bar))
 
 
 class Schema(object):
     def __init__(self, features: Dict[str, ValidatedFeature]):
+        """
+        A schema is the summation of multiple validated and unvalidated features for a Dataset. It provides helpful
+        methods for viewing which features have and have not been validated and with which data types, functions, and
+        metadata.
+
+        :param features: A dictionary mapping the dataset manifest column names to ValidatedFeatures.
+        """
         # Store all data
         self._feats = features
 
@@ -309,7 +360,17 @@ def validate(
     show_progress: bool = True
 ) -> ValidatedDataset:
     """
-    Validate a dataset.
+    A function that validates a dataset against the proposed schema.
+
+    :param data: A pandas dataframe to validate.
+    :param schema: The proposed schema to validate the dataset against.
+        A dictionary mapping dataframe column names to FeatureDefinitions.
+    :param n_workers: The number of threads to use during validation.
+    :param show_progress: Boolean option to show or hide progress bar.
+    :return: A ValidatedDataset object that stores the cleaned copy of the data as well as the validated schema.
+
+    Validation isn't a CPU intensive task so async threadpool is used over processpool.
+    The most intensive task is file existence checks.
     """
     # Generate a template
     if schema is None:

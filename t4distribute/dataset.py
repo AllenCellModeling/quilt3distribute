@@ -70,16 +70,39 @@ class Dataset(object):
         return self._data
 
     @property
-    def readme(self):
+    def readme(self) -> README:
         return self._readme
 
     def add_usage_doc(self, doc_or_link: Union[str, Path]):
+        """
+        Add a document's content or add a link to a publically accessibly resource for documentation and usage examples.
+
+        :param doc_or_link: A filepath or string uri to a resource detailing usage of this dataset.
+
+        Wrapper around t4distribute.documentation.README.append_readme_standards.
+        """
         self.readme.append_readme_standards(usage_doc_or_link=doc_or_link)
 
     def add_license(self, doc_or_link: Union[str, Path]):
+        """
+        Add a document's content or add a link to a publically accessibly resource for license details.
+
+        :param doc_or_link: A filepath or string uri to a resource for license details.
+
+        Wrapper around t4distribute.documentation.README.append_readme_standards.
+        """
         self.readme.append_readme_standards(license_doc_or_link=doc_or_link)
 
     def index_on_columns(self, columns: List[str]):
+        """
+        Use the manifest contents to attach metadata to the files found in the dataset.
+
+        :param columns: A list of columns to use for metadata attachment.
+
+        Example row: `{"CellId": 1, "Structure": "lysosome", "2dReadPath": "/allen...", "3dReadPath": "/allen..."}`
+        Attach structure metadata: `dataset.index_on_columns(["Structure"])`
+        Results in the files found at the 2dReadPath and the 3dReadPath both having `{"Structure": "lysosome"}` attached
+        """
         # Check columns
         if not any(col in self.data.columns for col in columns):
             raise ValueError(f"One or more columns provided were not found in the dataset. Received: {columns}")
@@ -87,6 +110,11 @@ class Dataset(object):
         self._index_columns = columns
 
     def set_path_columns(self, columns: List[str]):
+        """
+        Explicit override for which columns will be used for file distribution.
+
+        :param columns: A list of columns to use for file distribution.
+        """
         # Check columns
         if not any(col in self.data.columns for col in columns):
             raise ValueError(f"One or more columns provided were not found in the dataset. Received: {columns}")
@@ -94,7 +122,14 @@ class Dataset(object):
         self._path_columns = columns
 
     @staticmethod
-    def return_or_raise_approved_name(name: str):
+    def return_or_raise_approved_name(name: str) -> str:
+        """
+        Attempt to clean a string to match the pattern expected by Quilt 3/ T4.
+        If after the cleaning operation, it still doesn't match the approved pattern, will raise a ValueError.
+
+        :param name: String name to clean.
+        :return: Cleaned name.
+        """
         name = name.lower().replace(" ", "_").replace("-", "_")
         if not re.match(r"^[a-z0-9_\-]*$", name):
             raise ValueError(
@@ -109,6 +144,16 @@ class Dataset(object):
         push_uri: Optional[str] = None,
         message: Optional[str] = None
     ) -> t4.Package:
+        """
+        Push a package to a specific S3 bucket. If no bucket is provided, the un-built, un-pushed package is returned.
+        You can push a dataset with the same name multiple times to the same bucket multiple times as instead of
+        overriding a prior dataset, Quilt simply creates a new dataset version. Please refer to Quilt documentation for
+        more details: https://docs.quiltdata.com
+
+        :param push_uri: The S3 bucket uri to push to. Example: "s3://quilt-jacksonb"
+        :param message: An optional message to attach to that version of the dataset.
+        :return: The built and optionally pushed t4.Package.
+        """
         # Confirm name matches approved pattern
         # We previously checked during init, but the name could have been changed
         name = self.return_or_raise_approved_name(self.name)

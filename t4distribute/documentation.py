@@ -22,6 +22,11 @@ class ReplacedPath(NamedTuple):
 
 class README(object):
     def __init__(self, fp: Union[str, Path]):
+        """
+        Initialize a README object.
+
+        :param fp: Filepath to a markdown readme document.
+        """
         # Check filepath
         fp = Path(fp).expanduser().resolve(strict=True)
         if fp.is_dir():
@@ -34,11 +39,11 @@ class README(object):
         self._text = None
 
     @property
-    def fp(self):
+    def fp(self) -> Path:
         return self._fp
 
     @property
-    def referenced_files(self) -> List:
+    def referenced_files(self) -> List[Path]:
         # Find all link matches
         # Link matches look like the following in markdown
         # [hello world](https://allencell.org/myfile.png)
@@ -76,6 +81,15 @@ class README(object):
         usage_doc_or_link: Optional[Union[str, Path]] = None,
         license_doc_or_link: Optional[Union[str, Path]] = None
     ) -> str:
+        """
+        Attach a standard document or link to the readme. If the provided value is an external resource, a default
+        message is attached before linking to the external resource. Additionally, updates the underlying text attribute
+        for this object to retain prior document attachments.
+
+        :param usage_doc_or_link: A document or link to external resource with details on dataset usage.
+        :param license_doc_or_link: A document or link to external resource with details on licensing.
+        :return: The entire contents of the readme returned as a string.
+        """
         # Get current text if available
         if self._text:
             text = self._text
@@ -118,7 +132,7 @@ class README(object):
         return self._text
 
     @property
-    def text(self):
+    def text(self) -> str:
         if self._text:
             return self._text
 
