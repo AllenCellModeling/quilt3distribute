@@ -388,7 +388,7 @@ def validate(
 
     # Multiprocess validation
     with ThreadPoolExecutor(n_workers) as exe:
-        # Some people don't like progress bars, @jamie @mattb 🙃
+        # Some people don't like progress bars, @heeler @AetherUnbound 🙃
         if show_progress:
             with tqdm(total=len(validators) * len(data), desc="Validating") as pbar:
                 validate_partial = partial(_validate_helper, progress_bar=pbar)
