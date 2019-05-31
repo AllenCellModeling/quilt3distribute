@@ -43,7 +43,7 @@ interactive_requirements = [
 requirements = [
     'markdown2==2.3.7',
     'pandas',
-    't4==0.1.3',
+    't4==0.1.4',
     'tabulate==0.8.3',
     'tqdm==4.32.1',
 ]
