@@ -142,7 +142,8 @@ class Dataset(object):
     def distribute(
         self,
         push_uri: Optional[str] = None,
-        message: Optional[str] = None
+        message: Optional[str] = None,
+        attach_associates: bool = True,
     ) -> t4.Package:
         """
         Push a package to a specific S3 bucket. If no bucket is provided, the un-built, un-pushed package is returned.
@@ -152,6 +153,8 @@ class Dataset(object):
 
         :param push_uri: The S3 bucket uri to push to. Example: "s3://quilt-jacksonb"
         :param message: An optional message to attach to that version of the dataset.
+        :param attach_associates: Boolean option to attach associates as metadata to each file. Associates are used
+            to retain quick navigation between related files.
         :return: The built and optionally pushed t4.Package.
         """
         # Confirm name matches approved pattern
@@ -188,6 +191,13 @@ class Dataset(object):
                 fp_cols = self._path_columns
             else:
                 fp_cols = v_ds.schema.df.index[v_ds.schema.df["dtype"] == "pathlib.Path"].tolist()
+
+            # Create associate mappings: List[Dict[str, str]]
+            # This list is in index order. Meaning that as the column values are descended we can simply add a
+            # new associate to the already existing associate map at that list index.
+            associates = []
+
+            # Set all files
             for col in fp_cols:
                 # Update values to the logical key as they are set
                 for i, val in enumerate(v_ds.data[col].values):
@@ -201,10 +211,24 @@ class Dataset(object):
                         # Attach metadata to object
                         meta = {index_col: str(v_ds.data[index_col].values[i]) for index_col in self._index_columns}
                         pkg.set(lk, pk, meta)
+
+                        # Update associates
+                        try:
+                            associates[i][col] = lk
+                        except IndexError:
+                            associates.append({col: lk})
                     else:
                         lk = f"{col}/{val.name}"
                         v_ds.data[col].values[i] = lk
                         pkg.set_dir(lk, pk)
+
+            # Attach associates if desired
+            if attach_associates:
+                for i, associate_mapping in enumerate(associates):
+                    for col, lk in associate_mapping.items():
+                        # Having dictionary expansion in this order means that associates will override a prior
+                        # existing `associates` key, this is assumed safe because attach_associates was set to True.
+                        pkg[lk].set_meta({**pkg[lk].meta, **{"associates": associate_mapping}})
 
             # Store validated dataset in the temp dir with paths replaced
             meta_path = Path(tmpdir, "metadata.csv")
