@@ -5,7 +5,7 @@ import logging
 from pathlib import Path
 import re
 import tempfile
-from typing import List, Optional, Union
+from typing import Dict, List, Optional, Union
 from uuid import uuid4
 
 from markdown2 import markdown
@@ -64,6 +64,7 @@ class Dataset(object):
         # Lazy loaded
         self._index_columns = []
         self._path_columns = []
+        self._label_file_directories = {}
 
     @property
     def data(self) -> pd.DataFrame:
@@ -120,6 +121,20 @@ class Dataset(object):
             raise ValueError(f"One or more columns provided were not found in the dataset. Received: {columns}")
 
         self._path_columns = columns
+
+    def set_column_names_map(self, columns: Dict[str, str]):
+        """
+        Explicit override for the labeling of column names on file distribution.
+        Example, a column ("2dReadPath") is detected to have files, in the package that file will be placed in a
+        directory called "2dReadPath". Using this function, those directory names can be explicitly overridden.
+
+        :param columns: A mapping of current column name contain files to desired labeled directory name.
+        """
+        # Check columns
+        if not any(col in self.data.columns for col in columns):
+            raise ValueError(f"One or more columns provided were not found in the dataset. Received: {columns}")
+
+        self._label_file_directories = columns
 
     @staticmethod
     def return_or_raise_approved_name(name: str) -> str:
@@ -199,13 +214,20 @@ class Dataset(object):
 
             # Set all files
             for col in fp_cols:
+
+                # Check display name for col
+                if col in self._label_file_directories:
+                    col_label = self._label_file_directories[col]
+                else:
+                    col_label = col
+
                 # Update values to the logical key as they are set
                 for i, val in enumerate(v_ds.data[col].values):
                     pk = Path(val).expanduser().resolve()
                     if pk.is_file():
                         key = str(uuid4()).replace("-", "")
                         unique_name = f"{key}_{val.name}"
-                        lk = f"{col}/{unique_name}"
+                        lk = f"{col_label}/{unique_name}"
                         v_ds.data[col].values[i] = lk
 
                         # Attach metadata to object
@@ -218,7 +240,7 @@ class Dataset(object):
                         except IndexError:
                             associates.append({col: lk})
                     else:
-                        lk = f"{col}/{val.name}"
+                        lk = f"{col_label}/{val.name}"
                         v_ds.data[col].values[i] = lk
                         pkg.set_dir(lk, pk)
 
