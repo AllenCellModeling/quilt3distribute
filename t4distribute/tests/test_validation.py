@@ -5,9 +5,10 @@ from pathlib import Path
 import pytest
 
 import numpy as np
+import pandas as pd
 
 from t4distribute import FeatureDefinition
-from t4distribute.validation import Validator
+from t4distribute.validation import validate, Validator
 
 
 @pytest.mark.parametrize("dtype, validation_functions", [
@@ -27,29 +28,60 @@ def test_feature_def_init(dtype, validation_functions):
         assert fd.cast_values
 
 
-@pytest.mark.parametrize("values, definition", [
-    (np.ones(5), FeatureDefinition(np.float64)),
-    (np.array(["hello", "world"]), FeatureDefinition(str)),
-    (np.ones(5), FeatureDefinition(np.float64, (lambda x: x == 1,))),
-    pytest.param(np.ones(5), FeatureDefinition(Path), marks=pytest.mark.raises(exception=ValueError)),
+@pytest.mark.parametrize("values, definition, drop_on_error, expected_drops", [
+    (np.ones(5), FeatureDefinition(np.float64), False, set()),
+    (np.ones(5), FeatureDefinition(np.float64), True, set()),
+    (np.array(["hello", "world"]), FeatureDefinition(str), False, set()),
+    (np.ones(5), FeatureDefinition(np.float64, (lambda x: x == 1,)), False, set()),
+    pytest.param(np.ones(5), FeatureDefinition(Path), False, set(), marks=pytest.mark.raises(exception=ValueError)),
+    (np.ones(5), FeatureDefinition(Path), True, set([0, 1, 2, 3, 4])),
     pytest.param(
-        np.array(["hello", "world"]), FeatureDefinition(int, cast_values=True),
+        np.array(["hello", "world"]), FeatureDefinition(int, cast_values=True), False, set(),
         marks=pytest.mark.raises(exception=ValueError)
     ),
-    pytest.param(np.array(["hello", "world"]), FeatureDefinition(int), marks=pytest.mark.raises(exception=TypeError)),
+    (np.array(["hello", "world"]), FeatureDefinition(int, cast_values=True), True, set([0, 1])),
     pytest.param(
-        np.array(["1.png", "2.png"]), FeatureDefinition(Path),
+        np.array(["hello", "world"]), FeatureDefinition(int), False, set(),
+        marks=pytest.mark.raises(exception=TypeError)
+    ),
+    (np.array(["hello", "world"]), FeatureDefinition(int), True, set([0, 1])),
+    pytest.param(
+        np.array(["1.png", "2.png"]), FeatureDefinition(Path), False, set(),
         marks=pytest.mark.raises(exception=FileNotFoundError)
     ),
+    (np.array(["1.png", "2.png"]), FeatureDefinition(Path), True, set([0, 1])),
     pytest.param(
-        np.array([Path("1.png"), Path("2.png")]), FeatureDefinition(Path),
+        np.array([Path("1.png"), Path("2.png")]), FeatureDefinition(Path), False, set(),
         marks=pytest.mark.raises(exception=FileNotFoundError)
     ),
+    (np.array([Path("1.png"), Path("2.png")]), FeatureDefinition(Path), True, set([0, 1])),
     pytest.param(
-        np.ones(5), FeatureDefinition(np.float64, (lambda x: x == 2,)), marks=pytest.mark.raises(exception=ValueError)
-    )
+        np.ones(5), FeatureDefinition(np.float64, (lambda x: x == 2,)), False, set(),
+        marks=pytest.mark.raises(exception=ValueError)
+    ),
+    (np.ones(5), FeatureDefinition(np.float64, (lambda x: x == 2,)), True, set([0, 1, 2, 3, 4]))
 ])
-def test_validator_process(values, definition):
-    v = Validator("test", values, definition)
+def test_validator_process(values, definition, drop_on_error, expected_drops):
+    v = Validator("test", values, definition, drop_on_error)
 
-    v.process()
+    results = v.process()
+
+    if drop_on_error:
+        assert expected_drops == results.errored_indices
+    else:
+        assert len(results.errored_indices) == 0
+
+
+@pytest.mark.parametrize("data, drop_on_error, expected_len", [
+    (pd.DataFrame([{"floats": 1.0}, {"floats": 2.0}]), False, 2),
+    pytest.param(
+        pd.DataFrame([{"test_path": "1.png"}, {"test_path": "2.png"}]), False, 2,
+        marks=pytest.mark.raises(exception=FileNotFoundError)
+    ),
+    (pd.DataFrame([{"test_path": "1.png"}, {"test_path": "2.png"}]), True, 0)
+])
+def test_validate(data, drop_on_error, expected_len):
+    results = validate(data, drop_on_error=drop_on_error)
+
+    if drop_on_error:
+        assert len(results.data) == expected_len
