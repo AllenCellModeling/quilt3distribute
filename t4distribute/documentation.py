@@ -53,26 +53,26 @@ class README(object):
         # Determine if the links are files or external references
         files = set()
         for match in matches:
-            # Check for common external
-            if not any(sub in match.lower() for sub in ["https://", "http://", "s3://", "gs://"]):
-                # Look for file...
-                # This may look a bit odd but because links in markdown follow the []() structure as shown above
-                # we need to first find the index of the ending bracket.
-                # "But why not look for the first opening paranthesis?"
-                # Because sweet summer child, you can use paranthesis inside the brackets like so: [()]()
-                # Because of this we want to first find the ending bracket, then we know where the real link begins.
-                # From there we will have just the () contents.
-                # However, links can have alternet text that displays on hover in many markdown renderers.
-                # To find the real link inside the link portion of the paranthesis we can split the string by spaces
-                # and use the first component available.
-                fp = match[match.index("]") + 2: -1].split(" ")[0]
+            # Look for file...
+            # This may look a bit odd but because links in markdown follow the []() structure as shown above
+            # we need to first find the index of the ending bracket.
+            # "But why not look for the first opening paranthesis?"
+            # Because sweet summer child, you can use paranthesis inside the brackets like so: [()]()
+            # Because of this we want to first find the ending bracket, then we know where the real link begins.
+            # From there we will have just the () contents.
+            # However, links can have alternate text that displays on hover in many markdown renderers.
+            # To find the real link inside the link portion of the paranthesis we can split the string by spaces
+            # and use the first component available.
+            target = match[match.index("]") + 2: -1].split(" ")[0]
 
+            # Check for common external
+            if not any(sub in target.lower() for sub in ["https://", "http://", "s3://", "gs://"]) and target[0] != "#":
                 # Check if it is a file
-                fp = Path(fp).resolve()
-                if fp.is_file() or fp.is_dir():
-                    files.add(fp)
+                target = Path(target).resolve()
+                if target.is_file() or target.is_dir():
+                    files.add(target)
                 else:
-                    log.warn(f"Could not find file referenced in readme: {fp}")
+                    log.warn(f"Could not find file referenced in readme: {target}")
 
         return list(files)
 
