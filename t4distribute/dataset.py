@@ -11,6 +11,7 @@ from uuid import uuid4
 from markdown2 import markdown
 import pandas as pd
 import t4
+from tqdm import tqdm
 
 from .documentation import README, ReplacedPath
 from .validation import validate
@@ -205,7 +206,7 @@ class Dataset(object):
             if len(self._path_columns) > 0:
                 fp_cols = self._path_columns
             else:
-                fp_cols = v_ds.schema.df.index[v_ds.schema.df["dtype"] == "pathlib.Path"].tolist()
+                fp_cols = v_ds.schema.df.index[v_ds.schema.df["dtype"].str.contains("Path")].tolist()
 
             # Create associate mappings: List[Dict[str, str]]
             # This list is in index order. Meaning that as the column values are descended we can simply add a
@@ -213,40 +214,43 @@ class Dataset(object):
             associates = []
 
             # Set all files
-            for col in fp_cols:
-
-                # Check display name for col
-                if col in self._label_file_directories:
-                    col_label = self._label_file_directories[col]
-                else:
-                    col_label = col
-
-                # Update values to the logical key as they are set
-                for i, val in enumerate(v_ds.data[col].values):
-                    pk = Path(val).expanduser().resolve()
-                    if pk.is_file():
-                        key = str(uuid4()).replace("-", "")
-                        unique_name = f"{key}_{val.name}"
-                        lk = f"{col_label}/{unique_name}"
-                        v_ds.data[col].values[i] = lk
-
-                        # Attach metadata to object
-                        meta = {index_col: str(v_ds.data[index_col].values[i]) for index_col in self._index_columns}
-                        pkg.set(lk, pk, meta)
-
-                        # Update associates
-                        try:
-                            associates[i][col] = lk
-                        except IndexError:
-                            associates.append({col: lk})
+            with tqdm(total=len(fp_cols) * len(v_ds.data), desc="Constructing package") as pbar:
+                for col in fp_cols:
+                    # Check display name for col
+                    if col in self._label_file_directories:
+                        col_label = self._label_file_directories[col]
                     else:
-                        lk = f"{col_label}/{val.name}"
-                        v_ds.data[col].values[i] = lk
-                        pkg.set_dir(lk, pk)
+                        col_label = col
+
+                    # Update values to the logical key as they are set
+                    for i, val in enumerate(v_ds.data[col].values):
+                        pk = Path(val).expanduser().resolve()
+                        if pk.is_file():
+                            key = str(uuid4()).replace("-", "")
+                            unique_name = f"{key}_{val.name}"
+                            lk = f"{col_label}/{unique_name}"
+                            v_ds.data[col].values[i] = lk
+
+                            # Attach metadata to object
+                            meta = {index_col: str(v_ds.data[index_col].values[i]) for index_col in self._index_columns}
+                            pkg.set(lk, pk, meta)
+
+                            # Update associates
+                            try:
+                                associates[i][col_label] = lk
+                            except IndexError:
+                                associates.append({col_label: lk})
+                        else:
+                            lk = f"{col_label}/{val.name}"
+                            v_ds.data[col].values[i] = lk
+                            pkg.set_dir(lk, pk)
+
+                        # Update progress bar
+                        pbar.update()
 
             # Attach associates if desired
             if attach_associates:
-                for i, associate_mapping in enumerate(associates):
+                for i, associate_mapping in tqdm(enumerate(associates), desc="Creating associate metadata blocks"):
                     for col, lk in associate_mapping.items():
                         # Having dictionary expansion in this order means that associates will override a prior
                         # existing `associates` key, this is assumed safe because attach_associates was set to True.
