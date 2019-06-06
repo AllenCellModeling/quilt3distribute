@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 from functools import partial
 import logging
 from pathlib import Path
-from typing import Callable, Dict, List, NamedTuple, Optional, Tuple, Type, Union
+from typing import Callable, Dict, List, NamedTuple, Optional, Set, Tuple, Type, Union
 
 import numpy as np
 import pandas as pd
@@ -129,7 +129,8 @@ class ValidatedFeature(object):
         display_name: Optional[str] = None,
         description: Optional[str] = None,
         units: Optional[str] = None,
-        validation_functions: Optional[Tuple[Callable]] = None
+        validation_functions: Optional[Tuple[Callable]] = None,
+        errored_indices: Optional[Set[int]] = None
     ):
         """
         A feature that has it's core validation attributes locked but metadata freely mutable.
@@ -140,6 +141,7 @@ class ValidatedFeature(object):
         :param description: A description for the feature.
         :param units: Units for the feature.
         :param validation_functions: The tuple of validation functions ran against the feature values.
+        :param errored_indices: An optional set of indices that errored out during validation.
         """
         # Store configuration
         self._name = name
@@ -148,6 +150,11 @@ class ValidatedFeature(object):
         self.description = description
         self.units = units
         self._validation_functions = validation_functions
+
+        if errored_indices:
+            self._errored_indices = errored_indices
+        else:
+            self._errored_indices = set()
 
     @property
     def name(self) -> str:
@@ -162,6 +169,10 @@ class ValidatedFeature(object):
     def validation_functions(self) -> Tuple[Callable]:
         return self._validation_functions
 
+    @property
+    def errored_indices(self) -> Set[int]:
+        return self._errored_indices
+
     def to_dict(self) -> Dict[str, Union[str, Type, Tuple[Callable]]]:
         return {
             "name": self.name,
@@ -169,7 +180,8 @@ class ValidatedFeature(object):
             "display_name": self.display_name,
             "description": self.description,
             "units": self.units,
-            "validation_functions": self.validation_functions
+            "validation_functions": self.validation_functions,
+            "errored_indices": self.errored_indices
         }
 
     def __str__(self):
@@ -179,12 +191,17 @@ class ValidatedFeature(object):
         return str(self)
 
 
+class PlannedDelayedDropError(Exception):
+    pass
+
+
 class Validator(object):
     def __init__(
         self,
         name: str,
         values: np.ndarray,
-        definition: FeatureDefinition
+        definition: FeatureDefinition,
+        drop_on_error: bool = False
     ):
         """
         A container to manage feature values and feature definition that can actually process (validate) the feature.
@@ -192,11 +209,14 @@ class Validator(object):
         :param name: The name of the feature (usually this is the column name).
         :param values: The np.ndarray of feature values.
         :param definition: The feature definition to validate against.
+        :param drop_on_error: In the case that an error occurs during validation should the row be dropped and
+            validation continue.
         """
         # Store configuration
         self.name = name
         self.values = values
         self.definition = definition
+        self.drop_on_error = drop_on_error
 
     def process(self, progress_bar: Optional[tqdm] = None) -> ValidatedFeature:
         """
@@ -205,47 +225,67 @@ class Validator(object):
         :param progress_bar: An optional tqdm progress bar to update as the values are processed.
         :return: A ValidatedFeature object representing that this feature has been checked.
         """
+        # Create empty errored indicies set
+        errored_indices = set()
+
         # Begin checking
         for i in range(len(self.values)):
-            # Short ref to value
-            val = self.values[i]
-            val_descriptor = f"from column: '{self.name}', from index: {i}: ({type(val)} '{val}')"
+            try:
+                # Short ref to value
+                val = self.values[i]
+                val_descriptor = f"from column: '{self.name}', from index: {i}: ({type(val)} '{val}')"
 
-            # Attempt type casting
-            if self.definition.cast_values:
-                # Uncomment to fix windows paths
-                # Still debating the best way to do this
-                # Ideally we would want to detect which path sep was provided and what is the current os path sep
-                # Fix windows paths
-                # DEAR GOD WHY WINDOWS WHY
-                # if self.definition.dtype == Path:
-                #     val = val.replace("\\", "/")
+                # Attempt type casting
+                if self.definition.cast_values:
+                    # Uncomment to fix windows paths
+                    # Still debating the best way to do this
+                    # Ideally we would want to detect which path sep was provided and what is the current os path sep
+                    # Fix windows paths
+                    # DEAR GOD WHY WINDOWS WHY
+                    # if self.definition.dtype == Path:
+                    #     val = val.replace("\\", "/")
 
-                try:
-                    val = self.definition.dtype(val)
-                    self.values[i] = val
-                except (ValueError, TypeError):
-                    raise ValueError(
-                        f"Could not cast value {val_descriptor} to received type {self.definition.dtype}."
-                    )
+                    try:
+                        val = self.definition.dtype(val)
+                        self.values[i] = val
+                    except (ValueError, TypeError):
+                        if self.drop_on_error:
+                            raise PlannedDelayedDropError()
+                        else:
+                            raise ValueError(
+                                f"Could not cast value {val_descriptor} to received type {self.definition.dtype}."
+                            )
 
-            # Check type
-            if not isinstance(val, self.definition.dtype):
-                raise TypeError(
-                    f"Value {val_descriptor} does not match the type specification received {self.definition.dtype}."
-                )
+                # Check type
+                if not isinstance(val, self.definition.dtype):
+                    if self.drop_on_error:
+                        raise PlannedDelayedDropError()
+                    else:
+                        raise TypeError(
+                            f"Value {val_descriptor} does not match the type specification received "
+                            f"{self.definition.dtype}."
+                        )
 
-            # Confirm paths
-            if self.definition.dtype == Path:
-                if not val.exists():
-                    raise FileNotFoundError(f"Filepath {val_descriptor} was not found.")
+                # Confirm paths
+                if self.definition.dtype == Path:
+                    if not val.exists():
+                        if self.drop_on_error:
+                            raise PlannedDelayedDropError()
+                        else:
+                            raise FileNotFoundError(f"Filepath {val_descriptor} was not found.")
 
-            # Check values
-            for func_index, f in enumerate(self.definition.validation_functions):
-                if not f(val):
-                    raise ValueError(
-                        f"Value {val_descriptor} failed validation function {func_index}."
-                    )
+                # Check values
+                for func_index, f in enumerate(self.definition.validation_functions):
+                    if not f(val):
+                        if self.drop_on_error:
+                            raise PlannedDelayedDropError()
+                        else:
+                            raise ValueError(
+                                f"Value {val_descriptor} failed validation function {func_index}."
+                            )
+
+            except PlannedDelayedDropError:
+                errored_indices.add(i)
 
             # Update progress
             if progress_bar:
@@ -258,7 +298,8 @@ class Validator(object):
             display_name=self.definition.display_name,
             description=self.definition.description,
             units=self.definition.units,
-            validation_functions=self.definition.validation_functions
+            validation_functions=self.definition.validation_functions,
+            errored_indices=errored_indices
         )
 
 
@@ -298,7 +339,8 @@ class Schema(object):
                     "display_name": None,
                     "description": None,
                     "units": None,
-                    "validation_functions": None
+                    "validation_functions": None,
+                    "errored_indices": None
                 })
 
         # Set schema dataframe
@@ -356,6 +398,7 @@ class ValidatedDataset(NamedTuple):
 def validate(
     data: pd.DataFrame,
     schema: Optional[Dict[str, FeatureDefinition]] = None,
+    drop_on_error: bool = False,
     n_workers: Optional[int] = None,
     show_progress: bool = True
 ) -> ValidatedDataset:
@@ -365,6 +408,8 @@ def validate(
     :param data: A pandas dataframe to validate.
     :param schema: The proposed schema to validate the dataset against.
         A dictionary mapping dataframe column names to FeatureDefinitions.
+    :param drop_on_error: In the case that an error occurs during validation should the row be dropped and validation
+        continue.
     :param n_workers: The number of threads to use during validation.
     :param show_progress: Boolean option to show or hide progress bar.
     :return: A ValidatedDataset object that stores the cleaned copy of the data as well as the validated schema.
@@ -383,7 +428,8 @@ def validate(
     validators = [Validator(
         name=column,
         values=to_validate[column].values,
-        definition=definition
+        definition=definition,
+        drop_on_error=drop_on_error
     ) for column, definition in schema.items()]
 
     # Multiprocess validation
@@ -395,5 +441,15 @@ def validate(
                 validated_features = list(exe.map(validate_partial, validators))
         else:
             validated_features = list(exe.map(_validate_helper, validators))
+
+    # Drop any indicies that errored out during validation
+    if drop_on_error:
+        # Combine all errored indicie sets
+        master_set = set()
+        for vf in validated_features:
+            master_set = master_set.union(vf.feature.errored_indices)
+
+        # Drop all errored indicies
+        to_validate = to_validate.drop(list(master_set))
 
     return ValidatedDataset(to_validate, Schema({f.name: f.feature for f in validated_features}))
