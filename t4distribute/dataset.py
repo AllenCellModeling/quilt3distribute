@@ -63,9 +63,10 @@ class Dataset(object):
         self.readme_path = readme.fp
 
         # Lazy loaded
-        self._index_columns = []
-        self._path_columns = []
-        self._label_file_directories = {}
+        self.index_columns = []
+        self.path_columns = []
+        self.column_names_map = {}
+        self.extra_files = {}
 
     @property
     def data(self) -> pd.DataFrame:
@@ -109,7 +110,7 @@ class Dataset(object):
         if not any(col in self.data.columns for col in columns):
             raise ValueError(f"One or more columns provided were not found in the dataset. Received: {columns}")
 
-        self._index_columns = columns
+        self.index_columns = columns
 
     def set_path_columns(self, columns: List[str]):
         """
@@ -121,7 +122,7 @@ class Dataset(object):
         if not any(col in self.data.columns for col in columns):
             raise ValueError(f"One or more columns provided were not found in the dataset. Received: {columns}")
 
-        self._path_columns = columns
+        self.path_columns = columns
 
     def set_column_names_map(self, columns: Dict[str, str]):
         """
@@ -135,7 +136,7 @@ class Dataset(object):
         if not any(col in self.data.columns for col in columns):
             raise ValueError(f"One or more columns provided were not found in the dataset. Received: {columns}")
 
-        self._label_file_directories = columns
+        self.column_names_map = columns
 
     @staticmethod
     def return_or_raise_approved_name(name: str) -> str:
@@ -154,6 +155,29 @@ class Dataset(object):
             )
 
         return name
+
+    def set_extra_files(self, files: Union[List[Union[str, Path]], Dict[str, List[Union[str, Path]]]]):
+        """
+        Datasets commonly have extra or supporting files. Any file passed to this function will be added to the
+        requested directory.
+
+        :param files: When provided a list of string or Path objects all paths provided in the list will be sent to the
+            same logical key "supporting_files". When provided a dictionary mapping strings to list of string or Path
+            objects, the paths will be placed in logical keys labeled by their dictionary entry.
+        """
+        # Convert to dictionary
+        if isinstance(files, list):
+            files = {"supporting_files": files}
+
+        # Check all paths provided
+        converted = {}
+        for lk_parent, files_list in files.items():
+            converted[lk_parent] = []
+            for f in files_list:
+                converted[lk_parent].append(Path(f).expanduser().resolve(strict=True))
+
+        # Set the paths
+        self.extra_files = converted
 
     def distribute(
         self,
@@ -203,8 +227,8 @@ class Dataset(object):
             v_ds = validate(self.data)
 
             # Set package contents
-            if len(self._path_columns) > 0:
-                fp_cols = self._path_columns
+            if len(self.path_columns) > 0:
+                fp_cols = self.path_columns
             else:
                 fp_cols = v_ds.schema.df.index[v_ds.schema.df["dtype"].str.contains("Path")].tolist()
 
@@ -217,8 +241,8 @@ class Dataset(object):
             with tqdm(total=len(fp_cols) * len(v_ds.data), desc="Constructing package") as pbar:
                 for col in fp_cols:
                     # Check display name for col
-                    if col in self._label_file_directories:
-                        col_label = self._label_file_directories[col]
+                    if col in self.column_names_map:
+                        col_label = self.column_names_map[col]
                     else:
                         col_label = col
 
@@ -232,7 +256,7 @@ class Dataset(object):
                             v_ds.data[col].values[i] = lk
 
                             # Attach metadata to object
-                            meta = {index_col: str(v_ds.data[index_col].values[i]) for index_col in self._index_columns}
+                            meta = {index_col: str(v_ds.data[index_col].values[i]) for index_col in self.index_columns}
                             pkg.set(lk, pk, meta)
 
                             # Update associates
@@ -260,6 +284,11 @@ class Dataset(object):
             meta_path = Path(tmpdir, "metadata.csv")
             v_ds.data.to_csv(meta_path, index=False)
             pkg.set("metadata.csv", meta_path)
+
+            # Set logical keys for all extra files
+            for lk_parent, files_list in self.extra_files.items():
+                for f in files_list:
+                    pkg.set(f"{lk_parent}/{f.name}", f)
 
             # Optionally push
             if push_uri:

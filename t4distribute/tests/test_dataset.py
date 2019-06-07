@@ -132,7 +132,24 @@ def test_dataset_set_column_names_map(dataset, columns):
     dataset.set_column_names_map(columns)
 
 
-def test_dataset_distribute(dataset):
+def test_dataset_set_extra_files_exists(dataset, example_readme):
+    dataset.set_extra_files([example_readme])
+    dataset.set_extra_files({"extra": [example_readme]})
+
+
+@pytest.mark.parametrize("files", [
+    pytest.param(["/this/does/not/exist.png"], marks=pytest.mark.raises(exception=FileNotFoundError)),
+    pytest.param({"extras": ["/this/does/not/exist.png"]}, marks=pytest.mark.raises(exception=FileNotFoundError))
+])
+def test_dataset_set_extra_files_fails(dataset, files):
+    dataset.set_extra_files(files)
+
+
+@pytest.mark.parametrize("push_uri", [
+    (None),
+    ("s3://fake-uri")
+])
+def test_dataset_distribute(dataset, push_uri):
     with mock.patch("t4.Package.push") as mocked_package_push:
         mocked_package_push.return_value = "NiceTryGuy"
         dataset.distribute("s3://my-bucket", "some message")
