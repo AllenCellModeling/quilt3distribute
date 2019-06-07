@@ -74,14 +74,14 @@ def test_dataset_return_or_raise_approved_name(example_frame, example_readme, na
 
 
 @pytest.fixture
-def dataset(example_frame, example_readme):
+def no_additions_dataset(example_frame, example_readme):
     return Dataset(example_frame, "test_dataset", "me", example_readme)
 
 
-def test_dataset_props(dataset):
-    assert dataset.data is not None
-    newly_generated_readme = dataset.readme
-    assert dataset.readme == newly_generated_readme
+def test_dataset_props(no_additions_dataset):
+    assert no_additions_dataset.data is not None
+    newly_generated_readme = no_additions_dataset.readme
+    assert no_additions_dataset.readme == newly_generated_readme
 
 
 @pytest.mark.parametrize("usage_doc_or_link", [
@@ -89,8 +89,8 @@ def test_dataset_props(dataset):
     ("https://docs.quiltdata.com/walkthrough/installing-a-package"),
     ("https://docs.quiltdata.com/walkthrough/reading-from-a-package")
 ])
-def test_dataset_readme_usage_attachment(dataset, usage_doc_or_link):
-    dataset.add_usage_doc(usage_doc_or_link)
+def test_dataset_readme_usage_attachment(no_additions_dataset, usage_doc_or_link):
+    no_additions_dataset.add_usage_doc(usage_doc_or_link)
 
 
 @pytest.mark.parametrize("license_doc_or_link", [
@@ -98,8 +98,8 @@ def test_dataset_readme_usage_attachment(dataset, usage_doc_or_link):
     ("https://opensource.org/licenses/BSD-2-Clause"),
     ("https://opensource.org/licenses/MPL-2.0")
 ])
-def test_dataset_readme_license_attachment(dataset, license_doc_or_link):
-    dataset.add_license(license_doc_or_link)
+def test_dataset_readme_license_attachment(no_additions_dataset, license_doc_or_link):
+    no_additions_dataset.add_license(license_doc_or_link)
 
 
 @pytest.mark.parametrize("columns", [
@@ -108,8 +108,8 @@ def test_dataset_readme_license_attachment(dataset, license_doc_or_link):
     pytest.param(["DoesNotExist"], marks=pytest.mark.raises(exception=ValueError)),
     pytest.param(["DoesNotExist1", "DoesNotExist2"], marks=pytest.mark.raises(exception=ValueError))
 ])
-def test_dataset_index_on_columns(dataset, columns):
-    dataset.index_on_columns(columns)
+def test_dataset_index_on_columns(no_additions_dataset, columns):
+    no_additions_dataset.index_on_columns(columns)
 
 
 @pytest.mark.parametrize("columns", [
@@ -118,8 +118,8 @@ def test_dataset_index_on_columns(dataset, columns):
     pytest.param(["DoesNotExistPath"], marks=pytest.mark.raises(exception=ValueError)),
     pytest.param(["DoesNotExistPath1", "DoesNotExistPath2"], marks=pytest.mark.raises(exception=ValueError))
 ])
-def test_dataset_set_path_columns(dataset, columns):
-    dataset.set_path_columns(columns)
+def test_dataset_set_path_columns(no_additions_dataset, columns):
+    no_additions_dataset.set_path_columns(columns)
 
 
 @pytest.mark.parametrize("columns", [
@@ -128,28 +128,38 @@ def test_dataset_set_path_columns(dataset, columns):
     pytest.param({"DNE": "DNELabeled"}, marks=pytest.mark.raises(exception=ValueError)),
     pytest.param({"DNE1": "DNELabeled1", "DNE2": "DNELabeled2"}, marks=pytest.mark.raises(exception=ValueError))
 ])
-def test_dataset_set_column_names_map(dataset, columns):
-    dataset.set_column_names_map(columns)
+def test_dataset_set_column_names_map(no_additions_dataset, columns):
+    no_additions_dataset.set_column_names_map(columns)
 
 
-def test_dataset_set_extra_files_exists(dataset, example_readme):
-    dataset.set_extra_files([example_readme])
-    dataset.set_extra_files({"extra": [example_readme]})
+def test_dataset_set_extra_files_exists(no_additions_dataset, example_readme):
+    no_additions_dataset.set_extra_files([example_readme])
+    no_additions_dataset.set_extra_files({"extra": [example_readme]})
 
 
 @pytest.mark.parametrize("files", [
     pytest.param(["/this/does/not/exist.png"], marks=pytest.mark.raises(exception=FileNotFoundError)),
     pytest.param({"extras": ["/this/does/not/exist.png"]}, marks=pytest.mark.raises(exception=FileNotFoundError))
 ])
-def test_dataset_set_extra_files_fails(dataset, files):
-    dataset.set_extra_files(files)
+def test_dataset_set_extra_files_fails(no_additions_dataset, files):
+    no_additions_dataset.set_extra_files(files)
+
+
+@pytest.fixture
+def extra_additions_dataset(example_frame, example_readme):
+    ds = Dataset(example_frame, "test_dataset", "me", example_readme)
+    ds.set_path_columns(["2dReadPath"])
+    ds.set_extra_files([example_readme])
+    ds.set_column_names_map({"2dReadPath": "MappedPath"})
+    return ds
 
 
 @pytest.mark.parametrize("push_uri", [
     (None),
     ("s3://fake-uri")
 ])
-def test_dataset_distribute(dataset, push_uri):
+def test_dataset_distribute(no_additions_dataset, extra_additions_dataset, push_uri):
     with mock.patch("t4.Package.push") as mocked_package_push:
         mocked_package_push.return_value = "NiceTryGuy"
-        dataset.distribute("s3://my-bucket", "some message")
+        no_additions_dataset.distribute(push_uri, "some message")
+        extra_additions_dataset.distribute(push_uri, "some message")

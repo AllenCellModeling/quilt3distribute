@@ -100,6 +100,7 @@ class README(object):
 
         # Add usage if provided
         if usage_doc_or_link:
+            usage_doc_or_link = str(usage_doc_or_link)
             # Check if the usage doc is a link
             if any(sub in usage_doc_or_link.lower() for sub in ["https://", "http://", "s3://", "gs://"]):
                 text += (
@@ -114,6 +115,7 @@ class README(object):
                     text += f"\n{usage_doc.read()}"
 
         if license_doc_or_link:
+            license_doc_or_link = str(license_doc_or_link)
             # Check if the license doc is a link
             if any(sub in license_doc_or_link.lower() for sub in ["https://", "http://", "s3://", "gs://"]):
                 text += (
