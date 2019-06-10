@@ -46,6 +46,15 @@ def test_dataset_init_frame(example_frame, example_readme):
     Dataset(example_frame, "test_dataset", "me", example_readme)
 
 
+@pytest.mark.parametrize("dataset", [
+    (pd.DataFrame([{"hello": "world"}, {"hello": "jackson"}])),
+    pytest.param(1, marks=pytest.mark.raises(exception=TypeError)),
+    pytest.param(("wrong", "type"), marks=pytest.mark.raises(exception=TypeError))
+])
+def test_dataset_init_types(example_readme, dataset):
+    Dataset(dataset, "test_dataset", "me", example_readme)
+
+
 @pytest.mark.parametrize("readme_path", [
     pytest.param("/this/does/not/exist.md", marks=pytest.mark.raises(exception=FileNotFoundError)),
     pytest.param(Path("/this/does/not/exist.md"), marks=pytest.mark.raises(exception=FileNotFoundError))

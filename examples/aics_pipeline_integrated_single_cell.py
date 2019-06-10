@@ -42,7 +42,7 @@ cleaned = validate(raw, drop_on_error=True)
 
 # Step 5:
 # Send to dataset object for package construction
-ds = Dataset(cleaned, "Pipeline Integrated Single Cell", "aics", "aics_pipeline_integrated_single_cell.md")
+ds = Dataset(cleaned.data, "Pipeline Integrated Single Cell", "aics", "aics_pipeline_integrated_single_cell.md")
 
 # Step 6:
 # Add a license

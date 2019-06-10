@@ -49,6 +49,10 @@ class Dataset(object):
             # Read
             dataset = pd.read_csv(dataset)
 
+        # Check type
+        if not isinstance(dataset, pd.DataFrame):
+            raise TypeError("Dataset's may only be initialized with a path to csv or a pandas dataframe.")
+
         # Init readme
         readme = README(readme_path)
 
