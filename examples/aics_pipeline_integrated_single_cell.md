@@ -203,3 +203,7 @@ For more details on how filtering works please see [the Quilt documentation on t
 
 *Note: If you are more comfortable with pandas dataframes, you can also use traditional dataframe filtering options on
 the metadata.csv file.*
+
+
+### Distribution
+This package was created and distributed using [Quilt3Distribute](https://github.com/AllenCellModeling/quilt3distribute).
