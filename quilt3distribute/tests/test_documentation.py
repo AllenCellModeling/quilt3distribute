@@ -3,7 +3,7 @@
 
 import pytest
 
-from t4distribute.documentation import README
+from quilt3distribute.documentation import README
 
 
 @pytest.fixture

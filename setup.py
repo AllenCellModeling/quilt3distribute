@@ -3,7 +3,7 @@
 
 """The setup script."""
 
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 with open('README.md') as readme_file:
     readme = readme_file.read()
@@ -43,7 +43,7 @@ interactive_requirements = [
 requirements = [
     'markdown2==2.3.7',
     'pandas',
-    't4==0.1.4',
+    'quilt3>=3.0.4',
     'tabulate==0.8.3',
     'tqdm==4.32.1',
 ]
@@ -73,25 +73,25 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
     ],
-    description="A small wrapper around T4 to make dataset distribution even easier.",
+    description="A small wrapper around Quilt3 to make dataset distribution even easier.",
     entry_points={
         'console_scripts': [
-            't4_distribute_dataset=t4distribute.bin.t4_distribute_dataset:main'
+            'quilt3_distribute_dataset=quilt3distribute.bin.quilt3_distribute_dataset:main'
         ],
     },
     install_requires=requirements,
     license="Allen Institute Software License",
     long_description=readme,
     include_package_data=True,
-    keywords='t4distribute',
-    name='t4distribute',
+    keywords='quilt3distribute',
+    name='quilt3distribute',
     packages=find_packages(),
     python_requires=">=3.6",
     setup_requires=setup_requirements,
-    test_suite='t4distribute/tests',
+    test_suite='quilt3distribute/tests',
     tests_require=test_requirements,
     extras_require=extra_requirements,
-    url='https://github.com/AllenCellModeling/t4distribute',
+    url='https://github.com/AllenCellModeling/quilt3distribute',
     version='0.1.0',
     zip_safe=False,
 )

@@ -18,7 +18,7 @@ Much of the data gathered by the Allen Institute for Cell Science has previously
 batches of files hosted on our website. This repository provides the same high quality, curated datasets of labeled
 cell lines, but through Quilt's loading mechanism.
 
-Data versioning, downloading, and loading though Quilt's T4 is a substantial step towards trivially shareable and
+Data versioning, downloading, and loading though Quilt is a substantial step towards trivially shareable and
 reproducible analyses.
 
 ## Contents
@@ -57,9 +57,9 @@ of what all you can do with Quilt, please refer to their [documentation](https:/
 
 To load the package:
 ```python
-import t4
+import quilt3
 
-pkg = t4.Package.browse("aics/pipeline_integrated_single_cell", registry="s3://quilt-aics")
+pkg = quilt3.Package.browse("aics/pipeline_integrated_single_cell", registry="s3://quilt-aics")
 pkg
 ```
 
@@ -92,12 +92,12 @@ You should see something like this:
 *Note: If you want to retrieve a prior or specific version of this package you can add a `top_hash` parameter to the
 `browse` function like so:*
 ```python
-specific_version = t4.Package.browse("aics/pipeline_integrated_single_cell", "s3://quilt-aics", "7cf876498abb12db5004fbf7dbaece9fd1ca0b2e68738280f126c85f86a0b628")
+specific_version = quilt3.Package.browse("aics/pipeline_integrated_single_cell", "s3://quilt-aics", "7cf876498abb12db5004fbf7dbaece9fd1ca0b2e68738280f126c85f86a0b628")
 ```
 
 *You can find the top hashes for packages on the [Allen Cell Quilt data catalog](https://allencell.quiltdata.com/b/quilt-aics/packages/aics/pipeline_integrated_single_cell).*
 
-You can use this `pkg` (`t4.Package`) object to navigate around the dataset using dictionary accessors like so:
+You can use this `pkg` (`quilt3.Package`) object to navigate around the dataset using dictionary accessors like so:
 ```python
 example_feats = pkg["cell_features"]["0001ff07ebd74c3197fe4c6b45bf27c6_13736_116816_feats.json"]
 ```

@@ -2,15 +2,15 @@
 # -*- coding: utf-8 -*-
 
 import logging
-from pathlib import Path
 import re
 import tempfile
+from pathlib import Path
 from typing import Dict, List, Optional, Union
 from uuid import uuid4
 
-from markdown2 import markdown
 import pandas as pd
-import t4
+import quilt3
+from markdown2 import markdown
 from tqdm import tqdm
 
 from .documentation import README, ReplacedPath
@@ -86,7 +86,7 @@ class Dataset(object):
 
         :param doc_or_link: A filepath or string uri to a resource detailing usage of this dataset.
 
-        Wrapper around t4distribute.documentation.README.append_readme_standards.
+        Wrapper around quilt3distribute.documentation.README.append_readme_standards.
         """
         self.readme.append_readme_standards(usage_doc_or_link=doc_or_link)
 
@@ -96,7 +96,7 @@ class Dataset(object):
 
         :param doc_or_link: A filepath or string uri to a resource for license details.
 
-        Wrapper around t4distribute.documentation.README.append_readme_standards.
+        Wrapper around quilt3distribute.documentation.README.append_readme_standards.
         """
         self.readme.append_readme_standards(license_doc_or_link=doc_or_link)
 
@@ -145,7 +145,7 @@ class Dataset(object):
     @staticmethod
     def return_or_raise_approved_name(name: str) -> str:
         """
-        Attempt to clean a string to match the pattern expected by Quilt 3/ T4.
+        Attempt to clean a string to match the pattern expected by Quilt 3.
         If after the cleaning operation, it still doesn't match the approved pattern, will raise a ValueError.
 
         :param name: String name to clean.
@@ -188,7 +188,7 @@ class Dataset(object):
         push_uri: Optional[str] = None,
         message: Optional[str] = None,
         attach_associates: bool = True,
-    ) -> t4.Package:
+    ) -> quilt3.Package:
         """
         Push a package to a specific S3 bucket. If no bucket is provided, the un-built, un-pushed package is returned.
         You can push a dataset with the same name multiple times to the same bucket multiple times as instead of
@@ -199,14 +199,14 @@ class Dataset(object):
         :param message: An optional message to attach to that version of the dataset.
         :param attach_associates: Boolean option to attach associates as metadata to each file. Associates are used
             to retain quick navigation between related files.
-        :return: The built and optionally pushed t4.Package.
+        :return: The built and optionally pushed quilt3.Package.
         """
         # Confirm name matches approved pattern
         # We previously checked during init, but the name could have been changed
         name = self.return_or_raise_approved_name(self.name)
 
         # Create empty package
-        pkg = t4.Package()
+        pkg = quilt3.Package()
 
         # Write any extra files to tempdir to send to the build
         with tempfile.TemporaryDirectory() as tmpdir:
