@@ -10,6 +10,7 @@ This script will take the output of the AICS `single_cell_pipeline` and package 
 from pathlib import Path
 
 import pandas as pd
+
 from quilt3distribute import Dataset
 from quilt3distribute.validation import validate
 
@@ -26,6 +27,8 @@ raw = pd.read_csv(scp_manifest)
 # Step 3:
 # Drop any columns that are filled with filepaths that we don't want to send out at this time
 # In this case, it is because that data is available in a more production form from `aics/pipeline_integrated_cell`
+# In the future these columns will likely be kept in on a script the sends out the entire pipeline. So that we don't
+# have to split up single cell and full field packages.
 raw = raw.drop([
     "MembraneContourReadPath", "MembraneContourFilename", "MembraneSegmentationReadPath",
     "MembraneSegmentationFilename", "NucleusContourReadPath", "NucleusContourFilename",
