@@ -10,16 +10,16 @@ helps, and credit will always be given.
 Get Started!
 ------------
 
-Ready to contribute? Here's how to set up `t4distribute` for local development.
+Ready to contribute? Here's how to set up `quilt3distribute` for local development.
 
-1. Fork the `t4distribute` repo on GitHub.
+1. Fork the `quilt3distribute` repo on GitHub.
 2. Clone your fork locally::
 
-    $ git clone git@github.com:your_name_here/t4distribute.git
+    $ git clone git@github.com:your_name_here/quilt3distribute.git
 
 3. Install the project in editable mode. (It is also recommended to work in a virtualenv or anaconda environment)::
 
-    $ cd t4distribute/
+    $ cd quilt3distribute/
     $ pip install -e .[dev]
 
 4. Create a branch for local development::

@@ -1,4 +1,4 @@
-# Config file for automatic testing at travis-ci.org
+# Config file for automatic testing at travis-ci.com
 dist: xenial
 language: python
 cache: pip
@@ -26,5 +26,5 @@ deploy:
     secure: PLEASE_REPLACE_ME
   on:
     tags: true
-    repo: AllenCellModeling/t4distribute
+    repo: AllenCellModeling/quilt3distribute
     python: 3.7

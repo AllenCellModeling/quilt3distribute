@@ -7,8 +7,8 @@ import pytest
 import numpy as np
 import pandas as pd
 
-from t4distribute import FeatureDefinition
-from t4distribute.validation import validate, Validator
+from quilt3distribute import FeatureDefinition
+from quilt3distribute.validation import validate, Validator
 
 
 @pytest.mark.parametrize("dtype, validation_functions", [

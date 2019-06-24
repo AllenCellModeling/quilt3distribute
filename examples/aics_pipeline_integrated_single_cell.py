@@ -4,14 +4,14 @@
 """
 aics/pipeline_integrated_single_cell distribution
 
-This script will take the output of the AICS `single_cell_pipeline` and package and distribute it using `t4/quilt3`.
+This script will take the output of the AICS `single_cell_pipeline` and package and distribute it using `quilt3`.
 """
 
 from pathlib import Path
 
 import pandas as pd
-from t4distribute import Dataset
-from t4distribute.validation import validate
+from quilt3distribute import Dataset
+from quilt3distribute.validation import validate
 
 # Step 1:
 # Import the data

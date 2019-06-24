@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import pytest
+from pathlib import Path
 from unittest import mock
 
 import pandas as pd
-from pathlib import Path
-
-from t4distribute import Dataset
+import pytest
+from quilt3distribute import Dataset
 
 
 @pytest.fixture
@@ -168,7 +167,7 @@ def extra_additions_dataset(example_frame, example_readme):
     ("s3://fake-uri")
 ])
 def test_dataset_distribute(no_additions_dataset, extra_additions_dataset, push_uri):
-    with mock.patch("t4.Package.push") as mocked_package_push:
+    with mock.patch("quilt3.Package.push") as mocked_package_push:
         mocked_package_push.return_value = "NiceTryGuy"
         no_additions_dataset.distribute(push_uri, "some message")
         extra_additions_dataset.distribute(push_uri, "some message")

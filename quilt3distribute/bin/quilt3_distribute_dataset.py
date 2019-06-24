@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
 import argparse
 import logging
-from pathlib import Path
+import sys
 import traceback
+from pathlib import Path
 
-from t4distribute import Dataset
+from quilt3distribute import Dataset
 
 ###############################################################################
 
@@ -24,8 +24,8 @@ class Args(argparse.Namespace):
         self.__parse()
 
     def __parse(self):
-        p = argparse.ArgumentParser(prog='t4_distribute_dataset',
-                                    description=('A wrapper around t4 package distribution to make it even easier. '
+        p = argparse.ArgumentParser(prog='quilt3_distribute_dataset',
+                                    description=('A wrapper around quilt3 package distribution to make it even easier. '
                                                  'As default, this will attempt to do basic data cleaning tasks '
                                                  'and additionally, attempts to guess which file should be sent '
                                                  'out with the package. Lastly, will parse the provided README for '
@@ -54,10 +54,11 @@ class Args(argparse.Namespace):
                        help=('List of columns to use for metadata attachment. '
                              'The values in each row for the columns provided will be attached as metadata, '
                              'meaning, users will be able to search and filter the files sent using that metadata. '
-                             'Example: "t4_distribute_dataset ... -i drug_name structure_name ..."'))
+                             'Example: "quilt3_distribute_dataset ... -i drug_name structure_name ..."'))
         p.add_argument('-f', '--fc', '--file-columns', action='store', nargs='+', dest='path_columns', default=None,
                        help=('List of columns that contains filepaths to be sent out in the package. '
-                             'Example: "t4_distribute_dataset ... -p fov_read_path structure_segmentation_path ..."'))
+                             'Example: '
+                             '"quilt3_distribute_dataset ... -p fov_read_path structure_segmentation_path ..."'))
         p.add_argument('--debug', action='store_true', dest='debug', help=argparse.SUPPRESS)
         p.parse_args(namespace=self)
 

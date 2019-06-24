@@ -1,12 +1,12 @@
-# T4Distribute
+# quilt3distribute
 
-[![build status](https://travis-ci.com/AllenCellModeling/t4distribute.svg?branch=master)](https://travis-ci.com/AllenCellModeling/t4distribute)
-[![codecov](https://codecov.io/gh/AllenCellModeling/t4distribute/branch/master/graph/badge.svg)](https://codecov.io/gh/AllenCellModeling/t4distribute)
+[![build status](https://travis-ci.com/AllenCellModeling/quilt3distribute.svg?branch=master)](https://travis-ci.com/AllenCellModeling/quilt3distribute)
+[![codecov](https://codecov.io/gh/AllenCellModeling/quilt3distribute/branch/master/graph/badge.svg)](https://codecov.io/gh/AllenCellModeling/quilt3distribute)
 
 
 ![dataset packaging and distribution](http://www.allencell.org/uploads/8/1/9/9/81996008/published/automatingaccess-button-3_2.png?1549322257)
 
-A small wrapper around Quilt 3/ T4 to make dataset distribution even easier while enforcing some basic standards.
+A small wrapper around Quilt 3 to make dataset distribution even easier while enforcing some basic standards.
 
 ---
 
@@ -20,7 +20,7 @@ A small wrapper around Quilt 3/ T4 to make dataset distribution even easier whil
 ## Quick Start
 ***Bin Script:***
 
-Construct a csv (or pandas dataframe) dataset manifest ([Example](t4distribute/tests/data/example.csv)):
+Construct a csv (or pandas dataframe) dataset manifest ([Example](quilt3distribute/tests/data/example.csv)):
 
 | CellId | Structure | 2dReadPath | 3dReadPath |
 |--------|-----------|------------|------------|
@@ -38,18 +38,18 @@ Using the bin script offers easy dataset distribution, simply provide (in order)
 5. The S3 bucket URI you want to push the dataset to.
 
 Layout:<br>
-`t4_distribute_dataset {dataset_path} {dataset_name} {dataset_owner} {readme_path} {s3_uri}`
+`quilt3_distribute_dataset {dataset_path} {dataset_name} {dataset_owner} {readme_path} {s3_uri}`
 
 Filled:<br>
-`t4_distribute_dataset single_cell_examples.csv single_cell_examples jacksonb single_cell_examples.md s3://quilt-jacksonb`
+`quilt3_distribute_dataset single_cell_examples.csv single_cell_examples jacksonb single_cell_examples.md s3://quilt-jacksonb`
 
-Use `t4_distribute_dataset -h` to bring up more details about each parameter and all the options available.
+Use `quilt3_distribute_dataset -h` to bring up more details about each parameter and all the options available.
 If you don't know the details for items 3 or 5, talk to your Quilt account admin for help.
 
 
 ***Python:***
 ```python
-from t4distribute import Dataset
+from quilt3distribute import Dataset
 
 # Create the dataset
 ds = Dataset(
@@ -83,7 +83,7 @@ In short: the columns provided will be used for metadata attachment for every fi
 ## Installation
 PyPI installation not available at this time, please install using git.
 
-`pip install git+https://github.com/AllenCellModeling/t4distribute.git`
+`pip install git+https://github.com/AllenCellModeling/quilt3distribute.git`
 
 
 ### Credits

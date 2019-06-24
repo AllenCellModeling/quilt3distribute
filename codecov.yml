@@ -1,3 +1,3 @@
 ignore:
-    - "t4distribute/bin/.*"
+    - "quilt3distribute/bin/.*"
     - "**/__init__.py"

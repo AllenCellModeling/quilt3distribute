@@ -6,7 +6,7 @@
 
 
 ## Bug reports:
-* T4Distribute version:
+* Quilt3Distribute version:
 * Python version:
 * Operating System:
 

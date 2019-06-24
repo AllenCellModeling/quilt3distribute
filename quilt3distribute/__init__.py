@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Top-level package for T4Distribute."""
+"""Top-level package for quilt3distribute."""
 
 __author__ = 'Jackson Maxfield Brown'
 __email__ = 'jacksonb@alleninstitute.org'
