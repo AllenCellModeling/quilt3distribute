@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import logging
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 from functools import partial
-import logging
 from pathlib import Path
-from typing import Callable, Dict, List, NamedTuple, Optional, Set, Tuple, Type, Union
+from typing import (Callable, Dict, List, NamedTuple, Optional, Set, Tuple,
+                    Type, Union)
 
 import numpy as np
 import pandas as pd
@@ -233,7 +234,7 @@ class Validator(object):
             try:
                 # Short ref to value
                 val = self.values[i]
-                val_descriptor = f"from column: '{self.name}', from index: {i}: ({type(val)} '{val}')"
+                val_descriptor = f"from column: '{self.name}', at index: {i}: ({type(val)} '{val}')"
 
                 # Attempt type casting
                 if self.definition.cast_values:

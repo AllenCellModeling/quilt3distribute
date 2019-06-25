@@ -6,7 +6,6 @@ import re
 import tempfile
 from pathlib import Path
 from typing import Dict, List, Optional, Union
-from uuid import uuid4
 
 import pandas as pd
 import quilt3
