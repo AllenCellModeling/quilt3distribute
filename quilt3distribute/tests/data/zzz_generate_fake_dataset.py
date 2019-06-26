@@ -13,7 +13,6 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-
 import tifffile
 
 ###############################################################################
@@ -84,6 +83,16 @@ def main():
 
     data = pd.DataFrame({"CellId": cell_ids, "SourceReadPath": source_read_paths, "Structure": structures})
     data.to_csv((BASE_PATH / "repeated_values_example.csv"), index=False)
+
+    ###############################################################################
+
+    # Create same filenames dataset
+    three_d_paths = [(BASE_PATH / "fake_images" / "3d" / f"{i}.tiff").resolve() for i in range(1, 10)]
+    two_d_paths = [(BASE_PATH / "fake_images" / "2d" / f"{i}.tiff").resolve() for i in range(1, 10)]
+    paths = [*three_d_paths, *two_d_paths]
+
+    data = pd.DataFrame({"SourceReadPath": paths})
+    data.to_csv((BASE_PATH / "same_filenames_example.csv"), index=False)
 
 ###############################################################################
 # Allow caller to directly run this module (usually in development scenarios)

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import hashlib
 import logging
 import re
 import tempfile
@@ -306,8 +307,21 @@ class Dataset(object):
 
                     # Update values to the logical key as they are set
                     for i, val in enumerate(v_ds.data[col].values):
+                        # Fully resolve the path
                         pk = Path(val).expanduser().resolve()
-                        lk = f"{col_label}/{val.name}"
+
+                        # Just using val.name could result in files that shouldn't be grouped being grouped
+                        # Example column:
+                        # SourceReadpath
+                        # a/0.tiff
+                        # a/1.tiff
+                        # b/0.tiff
+                        # b/1.tiff
+                        # Even though there are four files, this would result in both a/0.tiff and b/0.tiff, and,
+                        # a/1.tiff and b/1.tiff being grouped together. To solve this we can prepend a the first couple
+                        # of characters from a hash of the fully resolved path to the logical key.
+                        prepend = hashlib.sha256(str(pk).encode("utf-8")).hexdigest()[:8]
+                        lk = f"{col_label}/{prepend}_{val.name}"
                         if pk.is_file():
                             v_ds.data[col].values[i] = lk
 
