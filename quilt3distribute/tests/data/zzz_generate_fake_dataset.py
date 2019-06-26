@@ -8,11 +8,12 @@
 ###############################################################################
 
 import json
-from pathlib import Path
 import random
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
+
 import tifffile
 
 ###############################################################################
@@ -22,7 +23,7 @@ BASE_PATH = Path(__file__).parent
 
 
 def main():
-    # Construct rows
+    # Create fake unique dataset
     rows = []
     for i in range(1, 10):
         # Generate random features
@@ -67,6 +68,22 @@ def main():
     # Create fake manifest (dataset)
     data = pd.DataFrame(rows)
     data.to_csv((BASE_PATH / "example.csv"), index=False)
+
+    ###############################################################################
+
+    # Create fake repeated dataset
+    cell_ids = [i for i in range(1, 10)]
+    source_read_paths_1 = [(BASE_PATH / "fake_images" / "3d" / "1.tiff").resolve() for i in range(4)]
+    source_read_paths_2 = [(BASE_PATH / "fake_images" / "3d" / "2.tiff").resolve() for i in range(3)]
+    source_read_paths_3 = [(BASE_PATH / "fake_images" / "3d" / "3.tiff").resolve() for i in range(2)]
+    source_read_paths = [*source_read_paths_1, *source_read_paths_2, *source_read_paths_3]
+    structures_1 = ["lamin"] * 4
+    structures_2 = ["mito"] * 3
+    structures_3 = ["pax"] * 2
+    structures = [*structures_1, *structures_2, *structures_3]
+
+    data = pd.DataFrame({"CellId": cell_ids, "SourceReadPath": source_read_paths, "Structure": structures})
+    data.to_csv((BASE_PATH / "repeated_values_example.csv"), index=False)
 
 ###############################################################################
 # Allow caller to directly run this module (usually in development scenarios)
