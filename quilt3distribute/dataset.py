@@ -20,6 +20,11 @@ from .validation import validate
 log = logging.getLogger(__name__)
 
 
+# This could actually include dictionaries, lists, and tuples but for the sake of simplicity we only allow these types.
+# Details here: https://docs.python.org/3/library/json.html#json.JSONEncoder
+JSONSerializableTypes = (str, int, float, bool, type(None))
+
+
 ###############################################################################
 
 
@@ -50,7 +55,9 @@ class Dataset(object):
 
         # Check type
         if not isinstance(dataset, pd.DataFrame):
-            raise TypeError("Dataset's may only be initialized with a path to csv or a pandas dataframe.")
+            raise TypeError(
+                f"Dataset's may only be initialized with a path to csv or a pandas dataframe. Received: {type(dataset)}"
+            )
 
         # Init readme
         readme = README(readme_path)
@@ -182,6 +189,30 @@ class Dataset(object):
         # Set the paths
         self.extra_files = converted
 
+    @staticmethod
+    def _recursive_clean(pkg: quilt3.Package, metadata_reduction_map: Dict[str, bool]):
+        # For all keys in current package level
+        for k in pkg:
+            # If it is a PackageEntry object, we know we have hit a leaf node
+            if isinstance(pkg[k], quilt3.packages.PackageEntry):
+                # Reduce the metadata to a single value where it can
+                cleaned_meta = {}
+                for meta_k, meta_v in pkg[k].meta.items():
+                    # If the metadata reduction map at the index column (or meta_k) can be reduced/ collapsed (True)
+                    # Reduce/ collapse the metadata
+                    if metadata_reduction_map[meta_k]:
+                        cleaned_meta[meta_k] = meta_v[0]
+                    # Else, do not reduce
+                    else:
+                        cleaned_meta[meta_k] = meta_v
+
+                # Update the object with the cleaned metadata
+                pkg[k].set_meta(cleaned_meta)
+            else:
+                Dataset._recursive_clean(pkg[k], metadata_reduction_map)
+
+        return pkg
+
     def distribute(
         self,
         push_uri: Optional[str] = None,
@@ -213,7 +244,7 @@ class Dataset(object):
             updated_references = []
             text = self.readme.text
             for f in self.readme.referenced_files:
-                replaced = ReplacedPath(f, f"reference_files/{f.name}")
+                replaced = ReplacedPath(f, f"referenced_files/{f.name}")
                 updated_references.append(replaced)
                 text = text.replace(str(replaced.prior), replaced.updated)
                 pkg.set(replaced.updated, str(replaced.prior.expanduser().resolve()))
@@ -240,6 +271,30 @@ class Dataset(object):
             # new associate to the already existing associate map at that list index.
             associates = []
 
+            # Create metadata reduction map
+            # This will be used to clean up and standardize the metadata access after object construction
+            # Index column name to boolean value for should or should not reduce metadata values
+            # This will be used during the "clean up the package metadata step"
+            # If we have multiple files each with the same keys for the metadata, but for one reason or another, one
+            # packaged file's value for a certain key is a list while another's is a single string, this leads to a
+            # confusing mixed return value API for the same _type_ of object. Example:
+            # fov/
+            #   obj1/
+            #      {example_key: "hello"}
+            #   obj2/
+            #      {example_key: ["hello", "world"]}
+            # Commonly this happens when a manifest has rows of unique instances of a child object but retains a
+            # reference to a parent object, example: rows of information about unique cells that were all generated
+            # using the same algorithm, whose information is stored in a column, for each cell information row.
+            # This could result in some files (which only have one cell) being a single string while other files
+            # (which have more than one cell) being a list of the same string over and over again.
+            # "Why spend all this time to reduce/ collapse the metadata anyway?", besides making it so that users won't
+            # have to call `obj2.meta["example_key"][0]` every time they want the value, and besides the fact that it
+            # standardizes the metadata api, the biggest reason is that S3 objects can only have 2KB of metadata,
+            # without this reduction/ collapse step, manifests are more likely to hit that limit and cause a package
+            # distribution error.
+            metadata_reduction_map = {index_col: True for index_col in self.index_columns}
+
             # Set all files
             with tqdm(total=len(fp_cols) * len(v_ds.data), desc="Constructing package") as pbar:
                 for col in fp_cols:
@@ -252,15 +307,69 @@ class Dataset(object):
                     # Update values to the logical key as they are set
                     for i, val in enumerate(v_ds.data[col].values):
                         pk = Path(val).expanduser().resolve()
+                        lk = f"{col_label}/{val.name}"
                         if pk.is_file():
-                            key = str(uuid4()).replace("-", "")
-                            unique_name = f"{key}_{val.name}"
-                            lk = f"{col_label}/{unique_name}"
                             v_ds.data[col].values[i] = lk
 
-                            # Attach metadata to object
-                            meta = {index_col: str(v_ds.data[index_col].values[i]) for index_col in self.index_columns}
-                            pkg.set(lk, pk, meta)
+                            # Create metadata dictionary to attach to object
+                            meta = {}
+                            for index_col in self.index_columns:
+                                # Short reference to current metadata value
+                                v = v_ds.data[index_col].values[i]
+
+                                # Enforce simple JSON serializable type
+                                # First check if value is a numpy value
+                                # It likely is because pandas relies on numpy
+                                # All numpy types have the "dtype" attribute and can be cast to python type by using
+                                # the `item` function, details here:
+                                # https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.item.html
+                                if hasattr(v, "dtype"):
+                                    v = v.item()
+                                if isinstance(v, JSONSerializableTypes):
+                                    meta[index_col] = [v]
+                                else:
+                                    raise TypeError(
+                                        f"Non-simple-JSON-serializable type found in column: '{index_col}', "
+                                        f"at index: {i}: ({type(v)} '{v}').\n\n "
+                                        f"At this time only the following types are allowing in metadata: "
+                                        f"{JSONSerializableTypes}"
+                                    )
+
+                            # Check if object already exists
+                            if lk in pkg:
+                                # Join the two meta dictionaries
+                                joined_meta = {}
+                                for index_col, curr_v in pkg[lk].meta.items():
+                                    # Join the values for the current iteration of the metadata
+                                    joined_values = [*curr_v, *meta[index_col]]
+
+                                    # Only check if the metadata at this index can be reduced if currently is still
+                                    # being decided. We know if the metadata value at this index is still be decided if:
+                                    # the boolean value in the metadata reduction map is True, as in, this index can be
+                                    # reduced or collapsed.
+                                    # The other reason to make this check is so that we don't override an earlier False
+                                    # reduction value. In the case where early on we encounter an instance of the
+                                    # metadata that should not be reduced but then later on we say it can be, this check
+                                    # prevents that. As we want all metadata access across the dataset to be uniform.
+                                    if metadata_reduction_map[index_col]:
+                                        # Update the metadata reduction map
+                                        # "We can reduce the metadata if the count of the first value (or any value) is
+                                        # the same as the length of the entire list of values"
+                                        # This runs quickly for small lists as seen here:
+                                        # https://stackoverflow.com/questions/3844801/check-if-all-elements-in-a-list-are-identical
+                                        metadata_reduction_map[index_col] = (
+                                            joined_values.count(joined_values[0]) == len(joined_values)
+                                        )
+
+                                    # Attached the joined values to the joined metadata
+                                    joined_meta[index_col] = joined_values
+
+                                # Update meta
+                                pkg[lk].set_meta(joined_meta)
+
+                            # Object didn't already exist, simply set it
+                            else:
+                                pkg.set(lk, pk, meta)
 
                             # Update associates
                             try:
@@ -268,12 +377,14 @@ class Dataset(object):
                             except IndexError:
                                 associates.append({col_label: lk})
                         else:
-                            lk = f"{col_label}/{val.name}"
                             v_ds.data[col].values[i] = lk
                             pkg.set_dir(lk, pk)
 
                         # Update progress bar
                         pbar.update()
+
+            # Clean up package metadata
+            pkg = self._recursive_clean(pkg, metadata_reduction_map)
 
             # Attach associates if desired
             if attach_associates:

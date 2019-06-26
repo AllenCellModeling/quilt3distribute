@@ -1,0 +1,10 @@
+CellId,SourceReadPath,Structure
+1,/Users/jacksonb/Desktop/active/cell/quilt3distribute/quilt3distribute/tests/data/fake_images/3d/1.tiff,lamin
+2,/Users/jacksonb/Desktop/active/cell/quilt3distribute/quilt3distribute/tests/data/fake_images/3d/1.tiff,lamin
+3,/Users/jacksonb/Desktop/active/cell/quilt3distribute/quilt3distribute/tests/data/fake_images/3d/1.tiff,lamin
+4,/Users/jacksonb/Desktop/active/cell/quilt3distribute/quilt3distribute/tests/data/fake_images/3d/1.tiff,lamin
+5,/Users/jacksonb/Desktop/active/cell/quilt3distribute/quilt3distribute/tests/data/fake_images/3d/2.tiff,mito
+6,/Users/jacksonb/Desktop/active/cell/quilt3distribute/quilt3distribute/tests/data/fake_images/3d/2.tiff,mito
+7,/Users/jacksonb/Desktop/active/cell/quilt3distribute/quilt3distribute/tests/data/fake_images/3d/2.tiff,mito
+8,/Users/jacksonb/Desktop/active/cell/quilt3distribute/quilt3distribute/tests/data/fake_images/3d/3.tiff,pax
+9,/Users/jacksonb/Desktop/active/cell/quilt3distribute/quilt3distribute/tests/data/fake_images/3d/3.tiff,pax
