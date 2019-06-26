@@ -4,6 +4,7 @@
 from pathlib import Path
 from unittest import mock
 
+import numpy as np
 import pandas as pd
 import pytest
 
@@ -18,6 +19,11 @@ def example_csv(data_dir):
 @pytest.fixture
 def example_frame(example_csv):
     return pd.read_csv(example_csv)
+
+
+@pytest.fixture
+def repeated_values_frame(data_dir):
+    return pd.read_csv(data_dir / "repeated_values_example.csv")
 
 
 @pytest.fixture
@@ -160,6 +166,7 @@ def extra_additions_dataset(example_frame, example_readme):
     ds.set_path_columns(["2dReadPath"])
     ds.set_extra_files([example_readme])
     ds.set_column_names_map({"2dReadPath": "MappedPath"})
+    ds.set_index_columns(["Structure"])
     return ds
 
 
@@ -172,3 +179,76 @@ def test_dataset_distribute(no_additions_dataset, extra_additions_dataset, push_
         mocked_package_push.return_value = "NiceTryGuy"
         no_additions_dataset.distribute(push_uri, "some message")
         extra_additions_dataset.distribute(push_uri, "some message")
+
+
+def test_dataset_metadata_numpy_type_casting(example_frame, example_readme):
+    # Add numpy column to frame
+    example_frame["NumpyTypes"] = np.zeros(9)
+    ds = Dataset(example_frame, "test_dataset", "me", example_readme)
+
+    # Add column filled with numpy types to index
+    ds.set_index_columns(["NumpyTypes"])
+
+    ds.distribute()
+
+
+class SomeDummyObject:
+    def __init__(self, a: int):
+        self.a = a
+
+
+def test_dataset_metadata_non_json_serializable_type(example_frame, example_readme):
+    # Add non json serializable type to dataframe
+    example_frame["BadType"] = [SomeDummyObject(i) for i in range(9)]
+    ds = Dataset(example_frame, "test_dataset", "me", example_readme)
+
+    # Add column filled with non serializable type to index
+    ds.set_index_columns(["BadType"])
+
+    # Check non json serializable type check fails
+    with pytest.raises(TypeError):
+        ds.distribute()
+
+
+def test_dataset_auto_metadata_grouping_no_additions(no_additions_dataset):
+    # Generate package
+    pkg = no_additions_dataset.distribute()
+
+    # Check file groupings available
+    assert set(pkg.keys()) == {
+        "2dReadPath", "3dReadPath", "MetadataReadPath", "README.md", "metadata.csv", "referenced_files"
+    }
+
+    # Check that associates was produced for metadata and nothing else
+    for f in pkg["2dReadPath"]:
+        assert "associates" in pkg["2dReadPath"][f].meta
+        assert len(pkg["2dReadPath"][f].meta) == 1
+
+
+def test_dataset_auto_metadata_grouping_extra_additions(extra_additions_dataset):
+    # Generate package
+    pkg = extra_additions_dataset.distribute()
+
+    # Check file groupings available
+    assert set(pkg.keys()) == {"MappedPath", "README.md", "metadata.csv", "referenced_files", "supporting_files"}
+
+    # Check that every metadata item is a string because no metadata reduction was needed
+    for f in pkg["MappedPath"]:
+        assert isinstance(pkg["MappedPath"][f].meta["Structure"], str)
+
+
+def test_dataset_auto_metadata_grouping_repeated_values(repeated_values_frame, example_readme):
+    # Create dataset from frame
+    ds = Dataset(repeated_values_frame, "test_dataset", "me", example_readme)
+    ds.set_index_columns(["CellId", "Structure"])
+
+    # Generate package
+    pkg = ds.distribute()
+
+    # Check file groupings available
+    assert set(pkg.keys()) == {"SourceReadPath", "README.md", "metadata.csv", "referenced_files"}
+
+    # Check that CellId is a list because of repeated values but that Structure is a string because always unique
+    for f in pkg["SourceReadPath"]:
+        assert isinstance(pkg["SourceReadPath"][f].meta["CellId"], list)
+        assert isinstance(pkg["SourceReadPath"][f].meta["Structure"], str)
