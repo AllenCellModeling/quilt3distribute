@@ -99,14 +99,14 @@ class Dataset(object):
         """
         self.readme.append_readme_standards(license_doc_or_link=doc_or_link)
 
-    def index_on_columns(self, columns: List[str]):
+    def set_index_columns(self, columns: List[str]):
         """
         Use the manifest contents to attach metadata to the files found in the dataset.
 
         :param columns: A list of columns to use for metadata attachment.
 
         Example row: `{"CellId": 1, "Structure": "lysosome", "2dReadPath": "/allen...", "3dReadPath": "/allen..."}`
-        Attach structure metadata: `dataset.index_on_columns(["Structure"])`
+        Attach structure metadata: `dataset.set_index_columns(["Structure"])`
         Results in the files found at the 2dReadPath and the 3dReadPath both having `{"Structure": "lysosome"}` attached
         """
         # Check columns

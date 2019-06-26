@@ -64,15 +64,15 @@ ds.add_usage_doc("https://docs.quiltdata.com/walkthrough/reading-from-a-package"
 ds.add_license("https://www.allencell.org/terms-of-use.html")
 
 # Optionally indicate column values to use for file metadata
-ds.index_on_columns(["Structure"])
+ds.set_index_columns(["Structure"])
 
 # Distribute
 pkg = ds.distribute(push_uri="s3://quilt-jacksonb", message="Initial dataset example")
 ```
 
-***index_on_columns:***
+***index columns:***
 
-A note on the bin script parameter and the Python API `index_on_columns`:<br>
+A note on the bin script parameter and the Python API `set_index_columns`:<br>
 Using the small example dataframe above as an example, if we provided `["Structure"]` as the list of columns to index
 on in Python (using the bin script this would be `-i "Structure"`). `{"Structure": "lysosome"}` gets added as metadata
 for both `2d/1.png` and `3d/1.tiff` files; `{"Structure": "laminb1"}` gets added as metadata for both `2d/2.png` and
