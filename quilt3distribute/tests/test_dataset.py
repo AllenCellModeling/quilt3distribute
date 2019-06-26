@@ -27,6 +27,11 @@ def repeated_values_frame(data_dir):
 
 
 @pytest.fixture
+def same_filenames_frame(data_dir):
+    return pd.read_csv(data_dir / "same_filenames_example.csv")
+
+
+@pytest.fixture
 def example_readme(data_dir):
     return data_dir / "README.md"
 
@@ -255,3 +260,17 @@ def test_dataset_auto_metadata_grouping_repeated_values(repeated_values_frame, e
     for f in pkg["SourceReadPath"]:
         assert isinstance(pkg["SourceReadPath"][f].meta["CellId"], list)
         assert isinstance(pkg["SourceReadPath"][f].meta["Structure"], str)
+
+
+def test_dataset_file_grouping_with_matching_names(same_filenames_frame, example_readme):
+    # Create dataset from frame
+    ds = Dataset(same_filenames_frame, "test_dataset", "me", example_readme)
+
+    # Generate package
+    pkg = ds.distribute()
+
+    # Check file groupings available
+    assert set(pkg.keys()) == {"SourceReadPath", "README.md", "metadata.csv", "referenced_files"}
+
+    # Check that 18 unique files were attached to package
+    assert len(pkg["SourceReadPath"]) == 18
