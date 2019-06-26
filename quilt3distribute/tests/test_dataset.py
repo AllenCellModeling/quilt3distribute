@@ -117,8 +117,8 @@ def test_dataset_readme_license_attachment(no_additions_dataset, license_doc_or_
     pytest.param(["DoesNotExist"], marks=pytest.mark.raises(exception=ValueError)),
     pytest.param(["DoesNotExist1", "DoesNotExist2"], marks=pytest.mark.raises(exception=ValueError))
 ])
-def test_dataset_index_on_columns(no_additions_dataset, columns):
-    no_additions_dataset.index_on_columns(columns)
+def test_dataset_set_index_columns(no_additions_dataset, columns):
+    no_additions_dataset.set_index_columns(columns)
 
 
 @pytest.mark.parametrize("columns", [

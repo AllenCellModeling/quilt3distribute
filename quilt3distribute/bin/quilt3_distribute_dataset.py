@@ -83,7 +83,7 @@ def main():
         if args.license_doc_or_link:
             ds.add_license(args.license_doc_or_link)
         if args.index_columns:
-            ds.index_on_columns(args.index_columns)
+            ds.set_index_columns(args.index_columns)
         if args.path_columns:
             ds.set_path_columns(args.path_columns)
 
