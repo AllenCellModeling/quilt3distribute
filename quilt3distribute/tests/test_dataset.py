@@ -248,6 +248,9 @@ def test_dataset_auto_metadata_grouping_repeated_values(repeated_values_frame, e
     # Check file groupings available
     assert set(pkg.keys()) == {"SourceReadPath", "README.md", "metadata.csv", "referenced_files"}
 
+    # Check that only three tiffs were attached to package
+    assert len(pkg["SourceReadPath"]) == 3
+
     # Check that CellId is a list because of repeated values but that Structure is a string because always unique
     for f in pkg["SourceReadPath"]:
         assert isinstance(pkg["SourceReadPath"][f].meta["CellId"], list)
