@@ -71,7 +71,7 @@ def main():
     ###############################################################################
 
     # Create fake repeated dataset
-    cell_ids = [i for i in range(1, 10)]
+    cell_ids = [*range(1, 10)]
     source_read_paths_1 = [(BASE_PATH / "fake_images" / "3d" / "1.tiff").resolve() for i in range(4)]
     source_read_paths_2 = [(BASE_PATH / "fake_images" / "3d" / "2.tiff").resolve() for i in range(3)]
     source_read_paths_3 = [(BASE_PATH / "fake_images" / "3d" / "3.tiff").resolve() for i in range(2)]
