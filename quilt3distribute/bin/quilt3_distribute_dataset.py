@@ -50,7 +50,7 @@ class Args(argparse.Namespace):
         p.add_argument('-l', '--license', action='store', dest='license_doc_or_link', default=None,
                        help=('Filepath or URL for dataset license details. '
                              'If your README already includes license details, this can be ignored.'))
-        p.add_argument('-i', '--ic', '--index-columns', action='store', nargs='+', dest='index_columns', default=None,
+        p.add_argument('-c', '--metadata-columns', action='store', nargs='+', dest='metadata_columns', default=None,
                        help=('List of columns to use for metadata attachment. '
                              'The values in each row for the columns provided will be attached as metadata, '
                              'meaning, users will be able to search and filter the files sent using that metadata. '
@@ -82,8 +82,8 @@ def main():
             ds.add_usage_doc(args.usage_doc_or_link)
         if args.license_doc_or_link:
             ds.add_license(args.license_doc_or_link)
-        if args.index_columns:
-            ds.set_index_columns(args.index_columns)
+        if args.metadata_columns:
+            ds.set_metadata_columns(args.metadata_columns)
         if args.path_columns:
             ds.set_path_columns(args.path_columns)
 

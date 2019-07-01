@@ -128,8 +128,8 @@ def test_dataset_readme_license_attachment(no_additions_dataset, license_doc_or_
     pytest.param(["DoesNotExist"], marks=pytest.mark.raises(exception=ValueError)),
     pytest.param(["DoesNotExist1", "DoesNotExist2"], marks=pytest.mark.raises(exception=ValueError))
 ])
-def test_dataset_set_index_columns(no_additions_dataset, columns):
-    no_additions_dataset.set_index_columns(columns)
+def test_dataset_set_metadata_columns(no_additions_dataset, columns):
+    no_additions_dataset.set_metadata_columns(columns)
 
 
 @pytest.mark.parametrize("columns", [
@@ -171,7 +171,7 @@ def extra_additions_dataset(example_frame, example_readme):
     ds.set_path_columns(["2dReadPath"])
     ds.set_extra_files([example_readme])
     ds.set_column_names_map({"2dReadPath": "MappedPath"})
-    ds.set_index_columns(["Structure"])
+    ds.set_metadata_columns(["Structure"])
     return ds
 
 
@@ -192,7 +192,7 @@ def test_dataset_metadata_numpy_type_casting(example_frame, example_readme):
     ds = Dataset(example_frame, "test_dataset", "me", example_readme)
 
     # Add column filled with numpy types to index
-    ds.set_index_columns(["NumpyTypes"])
+    ds.set_metadata_columns(["NumpyTypes"])
 
     ds.distribute()
 
@@ -208,7 +208,7 @@ def test_dataset_metadata_non_json_serializable_type(example_frame, example_read
     ds = Dataset(example_frame, "test_dataset", "me", example_readme)
 
     # Add column filled with non serializable type to index
-    ds.set_index_columns(["BadType"])
+    ds.set_metadata_columns(["BadType"])
 
     # Check non json serializable type check fails
     with pytest.raises(TypeError):
@@ -245,7 +245,7 @@ def test_dataset_auto_metadata_grouping_extra_additions(extra_additions_dataset)
 def test_dataset_auto_metadata_grouping_repeated_values(repeated_values_frame, example_readme):
     # Create dataset from frame
     ds = Dataset(repeated_values_frame, "test_dataset", "me", example_readme)
-    ds.set_index_columns(["CellId", "Structure"])
+    ds.set_metadata_columns(["CellId", "Structure"])
 
     # Generate package
     pkg = ds.distribute()
