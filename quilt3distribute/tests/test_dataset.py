@@ -194,6 +194,7 @@ def test_dataset_metadata_numpy_type_casting(example_frame, example_readme):
     # Add column filled with numpy types to index
     ds.set_metadata_columns(["NumpyTypes"])
 
+    # Just run distribute to make sure that numpy types are cast fine
     ds.distribute()
 
 
@@ -243,6 +244,12 @@ def test_dataset_auto_metadata_grouping_extra_additions(extra_additions_dataset)
 
 
 def test_dataset_auto_metadata_grouping_repeated_values(repeated_values_frame, example_readme):
+    """
+    Because the repeated values dataset has three unique files but has nine rows of data, this function
+    checks that there are only three files passed to the package object but that each file has a list of the unique
+    CellIds but that because all the structures are the same per file, that the structure has been reduced to a single
+    value.
+    """
     # Create dataset from frame
     ds = Dataset(repeated_values_frame, "test_dataset", "me", example_readme)
     ds.set_metadata_columns(["CellId", "Structure"])

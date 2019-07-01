@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import hashlib
 import logging
 import re
 import tempfile
@@ -13,6 +12,7 @@ import quilt3
 from markdown2 import markdown
 from tqdm import tqdm
 
+from . import file_utils
 from .documentation import README, ReplacedPath
 from .validation import validate
 
@@ -116,6 +116,8 @@ class Dataset(object):
         Example row: `{"CellId": 1, "Structure": "lysosome", "2dReadPath": "/allen...", "3dReadPath": "/allen..."}`
         Attach structure metadata: `dataset.set_metadata_columns(["Structure"])`
         Results in the files found at the 2dReadPath and the 3dReadPath both having `{"Structure": "lysosome"}` attached
+
+        In short: the values in each column provided will be used for metadata attachment for every file found.
         """
         # Check columns
         if not any(col in self.data.columns for col in columns):
@@ -193,14 +195,28 @@ class Dataset(object):
     @staticmethod
     def _recursive_clean(pkg: quilt3.Package, metadata_reduction_map: Dict[str, bool]):
         # For all keys in current package level
-        for k in pkg:
+        for key in pkg:
             # If it is a PackageEntry object, we know we have hit a leaf node
-            if isinstance(pkg[k], quilt3.packages.PackageEntry):
+            if isinstance(pkg[key], quilt3.packages.PackageEntry):
                 # Reduce the metadata to a single value where it can
                 cleaned_meta = {}
-                for meta_k, meta_v in pkg[k].meta.items():
-                    # If the metadata reduction map at the index column (or meta_k) can be reduced/ collapsed (True)
+                for meta_k, meta_v in pkg[key].meta.items():
+                    # If the metadata reduction map at the metadata column (or meta_k) can be reduced/ collapsed (True)
                     # Reduce/ collapse the metadata
+                    # Reminder: this step will make the metadata access for every file of the same file type the same
+                    # format. Example: all files under the key "FOV" will have the same metadata access after this
+                    # function runs. All the metadata access for the same file type across the package, if one file has
+                    # a list of values for the metadata key, "A", we want all files of the same type to all have list of
+                    # values for the metadata key, "A".
+                    # We also can't just use a set here for two reasons, the first is simply that sets are not JSON
+                    # serializable. "But you can just cast to a set then back to a list!!!". The second reason is that
+                    # because a file can have multiple list of values in it's metadata, if we cast to a set, one list
+                    # may be reduced to two items while another, different metadata list of values may be reduced to
+                    # a single item. Which leads to the problem of matching up metadata to metadata for the same file.
+                    # The example to use here is looking at an FOV files metadata:
+                    # {"CellID": [1, 2, 3], "CellIndex": [4, 8, 12]} By having them both as list without any chance of
+                    # reduction means that it is easy to match metadata values to each other.
+                    # "CellId" 1 maps to "CellIndex" 4, 2 maps to 8, and 3 maps to 12 in this case.
                     if metadata_reduction_map[meta_k]:
                         cleaned_meta[meta_k] = meta_v[0]
                     # Else, do not reduce
@@ -208,9 +224,9 @@ class Dataset(object):
                         cleaned_meta[meta_k] = meta_v
 
                 # Update the object with the cleaned metadata
-                pkg[k].set_meta(cleaned_meta)
+                pkg[key].set_meta(cleaned_meta)
             else:
-                Dataset._recursive_clean(pkg[k], metadata_reduction_map)
+                Dataset._recursive_clean(pkg[key], metadata_reduction_map)
 
         return pkg
 
@@ -274,7 +290,7 @@ class Dataset(object):
 
             # Create metadata reduction map
             # This will be used to clean up and standardize the metadata access after object construction
-            # Index column name to boolean value for should or should not reduce metadata values
+            # Metadata column name to boolean value for should or should not reduce metadata values
             # This will be used during the "clean up the package metadata step"
             # If we have multiple files each with the same keys for the metadata, but for one reason or another, one
             # packaged file's value for a certain key is a list while another's is a single string, this leads to a
@@ -308,7 +324,7 @@ class Dataset(object):
                     # Update values to the logical key as they are set
                     for i, val in enumerate(v_ds.data[col].values):
                         # Fully resolve the path
-                        pk = Path(val).expanduser().resolve()
+                        physical_key = Path(val).expanduser().resolve()
 
                         # Just using val.name could result in files that shouldn't be grouped being grouped
                         # Example column:
@@ -320,10 +336,10 @@ class Dataset(object):
                         # Even though there are four files, this would result in both a/0.tiff and b/0.tiff, and,
                         # a/1.tiff and b/1.tiff being grouped together. To solve this we can prepend a the first couple
                         # of characters from a hash of the fully resolved path to the logical key.
-                        prepend = hashlib.sha256(str(pk).encode("utf-8")).hexdigest()[:8]
-                        lk = f"{col_label}/{prepend}_{val.name}"
-                        if pk.is_file():
-                            v_ds.data[col].values[i] = lk
+                        unique_file_name = file_utils.create_unique_logical_key(physical_key)
+                        logical_key = f"{col_label}/{unique_file_name}"
+                        if physical_key.is_file():
+                            v_ds.data[col].values[i] = logical_key
 
                             # Create metadata dictionary to attach to object
                             meta = {}
@@ -350,10 +366,10 @@ class Dataset(object):
                                     )
 
                             # Check if object already exists
-                            if lk in pkg:
+                            if logical_key in pkg:
                                 # Join the two meta dictionaries
                                 joined_meta = {}
-                                for meta_col, curr_v in pkg[lk].meta.items():
+                                for meta_col, curr_v in pkg[logical_key].meta.items():
                                     # Join the values for the current iteration of the metadata
                                     joined_values = [*curr_v, *meta[meta_col]]
 
@@ -367,6 +383,9 @@ class Dataset(object):
                                     # prevents that. As we want all metadata access across the dataset to be uniform.
                                     if metadata_reduction_map[meta_col]:
                                         # Update the metadata reduction map
+                                        # For the current column being checked, as long as it is still being
+                                        # determined that the column can be reduced (aka we have entered this if block)
+                                        # check if we can still reduce the metadata after the recent addition.
                                         # "We can reduce the metadata if the count of the first value (or any value) is
                                         # the same as the length of the entire list of values"
                                         # This runs quickly for small lists as seen here:
@@ -379,20 +398,20 @@ class Dataset(object):
                                     joined_meta[meta_col] = joined_values
 
                                 # Update meta
-                                pkg[lk].set_meta(joined_meta)
+                                pkg[logical_key].set_meta(joined_meta)
 
                             # Object didn't already exist, simply set it
                             else:
-                                pkg.set(lk, pk, meta)
+                                pkg.set(logical_key, physical_key, meta)
 
                             # Update associates
                             try:
-                                associates[i][col_label] = lk
+                                associates[i][col_label] = logical_key
                             except IndexError:
-                                associates.append({col_label: lk})
+                                associates.append({col_label: logical_key})
                         else:
-                            v_ds.data[col].values[i] = lk
-                            pkg.set_dir(lk, pk)
+                            v_ds.data[col].values[i] = logical_key
+                            pkg.set_dir(logical_key, physical_key)
 
                         # Update progress bar
                         pbar.update()
