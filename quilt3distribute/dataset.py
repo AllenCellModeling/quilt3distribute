@@ -74,7 +74,7 @@ class Dataset(object):
         self.readme_path = readme.fp
 
         # Lazy loaded
-        self.index_columns = []
+        self.metadata_columns = []
         self.path_columns = []
         self.column_names_map = {}
         self.extra_files = {}
@@ -107,21 +107,21 @@ class Dataset(object):
         """
         self.readme.append_readme_standards(license_doc_or_link=doc_or_link)
 
-    def set_index_columns(self, columns: List[str]):
+    def set_metadata_columns(self, columns: List[str]):
         """
         Use the manifest contents to attach metadata to the files found in the dataset.
 
         :param columns: A list of columns to use for metadata attachment.
 
         Example row: `{"CellId": 1, "Structure": "lysosome", "2dReadPath": "/allen...", "3dReadPath": "/allen..."}`
-        Attach structure metadata: `dataset.set_index_columns(["Structure"])`
+        Attach structure metadata: `dataset.set_metadata_columns(["Structure"])`
         Results in the files found at the 2dReadPath and the 3dReadPath both having `{"Structure": "lysosome"}` attached
         """
         # Check columns
         if not any(col in self.data.columns for col in columns):
             raise ValueError(f"One or more columns provided were not found in the dataset. Received: {columns}")
 
-        self.index_columns = columns
+        self.metadata_columns = columns
 
     def set_path_columns(self, columns: List[str]):
         """
@@ -294,7 +294,7 @@ class Dataset(object):
             # standardizes the metadata api, the biggest reason is that S3 objects can only have 2KB of metadata,
             # without this reduction/ collapse step, manifests are more likely to hit that limit and cause a package
             # distribution error.
-            metadata_reduction_map = {index_col: True for index_col in self.index_columns}
+            metadata_reduction_map = {index_col: True for index_col in self.metadata_columns}
 
             # Set all files
             with tqdm(total=len(fp_cols) * len(v_ds.data), desc="Constructing package") as pbar:
@@ -327,9 +327,9 @@ class Dataset(object):
 
                             # Create metadata dictionary to attach to object
                             meta = {}
-                            for index_col in self.index_columns:
+                            for meta_col in self.metadata_columns:
                                 # Short reference to current metadata value
-                                v = v_ds.data[index_col].values[i]
+                                v = v_ds.data[meta_col].values[i]
 
                                 # Enforce simple JSON serializable type
                                 # First check if value is a numpy value
@@ -340,10 +340,10 @@ class Dataset(object):
                                 if hasattr(v, "dtype"):
                                     v = v.item()
                                 if isinstance(v, JSONSerializableTypes):
-                                    meta[index_col] = [v]
+                                    meta[meta_col] = [v]
                                 else:
                                     raise TypeError(
-                                        f"Non-simple-JSON-serializable type found in column: '{index_col}', "
+                                        f"Non-simple-JSON-serializable type found in column: '{meta_col}', "
                                         f"at index: {i}: ({type(v)} '{v}').\n\n "
                                         f"At this time only the following types are allowing in metadata: "
                                         f"{JSONSerializableTypes}"
@@ -353,9 +353,9 @@ class Dataset(object):
                             if lk in pkg:
                                 # Join the two meta dictionaries
                                 joined_meta = {}
-                                for index_col, curr_v in pkg[lk].meta.items():
+                                for meta_col, curr_v in pkg[lk].meta.items():
                                     # Join the values for the current iteration of the metadata
-                                    joined_values = [*curr_v, *meta[index_col]]
+                                    joined_values = [*curr_v, *meta[meta_col]]
 
                                     # Only check if the metadata at this index can be reduced if currently is still
                                     # being decided. We know if the metadata value at this index is still be decided if:
@@ -365,18 +365,18 @@ class Dataset(object):
                                     # reduction value. In the case where early on we encounter an instance of the
                                     # metadata that should not be reduced but then later on we say it can be, this check
                                     # prevents that. As we want all metadata access across the dataset to be uniform.
-                                    if metadata_reduction_map[index_col]:
+                                    if metadata_reduction_map[meta_col]:
                                         # Update the metadata reduction map
                                         # "We can reduce the metadata if the count of the first value (or any value) is
                                         # the same as the length of the entire list of values"
                                         # This runs quickly for small lists as seen here:
                                         # https://stackoverflow.com/questions/3844801/check-if-all-elements-in-a-list-are-identical
-                                        metadata_reduction_map[index_col] = (
+                                        metadata_reduction_map[meta_col] = (
                                             joined_values.count(joined_values[0]) == len(joined_values)
                                         )
 
                                     # Attached the joined values to the joined metadata
-                                    joined_meta[index_col] = joined_values
+                                    joined_meta[meta_col] = joined_values
 
                                 # Update meta
                                 pkg[lk].set_meta(joined_meta)

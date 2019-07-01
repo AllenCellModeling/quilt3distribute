@@ -52,7 +52,7 @@ ds = Dataset(cleaned.data, "Pipeline Integrated Single Cell", "aics", "aics_pipe
 ds.add_license("https://www.allencell.org/terms-of-use.html")
 
 # Indicate column values to use for file metadata
-ds.set_index_columns([
+ds.set_metadata_columns([
     "CellId", "CellIndex", "CellLine", "NucMembSegmentationAlgorithm",
     "NucMembSegmentationAlgorithmVersion", "FOVId", "Gene", "PlateId", "WellId",
     "ProteinDisplayName", "StructureDisplayName", "Workflow"
