@@ -89,6 +89,7 @@ You should see something like this:
  └─cell_images_2d_projections/
  └─cell_images_3d/
  └─metadata.csv
+ └─referenced_files/
  ...
 ```
 
@@ -138,7 +139,7 @@ You should see something like this:
     "NucMembSegmentationAlgorithmVersion": "1.3.1",
     "FOVId": 10416,
     "Gene": "GJA1",
-    "PlateId": 3500001806,
+    "PlateId": "3500001806",
     "WellId": 116885,
     "ProteinDisplayName": "Connexin-43",
     "StructureDisplayName": "Gap junctions",
@@ -153,51 +154,24 @@ You should see something like this:
 ```
 
 Notice the `associates` block in the metadata; Anything in this block is a quick reference to related files. In our
-example above we can tell from the metadata that we are looking at the features file for Cell Id:
+example above we can tell from the metadata that we are looking at the features file for Cell Id: 105772.
 If we wanted to navigate to the 3d cell image for this same cell we can use this associates block like so:
 ```python
 example_cell_3d = pkg[example_meta["associates"]["cell_images_3d"]]
 ```
 
 You can also filter down the entire `pkg` contents to what you think you are looking for by using `pkg.filter`. If we
-wanted to find all files from plate `3500001806`, we could write a filtering function like so:
+wanted to find all files from plate `"3500001806"`, we could write a filtering function like so:
 ```python
 def filter_by_plate_id(lk, entry) -> bool:
     # Check if the key 'PlateId' is present in the file meta
     # It won't be present for standard files like the README and metadata csv
     if "PlateId" in entry.meta:
         # If it is, return based on plate id match
-        return entry.meta["PlateId"] == 3500001806
+        return entry.meta["PlateId"] == "3500001806"
     return False
 
 sub_pkg = pkg.filter(filter_by_plate_id)
-sub_pkg
-```
-
-You should see something like this:
-```
-(remote Package)
- └─cell_features/
-   └─00034a00_10416_105772_feats.json
-   └─063cb23a_10429_105635_feats.json
-   └─0c368bb1_10435_105613_feats.json
-   └─0db9155b_10420_105763_feats.json
-   └─119758b3_10408_105732_feats.json
-   └─1459cf30_10424_105946_feats.json
-   └─1ef703f5_10419_105669_feats.json
-   └─1f686712_10435_105621_feats.json
-   └─208c26bf_10411_105595_feats.json
-   └─2d50c796_10413_105836_feats.json
-   └─2db5e068_10420_105752_feats.json
-   └─2ddcd282_10409_105813_feats.json
-   └─321563ed_10412_105564_feats.json
-   └─3a6c9d07_10429_105640_feats.json
-   └─3b0c220e_10415_105788_feats.json
-   └─47ff1072_10436_105702_feats.json
- └─cell_images_2d/
- └─cell_images_2d_projections/
- └─cell_images_3d/
- ...
 ```
 
 For more details on how filtering works please see [the Quilt documentation on the subject](https://docs.quiltdata.com/advanced-usage/filtering-a-package).

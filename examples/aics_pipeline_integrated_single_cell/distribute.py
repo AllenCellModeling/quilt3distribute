@@ -19,12 +19,9 @@ from quilt3distribute.validation import validate
 # Using pathlib here to verify that we have a valid target and to resolve any path issues
 scp_output_dir = Path("/allen/aics/modeling/gregj/results/ipp/scp_19_06_05/").resolve(strict=True)
 scp_manifest = (scp_output_dir / "data_jobs_out.csv").resolve(strict=True)
-
-# Step 2:
-# Read in the raw data
 raw = pd.read_csv(scp_manifest)
 
-# Step 3:
+# Step 2:
 # Drop any columns that are filled with filepaths that we don't want to send out at this time
 # In this case, it is because that data is available in a more production form from `aics/pipeline_integrated_cell`
 # In the future these columns will likely be kept in on a script the sends out the entire pipeline. So that we don't
@@ -37,17 +34,18 @@ raw = raw.drop([
     "StructureSegmentationReadPath", "StructureSegmentationFilename", "save_dir"
 ], axis=1)
 
-# Step 4:
+# Step 3:
 # Validate and prune the raw data
 # During the prune operation we lose ~16 rows of data to missing single cell feature files
 # We are still investigating this...
 cleaned = validate(raw, drop_on_error=True)
+print(f"Dropped {len(raw) - len(cleaned)} rows during validation.")
 
-# Step 5:
+# Step 4:
 # Send to dataset object for package construction
 ds = Dataset(cleaned.data, "Pipeline Integrated Single Cell", "aics", "readme.md")
 
-# Step 6:
+# Step 5:
 # Add a license
 ds.add_license("https://www.allencell.org/terms-of-use.html")
 
@@ -71,7 +69,7 @@ ds.set_extra_files({
     "contact_sheets": list(scp_output_dir.glob("diagnostics_*.png"))
 })
 
-# Step 7:
+# Step 6:
 # Distribute the package
 ds.distribute(
     push_uri="s3://quilt-aics",
