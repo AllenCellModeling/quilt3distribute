@@ -18,8 +18,7 @@ Much of the data gathered by the Allen Institute for Cell Science has previously
 batches of files hosted on our website. This repository provides the same high quality, curated datasets of labeled
 cell lines, but through Quilt's loading mechanism.
 
-Data versioning, downloading, and loading though Quilt is a substantial step towards trivially shareable and
-reproducible analyses.
+![example of 2d with all projections image](imgs/image_2d_with_projections.png)
 
 ## Contents
 This package contains preprocessed single cell images and features. From the complete collection we contrast-adjust
@@ -44,7 +43,11 @@ For the 3D images the channel ordering is:
 4. Labeled Structure (GFP)
 5. Transmitted Light
 
-Also contained are contact sheets for each subcellular structure.
+| Segmented DNA                                                                                                                                                          | Segmented Membrane                                                                                                                                                          | DNA (Hoechst)                                                                                                                                                | Membrane (CellMask)                                                                                                                                               | Labeled Structure (GFP)                                                                                                                                                    | Transmitted Light                                                                                                                                                              |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ![example of segmented dna channel](imgs/image_3d_channel_0.png) | ![example of segmented membrane channel](imgs/image_3d_channel_1.png) | ![example of dna channel](imgs/image_3d_channel_2.png) | ![example of membrane channel](imgs/image_3d_channel_3.png) | ![example of labeled structure channel](imgs/image_3d_channel_4.png) | ![example of segmented transmitted channel](imgs/image_3d_channel_5.png) |
+
+Also contained are contact sheets for each sub-cellular structure.
 
 The full details of the Allen Institute cell workflow are available on our website [here](https://www.allencell.org/methods-for-cells-in-the-lab.html).
 
@@ -68,20 +71,20 @@ You should see something like this:
 (remote Package)
 └─README.md
  └─cell_features/
-   └─0001ff07ebd74c3197fe4c6b45bf27c6_13736_116816_feats.json
-   └─0002733266624bb7b8d7cdb9972e8ac7_7359_45319_feats.json
-   └─000718286ce246d5b25ea998405342a1_16827_11409_feats.json
-   └─00082e1b87524ca19ab634115cc5be71_43663_130491_feats.json
-   └─000857a226e443e89f549fd102215a6d_13878_117592_feats.json
-   └─000a787cf0614f93a32a0bc187370b10_13764_116907_feats.json
-   └─000b0e811cee413083d1189c9450b759_5956_40157_feats.json
-   └─000ba89f8f094daf9630a00e97301684_16970_7249_feats.json
-   └─000ca0ca74af49259e30556b93688a91_15037_128823_feats.json
-   └─000dcb13e9de41659c765ebe31dfc0b6_4623_34166_feats.json
-   └─000fb9681ae049eb97910d99b6fe2b45_6619_44763_feats.json
-   └─0011638f8ffa4232a62d96013bfdc5b3_5260_32584_feats.json
-   └─0012fc30dea64878979860d6dd4f7ac7_1952_75327_feats.json
-   └─001455d25a50448d90693bc3c40d975c_43674_130710_feats.json
+   └─0001ff07_13736_116816_feats.json
+   └─00027332_7359_45319_feats.json
+   └─00071828_16827_11409_feats.json
+   └─00082e1b_43663_130491_feats.json
+   └─000857a2_13878_117592_feats.json
+   └─000a787c_13764_116907_feats.json
+   └─000b0e81_5956_40157_feats.json
+   └─000ba89f_16970_7249_feats.json
+   └─000ca0ca_15037_128823_feats.json
+   └─000dcb13_4623_34166_feats.json
+   └─000fb968_6619_44763_feats.json
+   └─0011638f_5260_32584_feats.json
+   └─0012fc30_1952_75327_feats.json
+   └─001455d2_43674_130710_feats.json
  └─cell_images_2d/
  └─cell_images_2d_projections/
  └─cell_images_3d/
@@ -99,10 +102,8 @@ specific_version = quilt3.Package.browse("aics/pipeline_integrated_single_cell",
 
 You can use this `pkg` (`quilt3.Package`) object to navigate around the dataset using dictionary accessors like so:
 ```python
-example_feats = pkg["cell_features"]["0001ff07ebd74c3197fe4c6b45bf27c6_13736_116816_feats.json"]
+example_feats = pkg["cell_features"]["0001ff07_13736_116816_feats.json"]
 ```
-
-*Note: Filenames like "0001ff07ebd74c3197fe4c6b45bf27c6_13736_116816_feats.json" are generated psuedo-randomly and will change between package versions*
 
 To then download that file locally you can use the `fetch` function like so:
 ```python
@@ -130,23 +131,23 @@ example_meta
 You should see something like this:
 ```json
 {
-    "CellId": "105772",
-    "CellIndex": "7",
+    "CellId": 105772,
+    "CellIndex": 7,
     "CellLine": "AICS-53",
     "NucMembSegmentationAlgorithm": "Matlab nucleus/membrane segmentation",
     "NucMembSegmentationAlgorithmVersion": "1.3.1",
-    "FOVId": "10416",
+    "FOVId": 10416,
     "Gene": "GJA1",
-    "PlateId": "3500001806",
-    "WellId": "116885",
+    "PlateId": 3500001806,
+    "WellId": 116885,
     "ProteinDisplayName": "Connexin-43",
     "StructureDisplayName": "Gap junctions",
     "Workflow": "Pipeline 4.2",
     "associates": {
-        "save_feats_path": "cell_features/00034a00108343b29f35f9eaf2008dfc_10416_105772_feats.json",
-        "save_reg_path": "cell_images_3d/7b9befb5edb040d3bf3e52a71f7c4265_10416_105772_reg.tiff",
-        "save_reg_path_flat": "cell_images_2d/23982d4dd3c6477e82dfbfc25e0fef34_10416_105772_reg_flat.png",
-        "save_reg_path_flat_proj": "cell_images_2d_projections/7d53366a0e4b4da384c2f344a8963568_10416_105772_reg_flat_proj.png"
+        "save_feats_path": "cell_features/00034a00_10416_105772_feats.json",
+        "save_reg_path": "cell_images_3d/7b9befb5_10416_105772_reg.tiff",
+        "save_reg_path_flat": "cell_images_2d/23982d4d_10416_105772_reg_flat.png",
+        "save_reg_path_flat_proj": "cell_images_2d_projections/7d53366a_10416_105772_reg_flat_proj.png"
     }
 }
 ```
@@ -159,14 +160,14 @@ example_cell_3d = pkg[example_meta["associates"]["cell_images_3d"]]
 ```
 
 You can also filter down the entire `pkg` contents to what you think you are looking for by using `pkg.filter`. If we
-wanted to find all files from plate `"3500001806"`, we could write a filtering function like so:
+wanted to find all files from plate `3500001806`, we could write a filtering function like so:
 ```python
 def filter_by_plate_id(lk, entry) -> bool:
     # Check if the key 'PlateId' is present in the file meta
     # It won't be present for standard files like the README and metadata csv
     if "PlateId" in entry.meta:
         # If it is, return based on plate id match
-        return entry.meta["PlateId"] == "3500001806"
+        return entry.meta["PlateId"] == 3500001806
     return False
 
 sub_pkg = pkg.filter(filter_by_plate_id)
@@ -177,22 +178,22 @@ You should see something like this:
 ```
 (remote Package)
  └─cell_features/
-   └─00034a00108343b29f35f9eaf2008dfc_10416_105772_feats.json
-   └─063cb23a655f4598b73409f0e0fa1029_10429_105635_feats.json
-   └─0c368bb15bc14fb1a691833e96824380_10435_105613_feats.json
-   └─0db9155b3ecc4b75bf66461e4b6f89ae_10420_105763_feats.json
-   └─119758b357834c15a6579fc50c72e699_10408_105732_feats.json
-   └─1459cf309fc04e869262f100b2337955_10424_105946_feats.json
-   └─1ef703f5e9224de29b9e81a4f99a4b16_10419_105669_feats.json
-   └─1f6867125f034d5facbbdbaab8fa6315_10435_105621_feats.json
-   └─208c26bf97494803952b77e9153f81ba_10411_105595_feats.json
-   └─2d50c796c22d4438a10b1797070cc846_10413_105836_feats.json
-   └─2db5e06884f04bd98840c3429f4cd468_10420_105752_feats.json
-   └─2ddcd282cffc4313b7d107c973cce031_10409_105813_feats.json
-   └─321563ed7ba042048132b9657973862f_10412_105564_feats.json
-   └─3a6c9d07c1ce4f91a9693b4402db89b7_10429_105640_feats.json
-   └─3b0c220e2fae4fcdb3b9319a040de7a8_10415_105788_feats.json
-   └─47ff1072346f4e398c71189f9017648a_10436_105702_feats.json
+   └─00034a00_10416_105772_feats.json
+   └─063cb23a_10429_105635_feats.json
+   └─0c368bb1_10435_105613_feats.json
+   └─0db9155b_10420_105763_feats.json
+   └─119758b3_10408_105732_feats.json
+   └─1459cf30_10424_105946_feats.json
+   └─1ef703f5_10419_105669_feats.json
+   └─1f686712_10435_105621_feats.json
+   └─208c26bf_10411_105595_feats.json
+   └─2d50c796_10413_105836_feats.json
+   └─2db5e068_10420_105752_feats.json
+   └─2ddcd282_10409_105813_feats.json
+   └─321563ed_10412_105564_feats.json
+   └─3a6c9d07_10429_105640_feats.json
+   └─3b0c220e_10415_105788_feats.json
+   └─47ff1072_10436_105702_feats.json
  └─cell_images_2d/
  └─cell_images_2d_projections/
  └─cell_images_3d/
