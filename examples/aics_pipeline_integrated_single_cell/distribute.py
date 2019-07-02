@@ -45,7 +45,7 @@ cleaned = validate(raw, drop_on_error=True)
 
 # Step 5:
 # Send to dataset object for package construction
-ds = Dataset(cleaned.data, "Pipeline Integrated Single Cell", "aics", "aics_pipeline_integrated_single_cell.md")
+ds = Dataset(cleaned.data, "Pipeline Integrated Single Cell", "aics", "readme.md")
 
 # Step 6:
 # Add a license
@@ -73,6 +73,10 @@ ds.set_extra_files({
 
 # Step 7:
 # Distribute the package
-ds.distribute(push_uri="s3://quilt-aics", message="Single Cell Pipeline: 5 June 2019")
+ds.distribute(
+    push_uri="s3://quilt-aics",
+    message="Metadata and Documentation update for Single Cell Pipeline: 5 June 2019"
+)
+
 print("-" * 80)
 print("COMPLETE")
