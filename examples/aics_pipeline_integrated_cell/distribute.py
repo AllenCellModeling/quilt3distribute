@@ -8,14 +8,14 @@ This script will take the output of the AICS Pipeline 4 Query and package and di
 """
 
 import pandas as pd
-from lkaccess import LabKey
+from lkaccess import LabKey, contexts
 
 from quilt3distribute import Dataset
 from quilt3distribute.validation import validate
 
 # Step 1:
 # Pull the data
-lk = LabKey(host="aics")
+lk = LabKey(host=contexts.PROD)
 raw = lk.dataset.get_pipeline_4_production_cells()
 raw = pd.DataFrame(raw)
 
