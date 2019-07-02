@@ -16,9 +16,9 @@ People commonly work with tabular datasets, people want to share their data, thi
 * Groups metadata for files that are referenced multiple times.
 * Validates and runs basic cleaning operations on your dataset manifest CSV.
 * Optionally add license details and usage instructions to your dataset README.
-* Parses README for any referenced files and packages them up as well. (Please use full paths)
+* Parses README for any referenced files and packages them up as well.
 * Support for adding extra files not contained in the manifest.
-* Constructs a "known associates" map that is placed into each files metadata for quick navigation around the package.
+* Constructs a "associates" map that is placed into each files metadata for quick navigation around the package.
 * Enforces that the metadata attached to each file is standardized across the package for each file column.
 
 ## Quick Start
