@@ -48,7 +48,7 @@ class README(object):
         # Link matches look like the following in markdown
         # [hello world](https://allencell.org/myfile.png)
         # [hello world](../mydir/myfile.png)
-        matches = re.findall(r"\[.*\]\(.*\)", self.text)
+        matches = re.findall(r"\[[^\]]*\]\([^\)]*\)", self.text)
 
         # Determine if the links are files or external references
         files = set()
