@@ -34,7 +34,7 @@ raw = raw.drop(
 # Validate and prune the raw data
 # We shouldn't lose any rows here but we are doing this as a safety measure
 cleaned = validate(raw, drop_on_error=True)
-print(f"Dropped {len(raw) - len(cleaned)} rows during validation.")
+print(f"Dropped {len(raw) - len(cleaned.data)} rows during validation.")
 
 # Step 4:
 # Send to dataset object for package construction
