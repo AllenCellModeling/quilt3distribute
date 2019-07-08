@@ -39,7 +39,7 @@ raw = raw.drop([
 # During the prune operation we lose ~16 rows of data to missing single cell feature files
 # We are still investigating this...
 cleaned = validate(raw, drop_on_error=True)
-print(f"Dropped {len(raw) - len(cleaned)} rows during validation.")
+print(f"Dropped {len(raw) - len(cleaned.data)} rows during validation.")
 
 # Step 4:
 # Send to dataset object for package construction
