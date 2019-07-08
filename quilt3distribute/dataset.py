@@ -13,7 +13,7 @@ from markdown2 import markdown
 from tqdm import tqdm
 
 from . import file_utils
-from .documentation import README, ReplacedPath
+from .documentation import README
 from .validation import validate
 
 ###############################################################################
@@ -258,13 +258,11 @@ class Dataset(object):
         # Write any extra files to tempdir to send to the build
         with tempfile.TemporaryDirectory() as tmpdir:
             # Set all referenced files
-            updated_references = []
             text = self.readme.text
-            for f in self.readme.referenced_files:
-                replaced = ReplacedPath(f, f"referenced_files/{f.name}")
-                updated_references.append(replaced)
-                text = text.replace(str(replaced.prior), replaced.updated)
-                pkg.set(replaced.updated, str(replaced.prior.expanduser().resolve()))
+            for rf in self.readme.referenced_files:
+                replaced = f"referenced_files/{rf.resolved.name}"
+                text = text.replace(rf.target, replaced)
+                pkg.set(replaced, str(rf.resolved))
 
             # Write the updated readme to temp
             readme_pk = Path(tmpdir, "README.md")
