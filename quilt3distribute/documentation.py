@@ -15,9 +15,9 @@ log = logging.getLogger(__name__)
 ###############################################################################
 
 
-class ReplacedPath(NamedTuple):
-    prior: Path
-    updated: str
+class ReferencedFiles(NamedTuple):
+    target: str
+    resolved: Path
 
 
 class README(object):
@@ -68,9 +68,9 @@ class README(object):
             # Check for common external
             if not any(sub in target.lower() for sub in ["https://", "http://", "s3://", "gs://"]) and target[0] != "#":
                 # Check if it is a file
-                target = Path(target).resolve()
-                if target.is_file() or target.is_dir():
-                    files.add(target)
+                resolved = Path(target).resolve()
+                if resolved.is_file() or resolved.is_dir():
+                    files.add(ReferencedFiles(target, resolved))
                 else:
                     log.warn(f"Could not find file referenced in readme: {target}")
 
