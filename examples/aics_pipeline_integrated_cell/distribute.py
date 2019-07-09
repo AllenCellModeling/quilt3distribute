@@ -15,7 +15,7 @@ from quilt3distribute.validation import validate
 
 # Step 1:
 # Pull the data
-lk = LabKey(host=contexts.PROD)
+lk = LabKey(contexts.PROD)
 raw = lk.dataset.get_pipeline_4_production_cells()
 raw = pd.DataFrame(raw)
 
