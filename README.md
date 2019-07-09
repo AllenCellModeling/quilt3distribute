@@ -18,7 +18,7 @@ People commonly work with tabular datasets, people want to share their data, thi
 * Optionally add license details and usage instructions to your dataset README.
 * Parses README for any referenced files and packages them up as well.
 * Support for adding extra files not contained in the manifest.
-* Constructs a "associates" map that is placed into each files metadata for quick navigation around the package.
+* Constructs an "associates" map that is placed into each files metadata for quick navigation around the package.
 * Enforces that the metadata attached to each file is standardized across the package for each file column.
 
 ## Quick Start
