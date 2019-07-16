@@ -30,6 +30,15 @@ raw = raw.drop(
     axis=1
 )
 
+
+# Optional:
+# Add extra metadata that isn't found in the database
+def create_feature_explorer_url(row):
+    return "https://www.allencell.org/cell-feature-explorer.html?cellSelectedFor3D={}".format(row["CellId"])
+
+
+raw["FeatureExplorerURL"] = raw.apply(create_feature_explorer_url, axis=1)
+
 # Step 3:
 # Validate and prune the raw data
 # We shouldn't lose any rows here but we are doing this as a safety measure
@@ -48,7 +57,7 @@ ds.add_license("https://www.allencell.org/terms-of-use.html")
 ds.set_metadata_columns([
     "CellId", "CellIndex", "CellLine", "NucMembSegmentationAlgorithm",
     "NucMembSegmentationAlgorithmVersion", "FOVId", "Gene", "PlateId", "WellId",
-    "ProteinDisplayName", "StructureDisplayName", "Workflow"
+    "ProteinDisplayName", "StructureDisplayName", "Workflow", "FeatureExplorerURL"
 ])
 
 # Set produced package directory naming
@@ -66,5 +75,8 @@ ds.set_column_names_map({
 # Distribute the package
 ds.distribute(
     push_uri="s3://quilt-aics",
-    message="Switched to Quilt3Distribute. Metadata structure updated."
+    message="Add feature explorer links to metadata"
 )
+
+print("-" * 80)
+print("COMPLETE")
