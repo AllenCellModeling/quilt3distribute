@@ -111,14 +111,16 @@ To then download that file locally you can use the `fetch` function like so:
 example_feats = example_feats.fetch("/path/to/my/target/destination.json")
 ```
 
-You can then read the file using a bytes reading lambda function like so:
+For certain file formats, Quilt natively knows how to deserialize the file and you can load the contents like so:
 ```python
-import io
-import json
+example_feats_loaded = example_feats()
+```
 
-json_reader = lambda b: json.load(io.BytesIO(b))
-
-example_feats_loaded = example_feats(json_reader)
+For other file formats, Quilt may not natively know how to deserialize the file. In which case, you can pass a bytes
+reading function or object to the `PackageEntry` object as a parameter to have the file read like so:
+```python
+from aicsimageio import AICSImage
+example_image_loaded = pkg["cell_images_3d"]["00001bb5_16872_35317_reg.tiff"](AICSImage)
 ```
 
 All of the core files (any file not in the top level or the `reference_files` directories) will have metadata attached

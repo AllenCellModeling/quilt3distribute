@@ -97,14 +97,11 @@ To then download that file locally you can use the `fetch` function like so:
 example_membrane_contour = example_membrane_contour.fetch("/path/to/my/target/destination.json")
 ```
 
-You can then read the file using a bytes reading lambda function like so:
+Quilt may not natively know how to deserialize the file. In which case, you can pass a bytes reading function or object
+to the `PackageEntry` object as a parameter to have the file read like so:
 ```python
-import io
-from skimage.external import tifffile
-
-tiffreader = lambda b: tifffile.TiffFile(io.BytesIO(b)).asarray()
-
-example_membrane_contour_loaded = example_membrane_contour(tiffreader)
+from aicsimageio import AICSImage
+example_membrane_contour_loaded = example_membrane_contour(AICSImage)
 ```
 
 All of the core files (any file not in the top level or the `reference_files` directories) will have metadata attached
