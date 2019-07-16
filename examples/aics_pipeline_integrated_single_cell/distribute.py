@@ -34,6 +34,15 @@ raw = raw.drop([
     "StructureSegmentationReadPath", "StructureSegmentationFilename", "save_dir"
 ], axis=1)
 
+
+# Optional:
+# Add extra metadata that isn't found in the database
+def create_feature_explorer_url(row):
+    return "https://www.allencell.org/cell-feature-explorer.html?cellSelectedFor3D={}".format(row["CellId"])
+
+
+raw["FeatureExplorerURL"] = raw.apply(create_feature_explorer_url, axis=1)
+
 # Step 3:
 # Validate and prune the raw data
 # During the prune operation we lose ~16 rows of data to missing single cell feature files
@@ -53,7 +62,7 @@ ds.add_license("https://www.allencell.org/terms-of-use.html")
 ds.set_metadata_columns([
     "CellId", "CellIndex", "CellLine", "NucMembSegmentationAlgorithm",
     "NucMembSegmentationAlgorithmVersion", "FOVId", "Gene", "PlateId", "WellId",
-    "ProteinDisplayName", "StructureDisplayName", "Workflow"
+    "ProteinDisplayName", "StructureDisplayName", "Workflow", "FeatureExplorerURL"
 ])
 
 # Set produced package directory naming
@@ -73,7 +82,7 @@ ds.set_extra_files({
 # Distribute the package
 ds.distribute(
     push_uri="s3://quilt-aics",
-    message="Metadata and Documentation update for Single Cell Pipeline: 5 June 2019"
+    message="Add feature explorer links to metadata"
 )
 
 print("-" * 80)
