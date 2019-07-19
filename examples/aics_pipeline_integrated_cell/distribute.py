@@ -30,14 +30,32 @@ raw = raw.drop(
     axis=1
 )
 
-
 # Optional:
 # Add extra metadata that isn't found in the database
-def create_feature_explorer_url(row):
-    return "https://www.allencell.org/cell-feature-explorer.html?cellSelectedFor3D={}".format(row["CellId"])
+grouped = raw.groupby("FOVId")
 
+# This will create a dataframe that has cell id and the fully resolved feature explorer link for all cells in the fov
+cell_id_to_fov_id_fe_link = []
+for key, rows in grouped.groups.items():
+    # Get the full rows from the dataframe for the group
+    rows = raw.loc[rows]
 
-raw["FeatureExplorerURL"] = raw.apply(create_feature_explorer_url, axis=1)
+    # Collect the cell ids
+    cell_ids = list(rows["CellId"])
+
+    # Create the feature explorer link for the entire FOV
+    fe_cell_selections = "&".join([f"selectedPoint[{i}]={c_id}" for i, c_id in enumerate(cell_ids)])
+    fe_link = f"https://www.allencell.org/cell-feature-explorer.html?{fe_cell_selections}"
+
+    # Create rows of cell id to the entire FOV feature explorer link
+    for cell_id in cell_ids:
+        cell_id_to_fov_id_fe_link.append({"CellId": cell_id, "FeatureExplorerURL": fe_link})
+
+# Create dataframe from rows
+cell_id_to_fov_id_fe_link = pd.DataFrame(cell_id_to_fov_id_fe_link)
+
+# Merge the dataframes into one
+raw = raw.merge(cell_id_to_fov_id_fe_link, left_on="CellId", right_on="CellId", suffixes=("_raw", "_fe_link"))
 
 # Step 3:
 # Validate and prune the raw data
