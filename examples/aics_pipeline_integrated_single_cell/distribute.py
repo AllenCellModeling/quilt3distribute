@@ -17,8 +17,8 @@ from quilt3distribute.validation import validate
 # Step 1:
 # Import the data
 # Using pathlib here to verify that we have a valid target and to resolve any path issues
-scp_output_dir = Path("/allen/aics/modeling/gregj/results/ipp/scp_19_06_05/").resolve(strict=True)
-scp_manifest = (scp_output_dir / "data_jobs_out.csv").resolve(strict=True)
+scp_output_dir = Path("/allen/aics/modeling/gregj/results/ipp/scp_19_04_10/controls").resolve(strict=True)
+scp_manifest = (scp_output_dir / "data_plus_controls.csv").resolve(strict=True)
 raw = pd.read_csv(scp_manifest)
 
 # Step 2:
@@ -33,6 +33,15 @@ raw = raw.drop([
     "SourceFilename", "StructureContourReadPath", "StructureContourFilename",
     "StructureSegmentationReadPath", "StructureSegmentationFilename", "save_dir"
 ], axis=1)
+
+# Specific to control data
+# Fill nan's in `StructureDisplayName` column with `Control` as this will be used in the metadata for each image
+raw = raw.fillna({"StructureDisplayName": "Control"})
+
+# Drop additional columns that have nan's that will result in validation failure
+raw = raw.drop([
+    "ColonyPosition", "RunId", "StructEducationName", "StructureShortName", "index"
+])
 
 
 # Optional:
@@ -52,7 +61,7 @@ print(f"Dropped {len(raw) - len(cleaned.data)} rows during validation.")
 
 # Step 4:
 # Send to dataset object for package construction
-ds = Dataset(cleaned.data, "Pipeline Integrated Single Cell", "aics", "readme.md")
+ds = Dataset(cleaned.data, "Pipeline Integrated Single Cell", "aics", "paper_release_readme.md")
 
 # Step 5:
 # Add a license
@@ -82,7 +91,7 @@ ds.set_extra_files({
 # Distribute the package
 ds.distribute(
     push_uri="s3://allencell",
-    message="Update feature explorer links"
+    message="Statistical Integrated Cell Research Dataset"
 )
 
 print("-" * 80)
