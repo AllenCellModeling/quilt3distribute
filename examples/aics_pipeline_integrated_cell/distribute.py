@@ -45,7 +45,7 @@ for key, rows in grouped.groups.items():
 
     # Create the feature explorer link for the entire FOV
     fe_cell_selections = "&".join([f"selectedPoint[{i}]={c_id}" for i, c_id in enumerate(cell_ids)])
-    fe_link = f"https://www.allencell.org/cell-feature-explorer.html?{fe_cell_selections}"
+    fe_link = f"https://cfe.allencell.org/?{fe_cell_selections}"
 
     # Create rows of cell id to the entire FOV feature explorer link
     for cell_id in cell_ids:
@@ -92,8 +92,8 @@ ds.set_column_names_map({
 # Step 6:
 # Distribute the package
 ds.distribute(
-    push_uri="s3://quilt-aics",
-    message="Add feature explorer links to metadata"
+    push_uri="s3://allencell",
+    message="Update feature explorer links"
 )
 
 print("-" * 80)
