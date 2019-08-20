@@ -48,7 +48,7 @@ To load the package:
 ```python
 import quilt3
 
-pkg = quilt3.Package.browse("aics/pipeline_integrated_cell", registry="s3://quilt-aics")
+pkg = quilt3.Package.browse("aics/pipeline_integrated_cell", registry="s3://allencell")
 pkg
 ```
 
@@ -82,10 +82,14 @@ You should see something like this:
 *Note: If you want to retrieve a prior or specific version of this package you can add a `top_hash` parameter to the
 `browse` function like so:*
 ```python
-specific_version = quilt3.Package.browse("aics/pipeline_integrated_cell", "s3://quilt-aics", "7a03086e6efa58d80ade4b2563b76053ef3e901654656b99cd9d7c1e5313f87c")
+specific_version = quilt3.Package.browse(
+    "aics/pipeline_integrated_cell",
+    "s3://allencell",
+    "7a03086e6efa58d80ade4b2563b76053ef3e901654656b99cd9d7c1e5313f87c"
+)
 ```
 
-*You can find the top hashes for packages on the [Allen Cell Quilt data catalog](https://allencell.quiltdata.com/b/quilt-aics/packages/aics/pipeline_integrated_cell).*
+*You can find the top hashes for packages on the [Allen Cell Quilt data catalog](https://open.quiltdata.com/b/allencell/packages/aics/pipeline_integrated_cell).*
 
 You can use this `pkg` (`quilt3.Package`) object to navigate around the dataset using dictionary accessors like so:
 ```python
@@ -160,11 +164,13 @@ def filter_by_plate_id(lk, entry) -> bool:
 sub_pkg = pkg.filter(filter_by_plate_id)
 ```
 
-For more details on how filtering works please see [the Quilt documentation on the subject](https://docs.quiltdata.com/advanced-usage/filtering-a-package).
+For more details on how filtering works please see
+[the Quilt documentation on the subject](https://docs.quiltdata.com/advanced-usage/filtering-a-package).
 
 *Note: If you are more comfortable with pandas dataframes, you can also use traditional dataframe filtering options on
 the metadata.csv file.*
 
 
 ### Distribution
-This package was created and distributed using [Quilt3Distribute](https://github.com/AllenCellModeling/quilt3distribute).
+This package was created and distributed using
+[Quilt3Distribute](https://github.com/AllenCellModeling/quilt3distribute).
