@@ -1,7 +1,7 @@
 # Allen Institute for Cell Science Pipeline Integrated Single Cell
 **Maintainers:** Greg Johnson (gregj@alleninstitute.org), Jackson Maxfield Brown (jacksonb@alleninstitute.org)
 
-**Overview:** This is a **BETA** companion package for the complete Allen Institute for Cell Science Pipeline
+**Overview:** This is a companion package for the complete Allen Institute for Cell Science Pipeline
 Integrated Cell Collection. This package contains single-cell data for most of the cells seen, imaged, measured, and
 cataloged by the [Allen Institute for Cell Science](https://www.allencell.org) Pipeline: Integrated (Single) Cell.
 
@@ -49,9 +49,11 @@ For the 3D images the channel ordering is:
 
 Also contained are contact sheets for each sub-cellular structure.
 
-The full details of the Allen Institute cell workflow are available on our website [here](https://www.allencell.org/methods-for-cells-in-the-lab.html).
+The full details of the Allen Institute cell workflow are available on our website
+[here](https://www.allencell.org/methods-for-cells-in-the-lab.html).
 
-The full details of the Allen Institute microscopy workflow are available on our website [here](https://www.allencell.org/methods-for-microscopy.html).
+The full details of the Allen Institute microscopy workflow are available on our website
+[here](https://www.allencell.org/methods-for-microscopy.html).
 
 ## Usage
 We understand this package is quite large and may not fit on your machine. Here is our list of methods for interacting
@@ -62,7 +64,7 @@ To load the package:
 ```python
 import quilt3
 
-pkg = quilt3.Package.browse("aics/pipeline_integrated_single_cell", registry="s3://quilt-aics")
+pkg = quilt3.Package.browse("aics/pipeline_integrated_single_cell", registry="s3://allencell")
 pkg
 ```
 
@@ -96,10 +98,14 @@ You should see something like this:
 *Note: If you want to retrieve a prior or specific version of this package you can add a `top_hash` parameter to the
 `browse` function like so:*
 ```python
-specific_version = quilt3.Package.browse("aics/pipeline_integrated_single_cell", "s3://quilt-aics", "7cf876498abb12db5004fbf7dbaece9fd1ca0b2e68738280f126c85f86a0b628")
+specific_version = quilt3.Package.browse(
+    "aics/pipeline_integrated_single_cell",
+    "s3://allencell",
+    "7cf876498abb12db5004fbf7dbaece9fd1ca0b2e68738280f126c85f86a0b628"
+)
 ```
 
-*You can find the top hashes for packages on the [Allen Cell Quilt data catalog](https://allencell.quiltdata.com/b/quilt-aics/packages/aics/pipeline_integrated_single_cell).*
+*You can find the top hashes for packages on the [Allen Cell Quilt data catalog](https://open.quiltdata.com/b/allencell/packages/aics/pipeline_integrated_single_cell).*
 
 You can use this `pkg` (`quilt3.Package`) object to navigate around the dataset using dictionary accessors like so:
 ```python
@@ -176,11 +182,13 @@ def filter_by_plate_id(lk, entry) -> bool:
 sub_pkg = pkg.filter(filter_by_plate_id)
 ```
 
-For more details on how filtering works please see [the Quilt documentation on the subject](https://docs.quiltdata.com/advanced-usage/filtering-a-package).
+For more details on how filtering works please see
+[the Quilt documentation on the subject](https://docs.quiltdata.com/advanced-usage/filtering-a-package).
 
 *Note: If you are more comfortable with pandas dataframes, you can also use traditional dataframe filtering options on
 the metadata.csv file.*
 
 
 ### Distribution
-This package was created and distributed using [Quilt3Distribute](https://github.com/AllenCellModeling/quilt3distribute).
+This package was created and distributed using
+[Quilt3Distribute](https://github.com/AllenCellModeling/quilt3distribute).
