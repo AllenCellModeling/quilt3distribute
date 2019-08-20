@@ -38,7 +38,7 @@ raw = raw.drop([
 # Optional:
 # Add extra metadata that isn't found in the database
 def create_feature_explorer_url(row):
-    return "https://cfe.allencell.org/cell-feature-explorer.html?cellSelectedFor3D={}".format(row["CellId"])
+    return "https://cfe.allencell.org/?cellSelectedFor3D={}".format(row["CellId"])
 
 
 raw["FeatureExplorerURL"] = raw.apply(create_feature_explorer_url, axis=1)
