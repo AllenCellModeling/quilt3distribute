@@ -38,7 +38,7 @@ raw = raw.drop([
 # Optional:
 # Add extra metadata that isn't found in the database
 def create_feature_explorer_url(row):
-    return "https://www.allencell.org/cell-feature-explorer.html?cellSelectedFor3D={}".format(row["CellId"])
+    return "https://cfe.allencell.org/cell-feature-explorer.html?cellSelectedFor3D={}".format(row["CellId"])
 
 
 raw["FeatureExplorerURL"] = raw.apply(create_feature_explorer_url, axis=1)
@@ -81,8 +81,8 @@ ds.set_extra_files({
 # Step 6:
 # Distribute the package
 ds.distribute(
-    push_uri="s3://quilt-aics",
-    message="Add feature explorer links to metadata"
+    push_uri="s3://allencell",
+    message="Update feature explorer links"
 )
 
 print("-" * 80)
