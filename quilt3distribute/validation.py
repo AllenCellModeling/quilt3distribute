@@ -122,6 +122,19 @@ def _generate_schema_template(df: pd.DataFrame) -> Dict[str, FeatureDefinition]:
     return feature_definitions
 
 
+class PlannedDelayedDropError(Exception):
+    def __init__(self, message: str, **kwargs):
+        self.message = message
+
+    def __str__(self):
+        return self.message
+
+
+class PlannedDelayedDropResult(NamedTuple):
+    index: int
+    error: PlannedDelayedDropError
+
+
 class ValidatedFeature(object):
     def __init__(
         self,
@@ -131,7 +144,7 @@ class ValidatedFeature(object):
         description: Optional[str] = None,
         units: Optional[str] = None,
         validation_functions: Optional[Tuple[Callable]] = None,
-        errored_indices: Optional[Set[int]] = None
+        errored_results: Optional[Set[PlannedDelayedDropResult]] = None
     ):
         """
         A feature that has it's core validation attributes locked but metadata freely mutable.
@@ -142,7 +155,7 @@ class ValidatedFeature(object):
         :param description: A description for the feature.
         :param units: Units for the feature.
         :param validation_functions: The tuple of validation functions ran against the feature values.
-        :param errored_indices: An optional set of indices that errored out during validation.
+        :param errored_results: An optional set of PlannedDelayedDropResults that errored out during validation.
         """
         # Store configuration
         self._name = name
@@ -152,10 +165,10 @@ class ValidatedFeature(object):
         self.units = units
         self._validation_functions = validation_functions
 
-        if errored_indices:
-            self._errored_indices = errored_indices
+        if errored_results:
+            self._errored_results = errored_results
         else:
-            self._errored_indices = set()
+            self._errored_results = set()
 
     @property
     def name(self) -> str:
@@ -171,8 +184,8 @@ class ValidatedFeature(object):
         return self._validation_functions
 
     @property
-    def errored_indices(self) -> Set[int]:
-        return self._errored_indices
+    def errored_results(self) -> Set[int]:
+        return self._errored_results
 
     def to_dict(self) -> Dict[str, Union[str, Type, Tuple[Callable]]]:
         return {
@@ -182,7 +195,7 @@ class ValidatedFeature(object):
             "description": self.description,
             "units": self.units,
             "validation_functions": self.validation_functions,
-            "errored_indices": self.errored_indices
+            "errored_results": self.errored_results
         }
 
     def __str__(self):
@@ -190,10 +203,6 @@ class ValidatedFeature(object):
 
     def __repr__(self):
         return str(self)
-
-
-class PlannedDelayedDropError(Exception):
-    pass
 
 
 class Validator(object):
@@ -250,43 +259,43 @@ class Validator(object):
                         val = self.definition.dtype(val)
                         self.values[i] = val
                     except (ValueError, TypeError):
+                        msg = f"Could not cast value {val_descriptor} to received type {self.definition.dtype}."
                         if self.drop_on_error:
-                            raise PlannedDelayedDropError()
+                            raise PlannedDelayedDropError(msg)
                         else:
-                            raise ValueError(
-                                f"Could not cast value {val_descriptor} to received type {self.definition.dtype}."
-                            )
+                            raise ValueError(msg)
 
                 # Check type
                 if not isinstance(val, self.definition.dtype):
+                    msg = (
+                        f"Value {val_descriptor} does not match the type specification received "
+                        f"{self.definition.dtype}."
+                    )
                     if self.drop_on_error:
-                        raise PlannedDelayedDropError()
+                        raise PlannedDelayedDropError(msg)
                     else:
-                        raise TypeError(
-                            f"Value {val_descriptor} does not match the type specification received "
-                            f"{self.definition.dtype}."
-                        )
+                        raise TypeError(msg)
 
                 # Confirm paths
                 if self.definition.dtype == Path:
                     if not val.exists():
+                        msg = f"Filepath {val_descriptor} was not found."
                         if self.drop_on_error:
-                            raise PlannedDelayedDropError()
+                            raise PlannedDelayedDropError(msg)
                         else:
-                            raise FileNotFoundError(f"Filepath {val_descriptor} was not found.")
+                            raise FileNotFoundError(msg)
 
                 # Check values
                 for func_index, f in enumerate(self.definition.validation_functions):
                     if not f(val):
+                        msg = f"Value {val_descriptor} failed validation function {func_index}."
                         if self.drop_on_error:
-                            raise PlannedDelayedDropError()
+                            raise PlannedDelayedDropError(msg)
                         else:
-                            raise ValueError(
-                                f"Value {val_descriptor} failed validation function {func_index}."
-                            )
+                            raise ValueError(msg)
 
-            except PlannedDelayedDropError:
-                errored_indices.add(i)
+            except PlannedDelayedDropError as e:
+                errored_indices.add(PlannedDelayedDropResult(index=i, error=e))
 
             # Update progress
             if progress_bar:
@@ -443,12 +452,21 @@ def validate(
         else:
             validated_features = list(exe.map(_validate_helper, validators))
 
+    # Display any errors that occured during validation
+    for vf in validated_features:
+        if len(vf.feature.errored_results) > 0:
+            log.warning(f"Validation errors for feature: {vf.name}")
+
+            # Display errors for this feature
+            for er in vf.feature.errored_results:
+                log.warning(er.error)
+
     # Drop any indicies that errored out during validation
     if drop_on_error:
         # Combine all errored indicie sets
         master_set = set()
         for vf in validated_features:
-            master_set = master_set.union(vf.feature.errored_indices)
+            master_set = master_set.union([er.index for er in vf.feature.errored_results])
 
         # Drop all errored indicies
         to_validate = to_validate.drop(list(master_set))
