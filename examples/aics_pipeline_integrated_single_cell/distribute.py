@@ -35,13 +35,13 @@ raw = raw.drop([
 ], axis=1)
 
 # Specific to control data
-# Fill nan's in `StructureDisplayName` column with `Control` as this will be used in the metadata for each image
-raw = raw.fillna({"StructureDisplayName": "Control"})
+# Fill nan's in `StructureDisplayName` column with the `Control` protein as this will be used in each file's metadata
+raw["StructureDisplayName"] = raw["StructureDisplayName"].fillna(raw["ProteinId/Name"])
 
 # Drop additional columns that have nan's that will result in validation failure
 raw = raw.drop([
-    "ColonyPosition", "RunId", "StructEducationName", "StructureShortName", "index"
-])
+    "Unnamed: 0", "ColonyPosition", "RunId", "StructEducationName", "StructureShortName", "index"
+], axis=1)
 
 
 # Optional:
