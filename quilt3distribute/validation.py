@@ -235,8 +235,8 @@ class Validator(object):
         :param progress_bar: An optional tqdm progress bar to update as the values are processed.
         :return: A ValidatedFeature object representing that this feature has been checked.
         """
-        # Create empty errored indicies set
-        errored_indices = set()
+        # Create empty errored results set
+        errored_results = set()
 
         # Begin checking
         for i in range(len(self.values)):
@@ -295,7 +295,7 @@ class Validator(object):
                             raise ValueError(msg)
 
             except PlannedDelayedDropError as e:
-                errored_indices.add(PlannedDelayedDropResult(index=i, error=e))
+                errored_results.add(PlannedDelayedDropResult(index=i, error=e))
 
             # Update progress
             if progress_bar:
@@ -309,7 +309,7 @@ class Validator(object):
             description=self.definition.description,
             units=self.definition.units,
             validation_functions=self.definition.validation_functions,
-            errored_indices=errored_indices
+            errored_results=errored_results
         )
 
 
@@ -350,7 +350,7 @@ class Schema(object):
                     "description": None,
                     "units": None,
                     "validation_functions": None,
-                    "errored_indices": None
+                    "errored_results": None
                 })
 
         # Set schema dataframe
