@@ -455,11 +455,16 @@ def validate(
     # Display any errors that occured during validation
     for vf in validated_features:
         if len(vf.feature.errored_results) > 0:
-            log.warning(f"Validation errors for feature: {vf.name}")
+            log.warning(f"{vf.name} resulted in {len(vf.feature.errored_results)} validation errors.")
 
             # Display errors for this feature
-            for er in vf.feature.errored_results:
+            for i, er in enumerate(vf.feature.errored_results):
                 log.warning(er.error)
+
+                # Break after first ten
+                if i == 9:
+                    log.warning("...")
+                    break
 
     # Drop any indicies that errored out during validation
     if drop_on_error:

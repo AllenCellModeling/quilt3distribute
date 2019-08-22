@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 
 from pathlib import Path
-import pytest
 
 import numpy as np
 import pandas as pd
+import pytest
 
 from quilt3distribute import FeatureDefinition
-from quilt3distribute.validation import validate, Validator
+from quilt3distribute.validation import Validator, validate
 
 
 @pytest.mark.parametrize("dtype, validation_functions", [
@@ -67,9 +67,9 @@ def test_validator_process(values, definition, drop_on_error, expected_drops):
     results = v.process()
 
     if drop_on_error:
-        assert expected_drops == results.errored_indices
+        assert expected_drops == {r.index for r in results.errored_results}
     else:
-        assert len(results.errored_indices) == 0
+        assert len(results.errored_results) == 0
 
 
 @pytest.mark.parametrize("data, drop_on_error, expected_len", [
