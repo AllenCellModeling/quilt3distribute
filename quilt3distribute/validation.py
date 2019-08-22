@@ -455,7 +455,7 @@ def validate(
     # Display any errors that occured during validation
     for vf in validated_features:
         if len(vf.feature.errored_results) > 0:
-            log.warning(f"{vf.name} resulted in {len(vf.feature.errored_results)} validation errors.")
+            log.warning(f"Validation against column {vf.name} resulted in {len(vf.feature.errored_results)} errors.")
 
             # Display errors for this feature
             for i, er in enumerate(vf.feature.errored_results):
