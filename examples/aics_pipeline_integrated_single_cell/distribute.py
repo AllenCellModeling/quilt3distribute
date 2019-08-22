@@ -31,10 +31,16 @@ raw = raw.drop([
     "MembraneSegmentationFilename", "NucleusContourReadPath", "NucleusContourFilename",
     "NucleusSegmentationReadPath", "NucleusSegmentationFilename", "SourceReadPath",
     "SourceFilename", "StructureContourReadPath", "StructureContourFilename",
-    "StructureSegmentationReadPath", "StructureSegmentationFilename", "save_dir"
+    "StructureSegmentationReadPath", "StructureSegmentationFilename", "save_dir",
+    "save_flat_reg_path", "save_flat_proj_reg_path"  # 😡 Please... Why are these columns still a thing 😡
 ], axis=1)
 
 # Specific to control data
+# Resolve the paths for the core regularized image column
+raw["save_reg_path"] = raw["save_reg_path"].apply(
+    lambda v: f"/allen/aics/modeling/gregj/results/ipp/scp_19_04_10/{v}"
+)
+
 # Fill nan's in `StructureDisplayName` column with the `Control` protein as this will be used in each file's metadata
 raw["StructureDisplayName"] = raw["StructureDisplayName"].fillna(raw["ProteinId/Name"])
 
