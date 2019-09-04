@@ -93,7 +93,7 @@ ds.set_column_names_map({
 # Distribute the package
 ds.distribute(
     push_uri="s3://allencell",
-    message="Update feature explorer links"
+    message="Update feature explorer links and documentation for new bucket"
 )
 
 print("-" * 80)
