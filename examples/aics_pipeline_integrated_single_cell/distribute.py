@@ -34,6 +34,7 @@ raw = raw.drop([
     "StructureSegmentationReadPath", "StructureSegmentationFilename", "save_dir"
 ], axis=1)
 
+
 # Optional:
 # Add extra metadata that isn't found in the database
 def create_feature_explorer_url(row):
