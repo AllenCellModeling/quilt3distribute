@@ -437,7 +437,7 @@ class Dataset(object):
 
             # Optionally push
             if push_uri:
-                pkg = pkg.push(f"{self.package_owner}/{name}", dest=push_uri, message=message)
+                pkg = pkg.push(f"{self.package_owner}/{name}", registry=push_uri, message=message)
 
         return pkg
 
