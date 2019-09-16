@@ -8,7 +8,7 @@ on:
     - cron: 0 10 * * 1
 
 jobs:
-  build:
+  test:
     runs-on: ${{ matrix.os }}
     strategy:
       max-parallel: 6
