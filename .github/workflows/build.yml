@@ -32,7 +32,7 @@ jobs:
         python quilt3distribute/tests/data/zzz_generate_fake_dataset.py
         pytest --cov-report html --cov-report xml --cov=quilt3distribute quilt3distribute/tests/
         codecov -t ${{ secrets.CODECOV_TOKEN }}
-        
+
   lint:
     runs-on: ubuntu-latest
 
@@ -48,4 +48,4 @@ jobs:
         pip install .[test]
     - name: Lint with flake8
       run: |
-        flake8 . --count --verbose --max-line-length=127 --show-source --statistics
+        flake8 quilt3distribute --count --verbose --max-line-length=127 --show-source --statistics
