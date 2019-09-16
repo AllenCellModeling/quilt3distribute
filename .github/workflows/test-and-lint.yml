@@ -1,11 +1,6 @@
-name: Build Master
+name: Test and Lint
 
-on:
-  push:
-    branches:
-      - master
-  schedule:
-    - cron: 0 10 * * 1
+on: push
 
 jobs:
   test:
