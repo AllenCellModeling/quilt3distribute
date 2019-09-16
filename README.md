@@ -1,6 +1,6 @@
 # quilt3distribute
 
-[![build status](https://travis-ci.com/AllenCellModeling/quilt3distribute.svg?branch=master)](https://travis-ci.com/AllenCellModeling/quilt3distribute)
+[![Build Status](https://github.com/AllenCellModeling/quilt3distribute/workflows/build-master/badge.svg)](https://github.com/AllenCellModeling/quilt3distribute/actions)
 [![codecov](https://codecov.io/gh/AllenCellModeling/quilt3distribute/branch/master/graph/badge.svg)](https://codecov.io/gh/AllenCellModeling/quilt3distribute)
 
 
