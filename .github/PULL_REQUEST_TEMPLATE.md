@@ -3,11 +3,11 @@ Pull request recommendations:
 - [ ] Name your pull request `TYPE/short-description`.
 
 Ex:
-> FEATURE/read-tiff-files
+> feature/read-tiff-files
 
 or
 
-> BUGFIX/handle-file-not-found
+> bugfix/handle-file-not-found
 
 - [ ] If your pull request addresses a GitHub issue, link to it either in a commit message or in the PR description.
 
