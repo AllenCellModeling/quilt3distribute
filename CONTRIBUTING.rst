@@ -24,9 +24,9 @@ Ready to contribute? Here's how to set up `quilt3distribute` for local developme
 
 4. Create a branch for local development::
 
-    $ git checkout -b TYPE/short-description
+    $ git checkout -b type/short-description
 
-    Ex: FEATURE/read-tiff-files or BUGFIX/handle-file-not-found
+    Ex: feature/read-tiff-files or bugfix/handle-file-not-found
 
    Now you can make your changes locally.
 
@@ -39,7 +39,7 @@ Ready to contribute? Here's how to set up `quilt3distribute` for local developme
 
     $ git add .
     $ git commit -m "Resolves gh-###. Your detailed description of your changes."
-    $ git push origin TYPE/short-description
+    $ git push origin type/short-description
 
 7. Submit a pull request through the GitHub website.
 
