@@ -3,7 +3,7 @@ name: Build
 on: push
 
 jobs:
-  build:
+  test:
     runs-on: ${{ matrix.os }}
     strategy:
       max-parallel: 6
