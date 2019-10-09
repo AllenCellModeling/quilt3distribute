@@ -36,11 +36,19 @@ raw = raw.drop([
     "StructureShortName", "index", "save_flat_reg_path", "save_flat_proj_reg_path"
 ], axis=1)
 
+
+# Some paths are full and some are partial, to fully resolve, check if they contain "/allen/"
+# Apply this function the the save_reg_path column to standardize the paths
+def fix_non_control_read_path(f):
+    if "/allen/" in f:
+        return f
+
+    return f"/allen/aics/modeling/gregj/results/ipp/scp_19_04_10/{f}"
+
+
 # Specific to control data
 # Resolve the paths for the core regularized image column
-raw["save_reg_path"] = raw["save_reg_path"].apply(
-    lambda v: f"/allen/aics/modeling/gregj/results/ipp/scp_19_04_10/{v}"
-)
+raw["save_reg_path"] = raw["save_reg_path"].apply(fix_non_control_read_path)
 
 # Fill nan's in `StructureDisplayName` column with the `Control` protein as this will be used in each file's metadata
 raw["StructureDisplayName"] = raw["StructureDisplayName"].fillna(raw["ProteinId/Name"])
