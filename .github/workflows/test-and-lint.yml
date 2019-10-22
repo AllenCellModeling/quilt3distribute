@@ -24,7 +24,7 @@ jobs:
     - name: Test with pytest
       run: |
         python quilt3distribute/tests/data/zzz_generate_fake_dataset.py
-        pytest --cov-report html --cov-report xml --cov=quilt3distribute quilt3distribute/tests/
+        pytest --cov-report xml --cov=quilt3distribute quilt3distribute/tests/
         codecov -t ${{ secrets.CODECOV_TOKEN }}
 
   lint:

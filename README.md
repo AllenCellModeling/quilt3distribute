@@ -1,8 +1,8 @@
 # quilt3distribute
 
 [![Build Status](https://github.com/AllenCellModeling/quilt3distribute/workflows/Build/badge.svg)](https://github.com/AllenCellModeling/quilt3distribute/actions)
-[![codecov](https://codecov.io/gh/AllenCellModeling/quilt3distribute/branch/master/graph/badge.svg)](https://codecov.io/gh/AllenCellModeling/quilt3distribute)
-
+[![Documentation](https://github.com/AllenCellModeling/quilt3distribute/workflows/Documentation/badge.svg)](https://AllenCellModeling.github.io/quilt3distribute)
+[![Code Coverage](https://codecov.io/gh/AllenCellModeling/quilt3distribute/branch/master/graph/badge.svg)](https://codecov.io/gh/AllenCellModeling/quilt3distribute)
 
 ![dataset packaging and distribution](http://www.allencell.org/uploads/8/1/9/9/81996008/published/automatingaccess-button-3_2.png?1549322257)
 
@@ -94,9 +94,8 @@ pkg["images_2d"]["03cdf019_1.png"].meta
 ```
 
 ## Installation
-PyPI installation not available at this time, please install using git.
-
-`pip install git+https://github.com/AllenCellModeling/quilt3distribute.git`
+**Stable Release:** `pip install quilt3distribute`<br>
+**Development Head:** `pip install git+https://github.com/AllenCellModeling/quilt3distribute.git`
 
 
 ### Credits
