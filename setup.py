@@ -71,9 +71,9 @@ setup(
     author="Jackson Maxfield Brown",
     author_email="jacksonb@alleninstitute.org",
     classifiers=[
-        "Development Status :: 2 - Pre-Alpha",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
-        "License :: Allen Institute Software License",
+        "License :: Free for non-commercial use",
         "Natural Language :: English",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
