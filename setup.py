@@ -46,11 +46,11 @@ interactive_requirements = [
 ]
 
 requirements = [
-    "markdown2==2.3.7",
+    "markdown2>=2.3.7",
     "pandas",
     "quilt3>=3.0.4",
-    "tabulate==0.8.3",
-    "tqdm==4.32.1",
+    "tabulate>=0.8.3",
+    "tqdm>=4.32.1",
 ]
 
 extra_requirements = {
