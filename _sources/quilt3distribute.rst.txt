@@ -1,0 +1,53 @@
+quilt3distribute package
+========================
+
+Subpackages
+-----------
+
+.. toctree::
+
+   quilt3distribute.bin
+
+Submodules
+----------
+
+quilt3distribute.dataset module
+-------------------------------
+
+.. automodule:: quilt3distribute.dataset
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+quilt3distribute.documentation module
+-------------------------------------
+
+.. automodule:: quilt3distribute.documentation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+quilt3distribute.file\_utils module
+-----------------------------------
+
+.. automodule:: quilt3distribute.file_utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+quilt3distribute.validation module
+----------------------------------
+
+.. automodule:: quilt3distribute.validation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: quilt3distribute
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,699 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>quilt3distribute.validation &mdash; quilt3distribute 0.1.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> quilt3distribute
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#stable-release">Stable release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#from-sources">From sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Package modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../quilt3distribute.html">quilt3distribute package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quilt3distribute.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../quilt3distribute.bin.html">quilt3distribute.bin package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../quilt3distribute.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quilt3distribute.html#module-quilt3distribute.dataset">quilt3distribute.dataset module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quilt3distribute.html#module-quilt3distribute.documentation">quilt3distribute.documentation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quilt3distribute.html#module-quilt3distribute.file_utils">quilt3distribute.file_utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quilt3distribute.html#module-quilt3distribute.validation">quilt3distribute.validation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quilt3distribute.html#module-quilt3distribute">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#get-started">Get Started!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#deploying">Deploying</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">quilt3distribute</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../quilt3distribute.html">quilt3distribute</a> &raquo;</li>
+        
+      <li>quilt3distribute.validation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for quilt3distribute.validation</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">Counter</span>
+<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="k">import</span> <span class="n">ThreadPoolExecutor</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="p">(</span><span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span>
+                    <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">tabulate</span> <span class="k">import</span> <span class="n">tabulate</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="k">import</span> <span class="n">tqdm</span>
+
+<span class="c1">###############################################################################</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1">###############################################################################</span>
+
+
+<div class="viewcode-block" id="FeatureDefinition"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.validation.FeatureDefinition">[docs]</a><span class="k">class</span> <span class="nc">FeatureDefinition</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="p">:</span> <span class="n">Type</span><span class="p">,</span>
+        <span class="n">validation_functions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">cast_values</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">display_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">units</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize a new feature definition. A feature definition can be as simple as providing a data type (dtype) or</span>
+<span class="sd">        can be incredibly specific by including validation and cleaning operations or providing metadata. If dtype of</span>
+<span class="sd">        pathlib.Path is provided, cast_values is automatically set to True.</span>
+
+<span class="sd">        :param dtype: The data type for the feature.</span>
+<span class="sd">        :param validation_functions: A list or tuple of callable functions to validate each instance of the feature.</span>
+<span class="sd">        :param cast_values: In the case that an instance of the feature is found that doesn&#39;t match the dtype provided,</span>
+<span class="sd">            should that instance be attempted to cast to the provided dtype.</span>
+<span class="sd">        :param display_name: Metadata attachment for a display name to be given to the feature.</span>
+<span class="sd">        :param description: Metadata attachment for a description for the feature.</span>
+<span class="sd">        :param units: Metadata attachment for unit details for the feature.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Handle non tuple values</span>
+        <span class="k">if</span> <span class="n">validation_functions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">validation_functions</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">validation_functions</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">validation_functions</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">validation_functions</span><span class="p">)</span>
+
+        <span class="c1"># Ensure functions was passed as a tuple</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">validation_functions</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="n">f</span><span class="s2">&quot;FeatureDefinitions must be initialized with either no, a list, or a tuple of validation functions.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Ensure all items provided in validation functions are callable</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">callable</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">validation_functions</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="n">f</span><span class="s2">&quot;Items provided as validation functions must be callable. Received: </span><span class="si">{validation_functions}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Store configuration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="n">dtype</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validation_functions</span> <span class="o">=</span> <span class="n">validation_functions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cast_values</span> <span class="o">=</span> <span class="n">cast_values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display_name</span> <span class="o">=</span> <span class="n">display_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="n">units</span>
+
+        <span class="c1"># If dtype passed was Path, always attempt to cast</span>
+        <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="n">Path</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cast_values</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">short_info</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;[display_name: &#39;</span><span class="si">{self.display_name}</span><span class="s2">&#39;, dtype: &#39;</span><span class="si">{self.dtype}</span><span class="s2">&#39;, cast values: </span><span class="si">{self.cast_values}</span><span class="s2">]&quot;</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s2">&quot;&lt;FeatureDefinition </span><span class="si">{short_info}</span><span class="s2">&gt;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_generate_schema_template</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">FeatureDefinition</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Helper function to generate a schema template (a dictionary of column name to FeatureDefinitions). This function</span>
+<span class="sd">    makes strong assumptions about which columns headers indicate that a value is a filepath or not. It also, attempts</span>
+<span class="sd">    to determine if value casting should be turned on based off the number of unique types present in a column.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create feature definition for each column</span>
+    <span class="n">feature_definitions</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="c1"># Make basic schema</span>
+        <span class="n">display_name</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;  &quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+
+        <span class="c1"># Create counter of types and choose most popular type</span>
+        <span class="n">dtypes</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">([</span><span class="n">v</span><span class="o">.</span><span class="vm">__class__</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">])</span>
+
+        <span class="c1"># Get most popular</span>
+        <span class="c1"># This is a good post explaining what is happening</span>
+        <span class="c1"># https://www.robjwells.com/2015/08/python-counter-gotcha-with-max/</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="n">dtypes</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Only cast values when more than one type is present</span>
+        <span class="n">cast_values</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dtypes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span>
+
+        <span class="c1"># Check for path indicator</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">sub</span> <span class="ow">in</span> <span class="n">col</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">,</span> <span class="s2">&quot;_dir&quot;</span><span class="p">,</span> <span class="s2">&quot;directory&quot;</span><span class="p">])</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">col</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">):</span>
+            <span class="c1"># Confirm most popular type is common path type</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">t</span> <span class="o">==</span> <span class="n">dtype</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">)):</span>
+                <span class="c1"># Set ctype to Path</span>
+                <span class="n">dtype</span> <span class="o">=</span> <span class="n">Path</span>
+
+        <span class="c1"># Create definition</span>
+        <span class="n">feature_definitions</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">FeatureDefinition</span><span class="p">(</span>
+            <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span>
+            <span class="n">cast_values</span><span class="o">=</span><span class="n">cast_values</span><span class="p">,</span>
+            <span class="n">display_name</span><span class="o">=</span><span class="n">display_name</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">feature_definitions</span>
+
+
+<div class="viewcode-block" id="PlannedDelayedDropError"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.validation.PlannedDelayedDropError">[docs]</a><span class="k">class</span> <span class="nc">PlannedDelayedDropError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">message</span></div>
+
+
+<div class="viewcode-block" id="PlannedDelayedDropResult"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.validation.PlannedDelayedDropResult">[docs]</a><span class="k">class</span> <span class="nc">PlannedDelayedDropResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="n">index</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">error</span><span class="p">:</span> <span class="n">PlannedDelayedDropError</span></div>
+
+
+<div class="viewcode-block" id="ValidatedFeature"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.validation.ValidatedFeature">[docs]</a><span class="k">class</span> <span class="nc">ValidatedFeature</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="p">:</span> <span class="n">Type</span><span class="p">,</span>
+        <span class="n">display_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">units</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">validation_functions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">errored_results</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="n">PlannedDelayedDropResult</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A feature that has it&#39;s core validation attributes locked but metadata freely mutable.</span>
+
+<span class="sd">        :param name: The name for the feature in the dataset (usually this is the column).</span>
+<span class="sd">        :param dtype: A single data type for the feature.</span>
+<span class="sd">        :param display_name: A display name for the feature.</span>
+<span class="sd">        :param description: A description for the feature.</span>
+<span class="sd">        :param units: Units for the feature.</span>
+<span class="sd">        :param validation_functions: The tuple of validation functions ran against the feature values.</span>
+<span class="sd">        :param errored_results: An optional set of PlannedDelayedDropResults that errored out during validation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Store configuration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span> <span class="o">=</span> <span class="n">dtype</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display_name</span> <span class="o">=</span> <span class="n">display_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="n">units</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validation_functions</span> <span class="o">=</span> <span class="n">validation_functions</span>
+
+        <span class="k">if</span> <span class="n">errored_results</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_errored_results</span> <span class="o">=</span> <span class="n">errored_results</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_errored_results</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">dtype</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Type</span><span class="p">:</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&lt;class &#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">dtype</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">validation_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validation_functions</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">errored_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Set</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_errored_results</span>
+
+<div class="viewcode-block" id="ValidatedFeature.to_dict"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.validation.ValidatedFeature.to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">]]]:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
+            <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">display_name</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+            <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">units</span><span class="p">,</span>
+            <span class="s2">&quot;validation_functions&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation_functions</span><span class="p">,</span>
+            <span class="s2">&quot;errored_results&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">errored_results</span>
+        <span class="p">}</span></div>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s2">&quot;&lt;ValidatedFeature [name: </span><span class="si">{self.name}</span><span class="s2">, dtype: </span><span class="si">{self.dtype}</span><span class="s2">, display_name: </span><span class="si">{self.display_name}</span><span class="s2">]&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Validator"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.validation.Validator">[docs]</a><span class="k">class</span> <span class="nc">Validator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">definition</span><span class="p">:</span> <span class="n">FeatureDefinition</span><span class="p">,</span>
+        <span class="n">drop_on_error</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A container to manage feature values and feature definition that can actually process (validate) the feature.</span>
+
+<span class="sd">        :param name: The name of the feature (usually this is the column name).</span>
+<span class="sd">        :param values: The np.ndarray of feature values.</span>
+<span class="sd">        :param definition: The feature definition to validate against.</span>
+<span class="sd">        :param drop_on_error: In the case that an error occurs during validation should the row be dropped and</span>
+<span class="sd">            validation continue.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Store configuration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="n">values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="n">definition</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drop_on_error</span> <span class="o">=</span> <span class="n">drop_on_error</span>
+
+<div class="viewcode-block" id="Validator.process"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.validation.Validator.process">[docs]</a>    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">progress_bar</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">tqdm</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ValidatedFeature</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Use the feature definition stored on this object to attempt to validate the feature.</span>
+
+<span class="sd">        :param progress_bar: An optional tqdm progress bar to update as the values are processed.</span>
+<span class="sd">        :return: A ValidatedFeature object representing that this feature has been checked.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Create empty errored results set</span>
+        <span class="n">errored_results</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="c1"># Begin checking</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">)):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Short ref to value</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">val_descriptor</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;from column: &#39;</span><span class="si">{self.name}</span><span class="s2">&#39;, at index: </span><span class="si">{i}</span><span class="s2">: ({type(val)} &#39;</span><span class="si">{val}</span><span class="s2">&#39;)&quot;</span>
+
+                <span class="c1"># Attempt type casting</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">cast_values</span><span class="p">:</span>
+                    <span class="c1"># Uncomment to fix windows paths</span>
+                    <span class="c1"># Still debating the best way to do this</span>
+                    <span class="c1"># Ideally we would want to detect which path sep was provided and what is the current os path sep</span>
+                    <span class="c1"># Fix windows paths</span>
+                    <span class="c1"># DEAR GOD WHY WINDOWS WHY</span>
+                    <span class="c1"># if self.definition.dtype == Path:</span>
+                    <span class="c1">#     val = val.replace(&quot;\\&quot;, &quot;/&quot;)</span>
+
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+                    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+                        <span class="n">msg</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;Could not cast value </span><span class="si">{val_descriptor}</span><span class="s2"> to received type </span><span class="si">{self.definition.dtype}</span><span class="s2">.&quot;</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_on_error</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="n">PlannedDelayedDropError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+                <span class="c1"># Check type</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
+                        <span class="n">f</span><span class="s2">&quot;Value </span><span class="si">{val_descriptor}</span><span class="s2"> does not match the type specification received &quot;</span>
+                        <span class="n">f</span><span class="s2">&quot;</span><span class="si">{self.definition.dtype}</span><span class="s2">.&quot;</span>
+                    <span class="p">)</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_on_error</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">PlannedDelayedDropError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+                <span class="c1"># Confirm paths</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">Path</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">val</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                        <span class="n">msg</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;Filepath </span><span class="si">{val_descriptor}</span><span class="s2"> was not found.&quot;</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_on_error</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="n">PlannedDelayedDropError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+                <span class="c1"># Check values</span>
+                <span class="k">for</span> <span class="n">func_index</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">validation_functions</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+                        <span class="n">msg</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;Value </span><span class="si">{val_descriptor}</span><span class="s2"> failed validation function </span><span class="si">{func_index}</span><span class="s2">.&quot;</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop_on_error</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="n">PlannedDelayedDropError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+            <span class="k">except</span> <span class="n">PlannedDelayedDropError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">errored_results</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">PlannedDelayedDropResult</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="n">e</span><span class="p">))</span>
+
+            <span class="c1"># Update progress</span>
+            <span class="k">if</span> <span class="n">progress_bar</span><span class="p">:</span>
+                <span class="n">progress_bar</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+        <span class="c1"># Everything passed return validated feature</span>
+        <span class="k">return</span> <span class="n">ValidatedFeature</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
+            <span class="n">display_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">display_name</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+            <span class="n">units</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">units</span><span class="p">,</span>
+            <span class="n">validation_functions</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">validation_functions</span><span class="p">,</span>
+            <span class="n">errored_results</span><span class="o">=</span><span class="n">errored_results</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="ValidationReturn"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.validation.ValidationReturn">[docs]</a><span class="k">class</span> <span class="nc">ValidationReturn</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">feature</span><span class="p">:</span> <span class="n">ValidatedFeature</span></div>
+
+
+<span class="k">def</span> <span class="nf">_validate_helper</span><span class="p">(</span><span class="n">validator</span><span class="p">:</span> <span class="n">Validator</span><span class="p">,</span> <span class="n">progress_bar</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">tqdm</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ValidatedFeature</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A concurrency helper function to manage validator io.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">ValidationReturn</span><span class="p">(</span><span class="n">validator</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">validator</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">progress_bar</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="Schema"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.validation.Schema">[docs]</a><span class="k">class</span> <span class="nc">Schema</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ValidatedFeature</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A schema is the summation of multiple validated and unvalidated features for a Dataset. It provides helpful</span>
+<span class="sd">        methods for viewing which features have and have not been validated and with which data types, functions, and</span>
+<span class="sd">        metadata.</span>
+
+<span class="sd">        :param features: A dictionary mapping the dataset manifest column names to ValidatedFeatures.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Store all data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_feats</span> <span class="o">=</span> <span class="n">features</span>
+
+        <span class="c1"># Construct schema dataframe</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">feat</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">feat</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feat</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                    <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                    <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                    <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                    <span class="s2">&quot;validation_functions&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                    <span class="s2">&quot;errored_results&quot;</span><span class="p">:</span> <span class="kc">None</span>
+                <span class="p">})</span>
+
+        <span class="c1"># Set schema dataframe</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">features</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ValidatedFeature</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_feats</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">df</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">validated</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="c1"># Return any features that are validated</span>
+        <span class="c1"># Known validated when the feature is not None</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">f</span><span class="p">]]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">unvalidated</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="c1"># Return any features that are not validated</span>
+        <span class="c1"># Known not validated when the feature is None</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_tabulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tablefmt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;html&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Wrapper around tabulate.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># We don&#39;t really care about rendering the validation functions</span>
+        <span class="n">schema_table</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;validation_functions&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">schema_table</span> <span class="o">=</span> <span class="n">tabulate</span><span class="p">(</span><span class="n">schema_table</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">schema_table</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span> <span class="n">tablefmt</span><span class="o">=</span><span class="n">tablefmt</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">schema_table</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s2">&quot;&lt;Schema [Percent Features Validated: {len(self.validated) / len(self.features) * 100}%]&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_repr_html_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ValidatedDataset"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.validation.ValidatedDataset">[docs]</a><span class="k">class</span> <span class="nc">ValidatedDataset</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span>
+    <span class="n">schema</span><span class="p">:</span> <span class="n">Schema</span></div>
+
+
+<div class="viewcode-block" id="validate"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.validation.validate">[docs]</a><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">schema</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">FeatureDefinition</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">drop_on_error</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">n_workers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">show_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ValidatedDataset</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A function that validates a dataset against the proposed schema.</span>
+
+<span class="sd">    :param data: A pandas dataframe to validate.</span>
+<span class="sd">    :param schema: The proposed schema to validate the dataset against.</span>
+<span class="sd">        A dictionary mapping dataframe column names to FeatureDefinitions.</span>
+<span class="sd">    :param drop_on_error: In the case that an error occurs during validation should the row be dropped and validation</span>
+<span class="sd">        continue.</span>
+<span class="sd">    :param n_workers: The number of threads to use during validation.</span>
+<span class="sd">    :param show_progress: Boolean option to show or hide progress bar.</span>
+<span class="sd">    :return: A ValidatedDataset object that stores the cleaned copy of the data as well as the validated schema.</span>
+
+<span class="sd">    Validation isn&#39;t a CPU intensive task so async threadpool is used over processpool.</span>
+<span class="sd">    The most intensive task is file existence checks.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Generate a template</span>
+    <span class="k">if</span> <span class="n">schema</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">schema</span> <span class="o">=</span> <span class="n">_generate_schema_template</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="c1"># Create a copy of the dataset to use for validation as values may change during validation</span>
+    <span class="n">to_validate</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># Create validators for every column passed in schema</span>
+    <span class="n">validators</span> <span class="o">=</span> <span class="p">[</span><span class="n">Validator</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">column</span><span class="p">,</span>
+        <span class="n">values</span><span class="o">=</span><span class="n">to_validate</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+        <span class="n">definition</span><span class="o">=</span><span class="n">definition</span><span class="p">,</span>
+        <span class="n">drop_on_error</span><span class="o">=</span><span class="n">drop_on_error</span>
+    <span class="p">)</span> <span class="k">for</span> <span class="n">column</span><span class="p">,</span> <span class="n">definition</span> <span class="ow">in</span> <span class="n">schema</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+
+    <span class="c1"># Multiprocess validation</span>
+    <span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">n_workers</span><span class="p">)</span> <span class="k">as</span> <span class="n">exe</span><span class="p">:</span>
+        <span class="c1"># Some people don&#39;t like progress bars, @heeler @AetherUnbound 🙃</span>
+        <span class="k">if</span> <span class="n">show_progress</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">validators</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Validating&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">pbar</span><span class="p">:</span>
+                <span class="n">validate_partial</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">_validate_helper</span><span class="p">,</span> <span class="n">progress_bar</span><span class="o">=</span><span class="n">pbar</span><span class="p">)</span>
+                <span class="n">validated_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">exe</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">validate_partial</span><span class="p">,</span> <span class="n">validators</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">validated_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">exe</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">_validate_helper</span><span class="p">,</span> <span class="n">validators</span><span class="p">))</span>
+
+    <span class="c1"># Display any errors that occured during validation</span>
+    <span class="k">for</span> <span class="n">vf</span> <span class="ow">in</span> <span class="n">validated_features</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vf</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">errored_results</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Validation against column </span><span class="si">{vf.name}</span><span class="s2"> resulted in {len(vf.feature.errored_results)} errors.&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Display errors for this feature</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">er</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vf</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">errored_results</span><span class="p">):</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">er</span><span class="o">.</span><span class="n">error</span><span class="p">)</span>
+
+                <span class="c1"># Break after first ten</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;...&quot;</span><span class="p">)</span>
+                    <span class="k">break</span>
+
+    <span class="c1"># Drop any indicies that errored out during validation</span>
+    <span class="k">if</span> <span class="n">drop_on_error</span><span class="p">:</span>
+        <span class="c1"># Combine all errored indicie sets</span>
+        <span class="n">master_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">vf</span> <span class="ow">in</span> <span class="n">validated_features</span><span class="p">:</span>
+            <span class="n">master_set</span> <span class="o">=</span> <span class="n">master_set</span><span class="o">.</span><span class="n">union</span><span class="p">([</span><span class="n">er</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">er</span> <span class="ow">in</span> <span class="n">vf</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">errored_results</span><span class="p">])</span>
+
+        <span class="c1"># Drop all errored indicies</span>
+        <span class="n">to_validate</span> <span class="o">=</span> <span class="n">to_validate</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">master_set</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">ValidatedDataset</span><span class="p">(</span><span class="n">to_validate</span><span class="p">,</span> <span class="n">Schema</span><span class="p">({</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">feature</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">validated_features</span><span class="p">}))</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Jackson Maxfield Brown
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

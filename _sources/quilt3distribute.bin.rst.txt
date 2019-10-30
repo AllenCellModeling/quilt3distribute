@@ -1,0 +1,22 @@
+quilt3distribute.bin package
+============================
+
+Submodules
+----------
+
+quilt3distribute.bin.quilt3\_distribute\_dataset module
+-------------------------------------------------------
+
+.. automodule:: quilt3distribute.bin.quilt3_distribute_dataset
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: quilt3distribute.bin
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,672 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>quilt3distribute.dataset &mdash; quilt3distribute 0.1.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> quilt3distribute
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#stable-release">Stable release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#from-sources">From sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Package modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../quilt3distribute.html">quilt3distribute package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../quilt3distribute.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../quilt3distribute.bin.html">quilt3distribute.bin package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../quilt3distribute.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quilt3distribute.html#module-quilt3distribute.dataset">quilt3distribute.dataset module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quilt3distribute.html#module-quilt3distribute.documentation">quilt3distribute.documentation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quilt3distribute.html#module-quilt3distribute.file_utils">quilt3distribute.file_utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quilt3distribute.html#module-quilt3distribute.validation">quilt3distribute.validation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../quilt3distribute.html#module-quilt3distribute">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#get-started">Get Started!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#deploying">Deploying</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">quilt3distribute</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+          <li><a href="../quilt3distribute.html">quilt3distribute</a> &raquo;</li>
+        
+      <li>quilt3distribute.dataset</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for quilt3distribute.dataset</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">quilt3</span>
+<span class="kn">from</span> <span class="nn">markdown2</span> <span class="k">import</span> <span class="n">markdown</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="k">import</span> <span class="n">tqdm</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">file_utils</span>
+<span class="kn">from</span> <span class="nn">.documentation</span> <span class="k">import</span> <span class="n">README</span>
+<span class="kn">from</span> <span class="nn">.validation</span> <span class="k">import</span> <span class="n">validate</span>
+
+<span class="c1">###############################################################################</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="c1"># This could actually include dictionaries, lists, and tuples but for the sake of simplicity we only allow these types.</span>
+<span class="c1"># Details here: https://docs.python.org/3/library/json.html#json.JSONEncoder</span>
+<span class="n">JSONSerializableTypes</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
+
+
+<span class="c1">###############################################################################</span>
+
+
+<div class="viewcode-block" id="Dataset"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.dataset.Dataset">[docs]</a><span class="k">class</span> <span class="nc">Dataset</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dataset</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">package_owner</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">readme_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize a dataset object.</span>
+
+<span class="sd">        :param dataset: Filepath or preloaded pandas dataframe.</span>
+<span class="sd">        :param name: A name for the dataset. May only contain alphabetic and underscore characters.</span>
+<span class="sd">        :param package_owner: The name of the dataset owner. To be attached to the dataset name.</span>
+<span class="sd">        :param readme_path: A path to a markdown README file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Read the dataset</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">)):</span>
+            <span class="n">dataset</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">dataset</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">IsADirectoryError</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+
+            <span class="c1"># Read</span>
+            <span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+
+        <span class="c1"># Check type</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="n">f</span><span class="s2">&quot;Dataset&#39;s may only be initialized with a path to csv or a pandas dataframe. Received: {type(dataset)}&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Init readme</span>
+        <span class="n">readme</span> <span class="o">=</span> <span class="n">README</span><span class="p">(</span><span class="n">readme_path</span><span class="p">)</span>
+
+        <span class="c1"># Confirm name matches allowed pattern</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_or_raise_approved_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="c1"># Store basic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">dataset</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">package_owner</span> <span class="o">=</span> <span class="n">package_owner</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_readme</span> <span class="o">=</span> <span class="n">readme</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">readme_path</span> <span class="o">=</span> <span class="n">readme</span><span class="o">.</span><span class="n">fp</span>
+
+        <span class="c1"># Lazy loaded</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata_columns</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path_columns</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">column_names_map</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extra_files</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">readme</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">README</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_readme</span>
+
+<div class="viewcode-block" id="Dataset.add_usage_doc"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.dataset.Dataset.add_usage_doc">[docs]</a>    <span class="k">def</span> <span class="nf">add_usage_doc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc_or_link</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a document&#39;s content or add a link to a publically accessibly resource for documentation and usage examples.</span>
+
+<span class="sd">        :param doc_or_link: A filepath or string uri to a resource detailing usage of this dataset.</span>
+
+<span class="sd">        Wrapper around quilt3distribute.documentation.README.append_readme_standards.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">readme</span><span class="o">.</span><span class="n">append_readme_standards</span><span class="p">(</span><span class="n">usage_doc_or_link</span><span class="o">=</span><span class="n">doc_or_link</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Dataset.add_license"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.dataset.Dataset.add_license">[docs]</a>    <span class="k">def</span> <span class="nf">add_license</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc_or_link</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a document&#39;s content or add a link to a publically accessibly resource for license details.</span>
+
+<span class="sd">        :param doc_or_link: A filepath or string uri to a resource for license details.</span>
+
+<span class="sd">        Wrapper around quilt3distribute.documentation.README.append_readme_standards.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">readme</span><span class="o">.</span><span class="n">append_readme_standards</span><span class="p">(</span><span class="n">license_doc_or_link</span><span class="o">=</span><span class="n">doc_or_link</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Dataset.set_metadata_columns"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.dataset.Dataset.set_metadata_columns">[docs]</a>    <span class="k">def</span> <span class="nf">set_metadata_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Use the manifest contents to attach metadata to the files found in the dataset.</span>
+
+<span class="sd">        :param columns: A list of columns to use for metadata attachment.</span>
+
+<span class="sd">        Example row: `{&quot;CellId&quot;: 1, &quot;Structure&quot;: &quot;lysosome&quot;, &quot;2dReadPath&quot;: &quot;/allen...&quot;, &quot;3dReadPath&quot;: &quot;/allen...&quot;}`</span>
+<span class="sd">        Attach structure metadata: `dataset.set_metadata_columns([&quot;Structure&quot;])`</span>
+<span class="sd">        Results in the files found at the 2dReadPath and the 3dReadPath both having `{&quot;Structure&quot;: &quot;lysosome&quot;}` attached</span>
+
+<span class="sd">        In short: the values in each column provided will be used for metadata attachment for every file found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check columns</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;One or more columns provided were not found in the dataset. Received: </span><span class="si">{columns}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">metadata_columns</span> <span class="o">=</span> <span class="n">columns</span></div>
+
+<div class="viewcode-block" id="Dataset.set_path_columns"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.dataset.Dataset.set_path_columns">[docs]</a>    <span class="k">def</span> <span class="nf">set_path_columns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Explicit override for which columns will be used for file distribution.</span>
+
+<span class="sd">        :param columns: A list of columns to use for file distribution.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check columns</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;One or more columns provided were not found in the dataset. Received: </span><span class="si">{columns}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">path_columns</span> <span class="o">=</span> <span class="n">columns</span></div>
+
+<div class="viewcode-block" id="Dataset.set_column_names_map"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.dataset.Dataset.set_column_names_map">[docs]</a>    <span class="k">def</span> <span class="nf">set_column_names_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">columns</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Explicit override for the labeling of column names on file distribution.</span>
+<span class="sd">        Example, a column (&quot;2dReadPath&quot;) is detected to have files, in the package that file will be placed in a</span>
+<span class="sd">        directory called &quot;2dReadPath&quot;. Using this function, those directory names can be explicitly overridden.</span>
+
+<span class="sd">        :param columns: A mapping of current column name contain files to desired labeled directory name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check columns</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;One or more columns provided were not found in the dataset. Received: </span><span class="si">{columns}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">column_names_map</span> <span class="o">=</span> <span class="n">columns</span></div>
+
+<div class="viewcode-block" id="Dataset.return_or_raise_approved_name"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.dataset.Dataset.return_or_raise_approved_name">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">return_or_raise_approved_name</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Attempt to clean a string to match the pattern expected by Quilt 3.</span>
+<span class="sd">        If after the cleaning operation, it still doesn&#39;t match the approved pattern, will raise a ValueError.</span>
+
+<span class="sd">        :param name: String name to clean.</span>
+<span class="sd">        :return: Cleaned name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-z0-9_\-]*$&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="n">f</span><span class="s2">&quot;Dataset names may only include lowercase alphanumeric, underscore, and hyphen characters. &quot;</span>
+                <span class="n">f</span><span class="s2">&quot;Received: </span><span class="si">{name}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">name</span></div>
+
+<div class="viewcode-block" id="Dataset.set_extra_files"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.dataset.Dataset.set_extra_files">[docs]</a>    <span class="k">def</span> <span class="nf">set_extra_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">files</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]]]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Datasets commonly have extra or supporting files. Any file passed to this function will be added to the</span>
+<span class="sd">        requested directory.</span>
+
+<span class="sd">        :param files: When provided a list of string or Path objects all paths provided in the list will be sent to the</span>
+<span class="sd">            same logical key &quot;supporting_files&quot;. When provided a dictionary mapping strings to list of string or Path</span>
+<span class="sd">            objects, the paths will be placed in logical keys labeled by their dictionary entry.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Convert to dictionary</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;supporting_files&quot;</span><span class="p">:</span> <span class="n">files</span><span class="p">}</span>
+
+        <span class="c1"># Check all paths provided</span>
+        <span class="n">converted</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">lk_parent</span><span class="p">,</span> <span class="n">files_list</span> <span class="ow">in</span> <span class="n">files</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">converted</span><span class="p">[</span><span class="n">lk_parent</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files_list</span><span class="p">:</span>
+                <span class="n">converted</span><span class="p">[</span><span class="n">lk_parent</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+        <span class="c1"># Set the paths</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extra_files</span> <span class="o">=</span> <span class="n">converted</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_recursive_clean</span><span class="p">(</span><span class="n">pkg</span><span class="p">:</span> <span class="n">quilt3</span><span class="o">.</span><span class="n">Package</span><span class="p">,</span> <span class="n">metadata_reduction_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]):</span>
+        <span class="c1"># For all keys in current package level</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">pkg</span><span class="p">:</span>
+            <span class="c1"># If it is a PackageEntry object, we know we have hit a leaf node</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pkg</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">quilt3</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">PackageEntry</span><span class="p">):</span>
+                <span class="c1"># Reduce the metadata to a single value where it can</span>
+                <span class="n">cleaned_meta</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">meta_k</span><span class="p">,</span> <span class="n">meta_v</span> <span class="ow">in</span> <span class="n">pkg</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="c1"># If the metadata reduction map at the metadata column (or meta_k) can be reduced/ collapsed (True)</span>
+                    <span class="c1"># Reduce/ collapse the metadata</span>
+                    <span class="c1"># Reminder: this step will make the metadata access for every file of the same file type the same</span>
+                    <span class="c1"># format. Example: all files under the key &quot;FOV&quot; will have the same metadata access after this</span>
+                    <span class="c1"># function runs. All the metadata access for the same file type across the package, if one file has</span>
+                    <span class="c1"># a list of values for the metadata key, &quot;A&quot;, we want all files of the same type to all have list of</span>
+                    <span class="c1"># values for the metadata key, &quot;A&quot;.</span>
+                    <span class="c1"># We also can&#39;t just use a set here for two reasons, the first is simply that sets are not JSON</span>
+                    <span class="c1"># serializable. &quot;But you can just cast to a set then back to a list!!!&quot;. The second reason is that</span>
+                    <span class="c1"># because a file can have multiple list of values in it&#39;s metadata, if we cast to a set, one list</span>
+                    <span class="c1"># may be reduced to two items while another, different metadata list of values may be reduced to</span>
+                    <span class="c1"># a single item. Which leads to the problem of matching up metadata to metadata for the same file.</span>
+                    <span class="c1"># The example to use here is looking at an FOV files metadata:</span>
+                    <span class="c1"># {&quot;CellID&quot;: [1, 2, 3], &quot;CellIndex&quot;: [4, 8, 12]} By having them both as list without any chance of</span>
+                    <span class="c1"># reduction means that it is easy to match metadata values to each other.</span>
+                    <span class="c1"># &quot;CellId&quot; 1 maps to &quot;CellIndex&quot; 4, 2 maps to 8, and 3 maps to 12 in this case.</span>
+                    <span class="k">if</span> <span class="n">metadata_reduction_map</span><span class="p">[</span><span class="n">meta_k</span><span class="p">]:</span>
+                        <span class="n">cleaned_meta</span><span class="p">[</span><span class="n">meta_k</span><span class="p">]</span> <span class="o">=</span> <span class="n">meta_v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="c1"># Else, do not reduce</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">cleaned_meta</span><span class="p">[</span><span class="n">meta_k</span><span class="p">]</span> <span class="o">=</span> <span class="n">meta_v</span>
+
+                <span class="c1"># Update the object with the cleaned metadata</span>
+                <span class="n">pkg</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">set_meta</span><span class="p">(</span><span class="n">cleaned_meta</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">Dataset</span><span class="o">.</span><span class="n">_recursive_clean</span><span class="p">(</span><span class="n">pkg</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">metadata_reduction_map</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">pkg</span>
+
+<div class="viewcode-block" id="Dataset.distribute"><a class="viewcode-back" href="../../quilt3distribute.html#quilt3distribute.dataset.Dataset.distribute">[docs]</a>    <span class="k">def</span> <span class="nf">distribute</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">push_uri</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">message</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">attach_associates</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">quilt3</span><span class="o">.</span><span class="n">Package</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Push a package to a specific S3 bucket. If no bucket is provided, the un-built, un-pushed package is returned.</span>
+<span class="sd">        You can push a dataset with the same name multiple times to the same bucket multiple times as instead of</span>
+<span class="sd">        overriding a prior dataset, Quilt simply creates a new dataset version. Please refer to Quilt documentation for</span>
+<span class="sd">        more details: https://docs.quiltdata.com</span>
+
+<span class="sd">        :param push_uri: The S3 bucket uri to push to. Example: &quot;s3://quilt-jacksonb&quot;</span>
+<span class="sd">        :param message: An optional message to attach to that version of the dataset.</span>
+<span class="sd">        :param attach_associates: Boolean option to attach associates as metadata to each file. Associates are used</span>
+<span class="sd">            to retain quick navigation between related files.</span>
+<span class="sd">        :return: The built and optionally pushed quilt3.Package.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Confirm name matches approved pattern</span>
+        <span class="c1"># We previously checked during init, but the name could have been changed</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_or_raise_approved_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="c1"># Create empty package</span>
+        <span class="n">pkg</span> <span class="o">=</span> <span class="n">quilt3</span><span class="o">.</span><span class="n">Package</span><span class="p">()</span>
+
+        <span class="c1"># Write any extra files to tempdir to send to the build</span>
+        <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdir</span><span class="p">:</span>
+            <span class="c1"># Set all referenced files</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">readme</span><span class="o">.</span><span class="n">text</span>
+            <span class="k">for</span> <span class="n">rf</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">readme</span><span class="o">.</span><span class="n">referenced_files</span><span class="p">:</span>
+                <span class="n">replaced</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;referenced_files/</span><span class="si">{rf.resolved.name}</span><span class="s2">&quot;</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">rf</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="n">replaced</span><span class="p">)</span>
+                <span class="n">pkg</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">replaced</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">rf</span><span class="o">.</span><span class="n">resolved</span><span class="p">))</span>
+
+            <span class="c1"># Write the updated readme to temp</span>
+            <span class="n">readme_pk</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">,</span> <span class="s2">&quot;README.md&quot;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">readme_pk</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">readme_write</span><span class="p">:</span>
+                <span class="n">readme_write</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+            <span class="c1"># Set the readme</span>
+            <span class="n">pkg</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;README.md&quot;</span><span class="p">,</span> <span class="n">readme_pk</span><span class="p">)</span>
+
+            <span class="c1"># Validate the dataset</span>
+            <span class="n">v_ds</span> <span class="o">=</span> <span class="n">validate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+            <span class="c1"># Set package contents</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_columns</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">fp_cols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">path_columns</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">fp_cols</span> <span class="o">=</span> <span class="n">v_ds</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">v_ds</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;dtype&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;Path&quot;</span><span class="p">)]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+            <span class="c1"># Create associate mappings: List[Dict[str, str]]</span>
+            <span class="c1"># This list is in index order. Meaning that as the column values are descended we can simply add a</span>
+            <span class="c1"># new associate to the already existing associate map at that list index.</span>
+            <span class="n">associates</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="c1"># Create metadata reduction map</span>
+            <span class="c1"># This will be used to clean up and standardize the metadata access after object construction</span>
+            <span class="c1"># Metadata column name to boolean value for should or should not reduce metadata values</span>
+            <span class="c1"># This will be used during the &quot;clean up the package metadata step&quot;</span>
+            <span class="c1"># If we have multiple files each with the same keys for the metadata, but for one reason or another, one</span>
+            <span class="c1"># packaged file&#39;s value for a certain key is a list while another&#39;s is a single string, this leads to a</span>
+            <span class="c1"># confusing mixed return value API for the same _type_ of object. Example:</span>
+            <span class="c1"># fov/</span>
+            <span class="c1">#   obj1/</span>
+            <span class="c1">#      {example_key: &quot;hello&quot;}</span>
+            <span class="c1">#   obj2/</span>
+            <span class="c1">#      {example_key: [&quot;hello&quot;, &quot;world&quot;]}</span>
+            <span class="c1"># Commonly this happens when a manifest has rows of unique instances of a child object but retains a</span>
+            <span class="c1"># reference to a parent object, example: rows of information about unique cells that were all generated</span>
+            <span class="c1"># using the same algorithm, whose information is stored in a column, for each cell information row.</span>
+            <span class="c1"># This could result in some files (which only have one cell) being a single string while other files</span>
+            <span class="c1"># (which have more than one cell) being a list of the same string over and over again.</span>
+            <span class="c1"># &quot;Why spend all this time to reduce/ collapse the metadata anyway?&quot;, besides making it so that users won&#39;t</span>
+            <span class="c1"># have to call `obj2.meta[&quot;example_key&quot;][0]` every time they want the value, and besides the fact that it</span>
+            <span class="c1"># standardizes the metadata api, the biggest reason is that S3 objects can only have 2KB of metadata,</span>
+            <span class="c1"># without this reduction/ collapse step, manifests are more likely to hit that limit and cause a package</span>
+            <span class="c1"># distribution error.</span>
+            <span class="n">metadata_reduction_map</span> <span class="o">=</span> <span class="p">{</span><span class="n">index_col</span><span class="p">:</span> <span class="kc">True</span> <span class="k">for</span> <span class="n">index_col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata_columns</span><span class="p">}</span>
+
+            <span class="c1"># Set all files</span>
+            <span class="k">with</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">fp_cols</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">v_ds</span><span class="o">.</span><span class="n">data</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Constructing package&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">pbar</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">fp_cols</span><span class="p">:</span>
+                    <span class="c1"># Check display name for col</span>
+                    <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_names_map</span><span class="p">:</span>
+                        <span class="n">col_label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">column_names_map</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">col_label</span> <span class="o">=</span> <span class="n">col</span>
+
+                    <span class="c1"># Update values to the logical key as they are set</span>
+                    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">v_ds</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">):</span>
+                        <span class="c1"># Fully resolve the path</span>
+                        <span class="n">physical_key</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+
+                        <span class="c1"># Just using val.name could result in files that shouldn&#39;t be grouped being grouped</span>
+                        <span class="c1"># Example column:</span>
+                        <span class="c1"># SourceReadpath</span>
+                        <span class="c1"># a/0.tiff</span>
+                        <span class="c1"># a/1.tiff</span>
+                        <span class="c1"># b/0.tiff</span>
+                        <span class="c1"># b/1.tiff</span>
+                        <span class="c1"># Even though there are four files, this would result in both a/0.tiff and b/0.tiff, and,</span>
+                        <span class="c1"># a/1.tiff and b/1.tiff being grouped together. To solve this we can prepend a the first couple</span>
+                        <span class="c1"># of characters from a hash of the fully resolved path to the logical key.</span>
+                        <span class="n">unique_file_name</span> <span class="o">=</span> <span class="n">file_utils</span><span class="o">.</span><span class="n">create_unique_logical_key</span><span class="p">(</span><span class="n">physical_key</span><span class="p">)</span>
+                        <span class="n">logical_key</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;</span><span class="si">{col_label}</span><span class="s2">/</span><span class="si">{unique_file_name}</span><span class="s2">&quot;</span>
+                        <span class="k">if</span> <span class="n">physical_key</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+                            <span class="n">v_ds</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">logical_key</span>
+
+                            <span class="c1"># Create metadata dictionary to attach to object</span>
+                            <span class="n">meta</span> <span class="o">=</span> <span class="p">{}</span>
+                            <span class="k">for</span> <span class="n">meta_col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metadata_columns</span><span class="p">:</span>
+                                <span class="c1"># Short reference to current metadata value</span>
+                                <span class="n">v</span> <span class="o">=</span> <span class="n">v_ds</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">meta_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+                                <span class="c1"># Enforce simple JSON serializable type</span>
+                                <span class="c1"># First check if value is a numpy value</span>
+                                <span class="c1"># It likely is because pandas relies on numpy</span>
+                                <span class="c1"># All numpy types have the &quot;dtype&quot; attribute and can be cast to python type by using</span>
+                                <span class="c1"># the `item` function, details here:</span>
+                                <span class="c1"># https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.item.html</span>
+                                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s2">&quot;dtype&quot;</span><span class="p">):</span>
+                                    <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+                                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">JSONSerializableTypes</span><span class="p">):</span>
+                                    <span class="n">meta</span><span class="p">[</span><span class="n">meta_col</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                                        <span class="n">f</span><span class="s2">&quot;Non-simple-JSON-serializable type found in column: &#39;</span><span class="si">{meta_col}</span><span class="s2">&#39;, &quot;</span>
+                                        <span class="n">f</span><span class="s2">&quot;at index: </span><span class="si">{i}</span><span class="s2">: ({type(v)} &#39;</span><span class="si">{v}</span><span class="s2">&#39;).</span><span class="se">\n\n</span><span class="s2"> &quot;</span>
+                                        <span class="n">f</span><span class="s2">&quot;At this time only the following types are allowing in metadata: &quot;</span>
+                                        <span class="n">f</span><span class="s2">&quot;</span><span class="si">{JSONSerializableTypes}</span><span class="s2">&quot;</span>
+                                    <span class="p">)</span>
+
+                            <span class="c1"># Check if object already exists</span>
+                            <span class="k">if</span> <span class="n">logical_key</span> <span class="ow">in</span> <span class="n">pkg</span><span class="p">:</span>
+                                <span class="c1"># Join the two meta dictionaries</span>
+                                <span class="n">joined_meta</span> <span class="o">=</span> <span class="p">{}</span>
+                                <span class="k">for</span> <span class="n">meta_col</span><span class="p">,</span> <span class="n">curr_v</span> <span class="ow">in</span> <span class="n">pkg</span><span class="p">[</span><span class="n">logical_key</span><span class="p">]</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                                    <span class="c1"># Join the values for the current iteration of the metadata</span>
+                                    <span class="n">joined_values</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">curr_v</span><span class="p">,</span> <span class="o">*</span><span class="n">meta</span><span class="p">[</span><span class="n">meta_col</span><span class="p">]]</span>
+
+                                    <span class="c1"># Only check if the metadata at this index can be reduced if currently is still</span>
+                                    <span class="c1"># being decided. We know if the metadata value at this index is still be decided if:</span>
+                                    <span class="c1"># the boolean value in the metadata reduction map is True, as in, this index can be</span>
+                                    <span class="c1"># reduced or collapsed.</span>
+                                    <span class="c1"># The other reason to make this check is so that we don&#39;t override an earlier False</span>
+                                    <span class="c1"># reduction value. In the case where early on we encounter an instance of the</span>
+                                    <span class="c1"># metadata that should not be reduced but then later on we say it can be, this check</span>
+                                    <span class="c1"># prevents that. As we want all metadata access across the dataset to be uniform.</span>
+                                    <span class="k">if</span> <span class="n">metadata_reduction_map</span><span class="p">[</span><span class="n">meta_col</span><span class="p">]:</span>
+                                        <span class="c1"># Update the metadata reduction map</span>
+                                        <span class="c1"># For the current column being checked, as long as it is still being</span>
+                                        <span class="c1"># determined that the column can be reduced (aka we have entered this if block)</span>
+                                        <span class="c1"># check if we can still reduce the metadata after the recent addition.</span>
+                                        <span class="c1"># &quot;We can reduce the metadata if the count of the first value (or any value) is</span>
+                                        <span class="c1"># the same as the length of the entire list of values&quot;</span>
+                                        <span class="c1"># This runs quickly for small lists as seen here:</span>
+                                        <span class="c1"># https://stackoverflow.com/questions/3844801/check-if-all-elements-in-a-list-are-identical</span>
+                                        <span class="n">metadata_reduction_map</span><span class="p">[</span><span class="n">meta_col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                                            <span class="n">joined_values</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">joined_values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">joined_values</span><span class="p">)</span>
+                                        <span class="p">)</span>
+
+                                    <span class="c1"># Attached the joined values to the joined metadata</span>
+                                    <span class="n">joined_meta</span><span class="p">[</span><span class="n">meta_col</span><span class="p">]</span> <span class="o">=</span> <span class="n">joined_values</span>
+
+                                <span class="c1"># Update meta</span>
+                                <span class="n">pkg</span><span class="p">[</span><span class="n">logical_key</span><span class="p">]</span><span class="o">.</span><span class="n">set_meta</span><span class="p">(</span><span class="n">joined_meta</span><span class="p">)</span>
+
+                            <span class="c1"># Object didn&#39;t already exist, simply set it</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">pkg</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">logical_key</span><span class="p">,</span> <span class="n">physical_key</span><span class="p">,</span> <span class="n">meta</span><span class="p">)</span>
+
+                            <span class="c1"># Update associates</span>
+                            <span class="k">try</span><span class="p">:</span>
+                                <span class="n">associates</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">col_label</span><span class="p">]</span> <span class="o">=</span> <span class="n">logical_key</span>
+                            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                                <span class="n">associates</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">col_label</span><span class="p">:</span> <span class="n">logical_key</span><span class="p">})</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">v_ds</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">logical_key</span>
+                            <span class="n">pkg</span><span class="o">.</span><span class="n">set_dir</span><span class="p">(</span><span class="n">logical_key</span><span class="p">,</span> <span class="n">physical_key</span><span class="p">)</span>
+
+                        <span class="c1"># Update progress bar</span>
+                        <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+            <span class="c1"># Clean up package metadata</span>
+            <span class="n">pkg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recursive_clean</span><span class="p">(</span><span class="n">pkg</span><span class="p">,</span> <span class="n">metadata_reduction_map</span><span class="p">)</span>
+
+            <span class="c1"># Attach associates if desired</span>
+            <span class="k">if</span> <span class="n">attach_associates</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">associate_mapping</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">associates</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Creating associate metadata blocks&quot;</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">lk</span> <span class="ow">in</span> <span class="n">associate_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                        <span class="c1"># Having dictionary expansion in this order means that associates will override a prior</span>
+                        <span class="c1"># existing `associates` key, this is assumed safe because attach_associates was set to True.</span>
+                        <span class="n">pkg</span><span class="p">[</span><span class="n">lk</span><span class="p">]</span><span class="o">.</span><span class="n">set_meta</span><span class="p">({</span><span class="o">**</span><span class="n">pkg</span><span class="p">[</span><span class="n">lk</span><span class="p">]</span><span class="o">.</span><span class="n">meta</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="s2">&quot;associates&quot;</span><span class="p">:</span> <span class="n">associate_mapping</span><span class="p">}})</span>
+
+            <span class="c1"># Store validated dataset in the temp dir with paths replaced</span>
+            <span class="n">meta_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">,</span> <span class="s2">&quot;metadata.csv&quot;</span><span class="p">)</span>
+            <span class="n">v_ds</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">meta_path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">pkg</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;metadata.csv&quot;</span><span class="p">,</span> <span class="n">meta_path</span><span class="p">)</span>
+
+            <span class="c1"># Set logical keys for all extra files</span>
+            <span class="k">for</span> <span class="n">lk_parent</span><span class="p">,</span> <span class="n">files_list</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra_files</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files_list</span><span class="p">:</span>
+                    <span class="n">pkg</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{lk_parent}</span><span class="s2">/</span><span class="si">{f.name}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+            <span class="c1"># Optionally push</span>
+            <span class="k">if</span> <span class="n">push_uri</span><span class="p">:</span>
+                <span class="n">pkg</span> <span class="o">=</span> <span class="n">pkg</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{self.package_owner}</span><span class="s2">/</span><span class="si">{name}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">registry</span><span class="o">=</span><span class="n">push_uri</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">pkg</span></div>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s2">&quot;&lt;Dataset [package: </span><span class="si">{self.package_owner}</span><span class="s2">/</span><span class="si">{self.name}</span><span class="s2">, shape: </span><span class="si">{self.data.shape}</span><span class="s2">]&gt;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_repr_html_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Swap the markdown table for an html render of the schema table</span>
+        <span class="k">return</span> <span class="n">markdown</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">readme</span><span class="o">.</span><span class="n">text</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Jackson Maxfield Brown
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

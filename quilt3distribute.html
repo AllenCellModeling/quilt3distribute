@@ -1,0 +1,703 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>quilt3distribute package &mdash; quilt3distribute 0.1.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="quilt3distribute.bin package" href="quilt3distribute.bin.html" />
+    <link rel="prev" title="quilt3distribute" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> quilt3distribute
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#stable-release">Stable release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#from-sources">From sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Package modules</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">quilt3distribute package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="quilt3distribute.bin.html">quilt3distribute.bin package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-quilt3distribute.dataset">quilt3distribute.dataset module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-quilt3distribute.documentation">quilt3distribute.documentation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-quilt3distribute.file_utils">quilt3distribute.file_utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-quilt3distribute.validation">quilt3distribute.validation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-quilt3distribute">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#get-started">Get Started!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#deploying">Deploying</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">quilt3distribute</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">quilt3distribute</a> &raquo;</li>
+        
+      <li>quilt3distribute package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/quilt3distribute.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="quilt3distribute.bin.html" class="btn btn-neutral float-right" title="quilt3distribute.bin package" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="modules.html" class="btn btn-neutral float-left" title="quilt3distribute" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="quilt3distribute-package">
+<h1>quilt3distribute package<a class="headerlink" href="#quilt3distribute-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quilt3distribute.bin.html">quilt3distribute.bin package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quilt3distribute.bin.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quilt3distribute.bin.html#module-quilt3distribute.bin.quilt3_distribute_dataset">quilt3distribute.bin.quilt3_distribute_dataset module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quilt3distribute.bin.html#module-quilt3distribute.bin">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-quilt3distribute.dataset">
+<span id="quilt3distribute-dataset-module"></span><h2>quilt3distribute.dataset module<a class="headerlink" href="#module-quilt3distribute.dataset" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="quilt3distribute.dataset.Dataset">
+<em class="property">class </em><code class="sig-prename descclassname">quilt3distribute.dataset.</code><code class="sig-name descname">Dataset</code><span class="sig-paren">(</span><em class="sig-param">dataset: Union[str, pathlib.Path, pandas.core.frame.DataFrame], name: str, package_owner: str, readme_path: Union[str, pathlib.Path]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/quilt3distribute/dataset.html#Dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.dataset.Dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Initialize a dataset object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> – Filepath or preloaded pandas dataframe.</p></li>
+<li><p><strong>name</strong> – A name for the dataset. May only contain alphabetic and underscore characters.</p></li>
+<li><p><strong>package_owner</strong> – The name of the dataset owner. To be attached to the dataset name.</p></li>
+<li><p><strong>readme_path</strong> – A path to a markdown README file.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="quilt3distribute.dataset.Dataset.add_license">
+<code class="sig-name descname">add_license</code><span class="sig-paren">(</span><em class="sig-param">doc_or_link: Union[str, pathlib.Path]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/quilt3distribute/dataset.html#Dataset.add_license"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.dataset.Dataset.add_license" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a document’s content or add a link to a publically accessibly resource for license details.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>doc_or_link</strong> – A filepath or string uri to a resource for license details.</p>
+</dd>
+</dl>
+<p>Wrapper around quilt3distribute.documentation.README.append_readme_standards.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.dataset.Dataset.add_usage_doc">
+<code class="sig-name descname">add_usage_doc</code><span class="sig-paren">(</span><em class="sig-param">doc_or_link: Union[str, pathlib.Path]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/quilt3distribute/dataset.html#Dataset.add_usage_doc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.dataset.Dataset.add_usage_doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a document’s content or add a link to a publically accessibly resource for documentation and usage examples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>doc_or_link</strong> – A filepath or string uri to a resource detailing usage of this dataset.</p>
+</dd>
+</dl>
+<p>Wrapper around quilt3distribute.documentation.README.append_readme_standards.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.dataset.Dataset.data">
+<em class="property">property </em><code class="sig-name descname">data</code><a class="headerlink" href="#quilt3distribute.dataset.Dataset.data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.dataset.Dataset.distribute">
+<code class="sig-name descname">distribute</code><span class="sig-paren">(</span><em class="sig-param">push_uri: Optional[str] = None</em>, <em class="sig-param">message: Optional[str] = None</em>, <em class="sig-param">attach_associates: bool = True</em><span class="sig-paren">)</span> &#x2192; quilt3.packages.Package<a class="reference internal" href="_modules/quilt3distribute/dataset.html#Dataset.distribute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.dataset.Dataset.distribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Push a package to a specific S3 bucket. If no bucket is provided, the un-built, un-pushed package is returned.
+You can push a dataset with the same name multiple times to the same bucket multiple times as instead of
+overriding a prior dataset, Quilt simply creates a new dataset version. Please refer to Quilt documentation for
+more details: <a class="reference external" href="https://docs.quiltdata.com">https://docs.quiltdata.com</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>push_uri</strong> – The S3 bucket uri to push to. Example: “s3://quilt-jacksonb”</p></li>
+<li><p><strong>message</strong> – An optional message to attach to that version of the dataset.</p></li>
+<li><p><strong>attach_associates</strong> – Boolean option to attach associates as metadata to each file. Associates are used
+to retain quick navigation between related files.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The built and optionally pushed quilt3.Package.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.dataset.Dataset.readme">
+<em class="property">property </em><code class="sig-name descname">readme</code><a class="headerlink" href="#quilt3distribute.dataset.Dataset.readme" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.dataset.Dataset.return_or_raise_approved_name">
+<em class="property">static </em><code class="sig-name descname">return_or_raise_approved_name</code><span class="sig-paren">(</span><em class="sig-param">name: str</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/quilt3distribute/dataset.html#Dataset.return_or_raise_approved_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.dataset.Dataset.return_or_raise_approved_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempt to clean a string to match the pattern expected by Quilt 3.
+If after the cleaning operation, it still doesn’t match the approved pattern, will raise a ValueError.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – String name to clean.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Cleaned name.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.dataset.Dataset.set_column_names_map">
+<code class="sig-name descname">set_column_names_map</code><span class="sig-paren">(</span><em class="sig-param">columns: Dict[str, str]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/quilt3distribute/dataset.html#Dataset.set_column_names_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.dataset.Dataset.set_column_names_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Explicit override for the labeling of column names on file distribution.
+Example, a column (“2dReadPath”) is detected to have files, in the package that file will be placed in a
+directory called “2dReadPath”. Using this function, those directory names can be explicitly overridden.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>columns</strong> – A mapping of current column name contain files to desired labeled directory name.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.dataset.Dataset.set_extra_files">
+<code class="sig-name descname">set_extra_files</code><span class="sig-paren">(</span><em class="sig-param">files: Union[List[Union[str, pathlib.Path]], Dict[str, List[Union[str, pathlib.Path]]]]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/quilt3distribute/dataset.html#Dataset.set_extra_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.dataset.Dataset.set_extra_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Datasets commonly have extra or supporting files. Any file passed to this function will be added to the
+requested directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>files</strong> – When provided a list of string or Path objects all paths provided in the list will be sent to the
+same logical key “supporting_files”. When provided a dictionary mapping strings to list of string or Path
+objects, the paths will be placed in logical keys labeled by their dictionary entry.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.dataset.Dataset.set_metadata_columns">
+<code class="sig-name descname">set_metadata_columns</code><span class="sig-paren">(</span><em class="sig-param">columns: List[str]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/quilt3distribute/dataset.html#Dataset.set_metadata_columns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.dataset.Dataset.set_metadata_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use the manifest contents to attach metadata to the files found in the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>columns</strong> – A list of columns to use for metadata attachment.</p>
+</dd>
+</dl>
+<p>Example row: <cite>{“CellId”: 1, “Structure”: “lysosome”, “2dReadPath”: “/allen…”, “3dReadPath”: “/allen…”}</cite>
+Attach structure metadata: <cite>dataset.set_metadata_columns([“Structure”])</cite>
+Results in the files found at the 2dReadPath and the 3dReadPath both having <cite>{“Structure”: “lysosome”}</cite> attached</p>
+<p>In short: the values in each column provided will be used for metadata attachment for every file found.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.dataset.Dataset.set_path_columns">
+<code class="sig-name descname">set_path_columns</code><span class="sig-paren">(</span><em class="sig-param">columns: List[str]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/quilt3distribute/dataset.html#Dataset.set_path_columns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.dataset.Dataset.set_path_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Explicit override for which columns will be used for file distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>columns</strong> – A list of columns to use for file distribution.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-quilt3distribute.documentation">
+<span id="quilt3distribute-documentation-module"></span><h2>quilt3distribute.documentation module<a class="headerlink" href="#module-quilt3distribute.documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="quilt3distribute.documentation.README">
+<em class="property">class </em><code class="sig-prename descclassname">quilt3distribute.documentation.</code><code class="sig-name descname">README</code><span class="sig-paren">(</span><em class="sig-param">fp: Union[str, pathlib.Path]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/quilt3distribute/documentation.html#README"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.documentation.README" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Initialize a README object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fp</strong> – Filepath to a markdown readme document.</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="quilt3distribute.documentation.README.append_readme_standards">
+<code class="sig-name descname">append_readme_standards</code><span class="sig-paren">(</span><em class="sig-param">usage_doc_or_link: Union[str</em>, <em class="sig-param">pathlib.Path</em>, <em class="sig-param">None] = None</em>, <em class="sig-param">license_doc_or_link: Union[str</em>, <em class="sig-param">pathlib.Path</em>, <em class="sig-param">None] = None</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/quilt3distribute/documentation.html#README.append_readme_standards"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.documentation.README.append_readme_standards" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attach a standard document or link to the readme. If the provided value is an external resource, a default
+message is attached before linking to the external resource. Additionally, updates the underlying text attribute
+for this object to retain prior document attachments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>usage_doc_or_link</strong> – A document or link to external resource with details on dataset usage.</p></li>
+<li><p><strong>license_doc_or_link</strong> – A document or link to external resource with details on licensing.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The entire contents of the readme returned as a string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.documentation.README.fp">
+<em class="property">property </em><code class="sig-name descname">fp</code><a class="headerlink" href="#quilt3distribute.documentation.README.fp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.documentation.README.referenced_files">
+<em class="property">property </em><code class="sig-name descname">referenced_files</code><a class="headerlink" href="#quilt3distribute.documentation.README.referenced_files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.documentation.README.text">
+<em class="property">property </em><code class="sig-name descname">text</code><a class="headerlink" href="#quilt3distribute.documentation.README.text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="quilt3distribute.documentation.ReferencedFiles">
+<em class="property">class </em><code class="sig-prename descclassname">quilt3distribute.documentation.</code><code class="sig-name descname">ReferencedFiles</code><span class="sig-paren">(</span><em class="sig-param">target</em>, <em class="sig-param">resolved</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/quilt3distribute/documentation.html#ReferencedFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.documentation.ReferencedFiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Create new instance of ReferencedFiles(target, resolved)</p>
+<dl class="method">
+<dt id="quilt3distribute.documentation.ReferencedFiles.resolved">
+<em class="property">property </em><code class="sig-name descname">resolved</code><a class="headerlink" href="#quilt3distribute.documentation.ReferencedFiles.resolved" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.documentation.ReferencedFiles.target">
+<em class="property">property </em><code class="sig-name descname">target</code><a class="headerlink" href="#quilt3distribute.documentation.ReferencedFiles.target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-quilt3distribute.file_utils">
+<span id="quilt3distribute-file-utils-module"></span><h2>quilt3distribute.file_utils module<a class="headerlink" href="#module-quilt3distribute.file_utils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="quilt3distribute.file_utils.create_unique_logical_key">
+<code class="sig-prename descclassname">quilt3distribute.file_utils.</code><code class="sig-name descname">create_unique_logical_key</code><span class="sig-paren">(</span><em class="sig-param">physical_key: Union[str, pathlib.Path]</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="_modules/quilt3distribute/file_utils.html#create_unique_logical_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.file_utils.create_unique_logical_key" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-quilt3distribute.validation">
+<span id="quilt3distribute-validation-module"></span><h2>quilt3distribute.validation module<a class="headerlink" href="#module-quilt3distribute.validation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="quilt3distribute.validation.FeatureDefinition">
+<em class="property">class </em><code class="sig-prename descclassname">quilt3distribute.validation.</code><code class="sig-name descname">FeatureDefinition</code><span class="sig-paren">(</span><em class="sig-param">dtype: Type, validation_functions: Union[List[Callable], Tuple[Callable], None] = None, cast_values: bool = False, display_name: Optional[str] = None, description: Optional[str] = None, units: Optional[str] = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/quilt3distribute/validation.html#FeatureDefinition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.validation.FeatureDefinition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Initialize a new feature definition. A feature definition can be as simple as providing a data type (dtype) or
+can be incredibly specific by including validation and cleaning operations or providing metadata. If dtype of
+pathlib.Path is provided, cast_values is automatically set to True.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dtype</strong> – The data type for the feature.</p></li>
+<li><p><strong>validation_functions</strong> – A list or tuple of callable functions to validate each instance of the feature.</p></li>
+<li><p><strong>cast_values</strong> – In the case that an instance of the feature is found that doesn’t match the dtype provided,
+should that instance be attempted to cast to the provided dtype.</p></li>
+<li><p><strong>display_name</strong> – Metadata attachment for a display name to be given to the feature.</p></li>
+<li><p><strong>description</strong> – Metadata attachment for a description for the feature.</p></li>
+<li><p><strong>units</strong> – Metadata attachment for unit details for the feature.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="exception">
+<dt id="quilt3distribute.validation.PlannedDelayedDropError">
+<em class="property">exception </em><code class="sig-prename descclassname">quilt3distribute.validation.</code><code class="sig-name descname">PlannedDelayedDropError</code><span class="sig-paren">(</span><em class="sig-param">message: str</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/quilt3distribute/validation.html#PlannedDelayedDropError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.validation.PlannedDelayedDropError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="quilt3distribute.validation.PlannedDelayedDropResult">
+<em class="property">class </em><code class="sig-prename descclassname">quilt3distribute.validation.</code><code class="sig-name descname">PlannedDelayedDropResult</code><span class="sig-paren">(</span><em class="sig-param">index</em>, <em class="sig-param">error</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/quilt3distribute/validation.html#PlannedDelayedDropResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.validation.PlannedDelayedDropResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Create new instance of PlannedDelayedDropResult(index, error)</p>
+<dl class="method">
+<dt id="quilt3distribute.validation.PlannedDelayedDropResult.error">
+<em class="property">property </em><code class="sig-name descname">error</code><a class="headerlink" href="#quilt3distribute.validation.PlannedDelayedDropResult.error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.validation.PlannedDelayedDropResult.index">
+<em class="property">property </em><code class="sig-name descname">index</code><a class="headerlink" href="#quilt3distribute.validation.PlannedDelayedDropResult.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="quilt3distribute.validation.Schema">
+<em class="property">class </em><code class="sig-prename descclassname">quilt3distribute.validation.</code><code class="sig-name descname">Schema</code><span class="sig-paren">(</span><em class="sig-param">features: Dict[str, quilt3distribute.validation.ValidatedFeature]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/quilt3distribute/validation.html#Schema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.validation.Schema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A schema is the summation of multiple validated and unvalidated features for a Dataset. It provides helpful
+methods for viewing which features have and have not been validated and with which data types, functions, and
+metadata.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>features</strong> – A dictionary mapping the dataset manifest column names to ValidatedFeatures.</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="quilt3distribute.validation.Schema.df">
+<em class="property">property </em><code class="sig-name descname">df</code><a class="headerlink" href="#quilt3distribute.validation.Schema.df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.validation.Schema.features">
+<em class="property">property </em><code class="sig-name descname">features</code><a class="headerlink" href="#quilt3distribute.validation.Schema.features" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.validation.Schema.unvalidated">
+<em class="property">property </em><code class="sig-name descname">unvalidated</code><a class="headerlink" href="#quilt3distribute.validation.Schema.unvalidated" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.validation.Schema.validated">
+<em class="property">property </em><code class="sig-name descname">validated</code><a class="headerlink" href="#quilt3distribute.validation.Schema.validated" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="quilt3distribute.validation.ValidatedDataset">
+<em class="property">class </em><code class="sig-prename descclassname">quilt3distribute.validation.</code><code class="sig-name descname">ValidatedDataset</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">schema</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/quilt3distribute/validation.html#ValidatedDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.validation.ValidatedDataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Create new instance of ValidatedDataset(data, schema)</p>
+<dl class="method">
+<dt id="quilt3distribute.validation.ValidatedDataset.data">
+<em class="property">property </em><code class="sig-name descname">data</code><a class="headerlink" href="#quilt3distribute.validation.ValidatedDataset.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.validation.ValidatedDataset.schema">
+<em class="property">property </em><code class="sig-name descname">schema</code><a class="headerlink" href="#quilt3distribute.validation.ValidatedDataset.schema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="quilt3distribute.validation.ValidatedFeature">
+<em class="property">class </em><code class="sig-prename descclassname">quilt3distribute.validation.</code><code class="sig-name descname">ValidatedFeature</code><span class="sig-paren">(</span><em class="sig-param">name: str</em>, <em class="sig-param">dtype: Type</em>, <em class="sig-param">display_name: Optional[str] = None</em>, <em class="sig-param">description: Optional[str] = None</em>, <em class="sig-param">units: Optional[str] = None</em>, <em class="sig-param">validation_functions: Optional[Tuple[Callable]] = None</em>, <em class="sig-param">errored_results: Optional[Set[quilt3distribute.validation.PlannedDelayedDropResult]] = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/quilt3distribute/validation.html#ValidatedFeature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.validation.ValidatedFeature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A feature that has it’s core validation attributes locked but metadata freely mutable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The name for the feature in the dataset (usually this is the column).</p></li>
+<li><p><strong>dtype</strong> – A single data type for the feature.</p></li>
+<li><p><strong>display_name</strong> – A display name for the feature.</p></li>
+<li><p><strong>description</strong> – A description for the feature.</p></li>
+<li><p><strong>units</strong> – Units for the feature.</p></li>
+<li><p><strong>validation_functions</strong> – The tuple of validation functions ran against the feature values.</p></li>
+<li><p><strong>errored_results</strong> – An optional set of PlannedDelayedDropResults that errored out during validation.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="quilt3distribute.validation.ValidatedFeature.dtype">
+<em class="property">property </em><code class="sig-name descname">dtype</code><a class="headerlink" href="#quilt3distribute.validation.ValidatedFeature.dtype" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.validation.ValidatedFeature.errored_results">
+<em class="property">property </em><code class="sig-name descname">errored_results</code><a class="headerlink" href="#quilt3distribute.validation.ValidatedFeature.errored_results" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.validation.ValidatedFeature.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#quilt3distribute.validation.ValidatedFeature.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.validation.ValidatedFeature.to_dict">
+<code class="sig-name descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict[str, Union[str, Type, Tuple[Callable]]]<a class="reference internal" href="_modules/quilt3distribute/validation.html#ValidatedFeature.to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.validation.ValidatedFeature.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.validation.ValidatedFeature.validation_functions">
+<em class="property">property </em><code class="sig-name descname">validation_functions</code><a class="headerlink" href="#quilt3distribute.validation.ValidatedFeature.validation_functions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="quilt3distribute.validation.ValidationReturn">
+<em class="property">class </em><code class="sig-prename descclassname">quilt3distribute.validation.</code><code class="sig-name descname">ValidationReturn</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">feature</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/quilt3distribute/validation.html#ValidationReturn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.validation.ValidationReturn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Create new instance of ValidationReturn(name, feature)</p>
+<dl class="method">
+<dt id="quilt3distribute.validation.ValidationReturn.feature">
+<em class="property">property </em><code class="sig-name descname">feature</code><a class="headerlink" href="#quilt3distribute.validation.ValidationReturn.feature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="quilt3distribute.validation.ValidationReturn.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#quilt3distribute.validation.ValidationReturn.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="quilt3distribute.validation.Validator">
+<em class="property">class </em><code class="sig-prename descclassname">quilt3distribute.validation.</code><code class="sig-name descname">Validator</code><span class="sig-paren">(</span><em class="sig-param">name: str</em>, <em class="sig-param">values: numpy.ndarray</em>, <em class="sig-param">definition: quilt3distribute.validation.FeatureDefinition</em>, <em class="sig-param">drop_on_error: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/quilt3distribute/validation.html#Validator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.validation.Validator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A container to manage feature values and feature definition that can actually process (validate) the feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The name of the feature (usually this is the column name).</p></li>
+<li><p><strong>values</strong> – The np.ndarray of feature values.</p></li>
+<li><p><strong>definition</strong> – The feature definition to validate against.</p></li>
+<li><p><strong>drop_on_error</strong> – In the case that an error occurs during validation should the row be dropped and
+validation continue.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="quilt3distribute.validation.Validator.process">
+<code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param">progress_bar: Optional[tqdm.std.tqdm] = None</em><span class="sig-paren">)</span> &#x2192; quilt3distribute.validation.ValidatedFeature<a class="reference internal" href="_modules/quilt3distribute/validation.html#Validator.process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.validation.Validator.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use the feature definition stored on this object to attempt to validate the feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>progress_bar</strong> – An optional tqdm progress bar to update as the values are processed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A ValidatedFeature object representing that this feature has been checked.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="quilt3distribute.validation.validate">
+<code class="sig-prename descclassname">quilt3distribute.validation.</code><code class="sig-name descname">validate</code><span class="sig-paren">(</span><em class="sig-param">data: pandas.core.frame.DataFrame</em>, <em class="sig-param">schema: Optional[Dict[str</em>, <em class="sig-param">quilt3distribute.validation.FeatureDefinition]] = None</em>, <em class="sig-param">drop_on_error: bool = False</em>, <em class="sig-param">n_workers: Optional[int] = None</em>, <em class="sig-param">show_progress: bool = True</em><span class="sig-paren">)</span> &#x2192; quilt3distribute.validation.ValidatedDataset<a class="reference internal" href="_modules/quilt3distribute/validation.html#validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.validation.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function that validates a dataset against the proposed schema.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – A pandas dataframe to validate.</p></li>
+<li><p><strong>schema</strong> – The proposed schema to validate the dataset against.
+A dictionary mapping dataframe column names to FeatureDefinitions.</p></li>
+<li><p><strong>drop_on_error</strong> – In the case that an error occurs during validation should the row be dropped and validation
+continue.</p></li>
+<li><p><strong>n_workers</strong> – The number of threads to use during validation.</p></li>
+<li><p><strong>show_progress</strong> – Boolean option to show or hide progress bar.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A ValidatedDataset object that stores the cleaned copy of the data as well as the validated schema.</p>
+</dd>
+</dl>
+<p>Validation isn’t a CPU intensive task so async threadpool is used over processpool.
+The most intensive task is file existence checks.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-quilt3distribute">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-quilt3distribute" title="Permalink to this headline">¶</a></h2>
+<p>Top-level package for quilt3distribute.</p>
+<dl class="function">
+<dt id="quilt3distribute.get_module_version">
+<code class="sig-prename descclassname">quilt3distribute.</code><code class="sig-name descname">get_module_version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/quilt3distribute.html#get_module_version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#quilt3distribute.get_module_version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Jackson Maxfield Brown
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
