@@ -52,7 +52,6 @@ gen-docs: ## generate Sphinx HTML documentation, including API docs
 	rm -f docs/quilt3distribute*.rst
 	rm -f docs/modules.rst
 	sphinx-apidoc -o docs/ quilt3distribute **/tests/
-	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
 
 docs: ## generate Sphinx HTML documentation, including API docs, and serve to browser
