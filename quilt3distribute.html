@@ -633,7 +633,8 @@ validation continue.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> – A pandas dataframe to validate.</p></li>
 <li><p><strong>schema</strong> – The proposed schema to validate the dataset against.
-A dictionary mapping dataframe column names to FeatureDefinitions.</p></li>
+A dictionary mapping dataframe column names to FeatureDefinitions.
+If no schema provided, it will use <cite>_generate_schema_template</cite> to generate one for the data provided.</p></li>
 <li><p><strong>drop_on_error</strong> – In the case that an error occurs during validation should the row be dropped and validation
 continue.</p></li>
 <li><p><strong>n_workers</strong> – The number of threads to use during validation.</p></li>

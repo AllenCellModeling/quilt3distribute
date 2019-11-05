@@ -596,6 +596,7 @@
 <span class="sd">    :param data: A pandas dataframe to validate.</span>
 <span class="sd">    :param schema: The proposed schema to validate the dataset against.</span>
 <span class="sd">        A dictionary mapping dataframe column names to FeatureDefinitions.</span>
+<span class="sd">        If no schema provided, it will use `_generate_schema_template` to generate one for the data provided.</span>
 <span class="sd">    :param drop_on_error: In the case that an error occurs during validation should the row be dropped and validation</span>
 <span class="sd">        continue.</span>
 <span class="sd">    :param n_workers: The number of threads to use during validation.</span>
