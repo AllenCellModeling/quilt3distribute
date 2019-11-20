@@ -48,8 +48,8 @@ interactive_requirements = [
 requirements = [
     "markdown2>=2.3.7",
     "pandas",
-    "python-dateutil==2.8.0",  # temporary fix until botocore releases an update
-    "quilt3>=3.0.4",
+    "python-dateutil==2.8.0",  # Quilt3 version should have fixed this but didn't :shrug:
+    "quilt3>=3.1.5",
     "tabulate>=0.8.3",
     "tqdm>=4.32.1",
 ]
