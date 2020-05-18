@@ -4,8 +4,8 @@
 [![Documentation](https://github.com/AllenCellModeling/quilt3distribute/workflows/Documentation/badge.svg)](https://AllenCellModeling.github.io/quilt3distribute)
 [![Code Coverage](https://codecov.io/gh/AllenCellModeling/quilt3distribute/branch/master/graph/badge.svg)](https://codecov.io/gh/AllenCellModeling/quilt3distribute)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3382259.svg)](https://doi.org/10.5281/zenodo.3382259)
-
 <br>
+
 ![dataset packaging and distribution](http://www.allencell.org/uploads/8/1/9/9/81996008/published/automatingaccess-button-3_2.png?1549322257)
 
 People commonly work with tabular datasets, people want to share their data, this makes that easier through Quilt3.
