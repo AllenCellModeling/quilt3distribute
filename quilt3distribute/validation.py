@@ -53,7 +53,7 @@ class FeatureDefinition(object):
         # Ensure functions was passed as a tuple
         if not isinstance(validation_functions, tuple):
             raise TypeError(
-                f"FeatureDefinitions must be initialized with either no, a list, or a tuple of validation functions."
+                "FeatureDefinitions must be initialized with either no, a list, or a tuple of validation functions."
             )
 
         # Ensure all items provided in validation functions are callable
