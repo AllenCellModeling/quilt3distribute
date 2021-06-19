@@ -15,7 +15,7 @@ test_requirements = [
     "pytest",
     "pytest-cov",
     "pytest-raises",
-    "tifffile==0.15.1",
+    "tifffile",
 ]
 
 setup_requirements = [
