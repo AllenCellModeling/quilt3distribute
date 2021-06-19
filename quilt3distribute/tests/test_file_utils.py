@@ -24,6 +24,8 @@ def test_create_unique_logical_key(example_csv):
     # Assert that both generated logical keys match the pattern
     # We can't just use a predetermined hash here because depending on the testing machine, the fully resolved
     # filepath may be different
+    print(path_created_logical_key)
+    print(str_created_logical_key)
     assert regexp.match(path_created_logical_key)
     assert regexp.match(str_created_logical_key)
 
