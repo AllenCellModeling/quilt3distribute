@@ -18,8 +18,8 @@ def test_create_unique_logical_key(example_csv):
     path_created_logical_key = file_utils.create_unique_logical_key(example_csv)
     str_created_logical_key = file_utils.create_unique_logical_key(str(example_csv))
 
-    # Should be 8 characters of hex followed by the filename
-    regexp = re.compile("[a-z0-9]{8}_example.csv")
+    # Should be a hex string followed by the filename
+    regexp = re.compile("[a-z0-9]_example.csv")
 
     # Assert that both generated logical keys match the pattern
     # We can't just use a predetermined hash here because depending on the testing machine, the fully resolved
