@@ -4,7 +4,7 @@
 
 __author__ = 'Jackson Maxfield Brown'
 __email__ = 'jacksonb@alleninstitute.org'
-__version__ = '0.1.3'
+__version__ = '0.1.4'
 
 
 def get_module_version():
