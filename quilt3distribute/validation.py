@@ -97,6 +97,11 @@ def _generate_schema_template(df: pd.DataFrame) -> Dict[str, FeatureDefinition]:
         # Create counter of types and choose most popular type
         dtypes = Counter([v.__class__ for v in df[col].values])
 
+        # NoneType should not be counted here. If the most frequent type is 
+        # NoneType, then casting other values to None will cause errors.
+        if type(None) in dtypes.keys():
+            del dtypes[type(None)]
+
         # Get most popular
         # This is a good post explaining what is happening
         # https://www.robjwells.com/2015/08/python-counter-gotcha-with-max/
@@ -255,21 +260,22 @@ class Validator(object):
                     # if self.definition.dtype == Path:
                     #     val = val.replace("\\", "/")
 
-                    try:
-                        val = self.definition.dtype(val)
-                        self.values[i] = val
-                    except (ValueError, TypeError):
-                        msg = f"Could not cast value {val_descriptor} to received type {self.definition.dtype}."
-                        if self.drop_on_error:
-                            raise PlannedDelayedDropError(msg)
-                        else:
-                            raise ValueError(msg)
+                    if val is not None:  # no need to cast None
+                        try:
+                            val = self.definition.dtype(val)
+                            self.values[i] = val
+                        except (ValueError, TypeError):
+                            msg = f"Could not cast value {val_descriptor} to received type {self.definition.dtype}."
+                            if self.drop_on_error:
+                                raise PlannedDelayedDropError(msg)
+                            else:
+                                raise ValueError(msg)
 
                 # Check type
-                if not isinstance(val, self.definition.dtype):
+                if val is not None and not isinstance(val, self.definition.dtype):
                     msg = (
                         f"Value {val_descriptor} does not match the type specification received "
-                        f"{self.definition.dtype}."
+                        f"{self.definition.dtype}"
                     )
                     if self.drop_on_error:
                         raise PlannedDelayedDropError(msg)
